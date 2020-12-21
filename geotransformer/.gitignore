@@ -1,0 +1,12 @@
+*.egg-info
+*.swp
+.DS_Store
+.ipynb_checkpoints
+.mypy_cache
+__pycache__
+build
+conda-env
+conda-env.zip
+dist
+logs
+.vscode
