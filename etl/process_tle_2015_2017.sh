@@ -1,7 +1,7 @@
 #!/bin/bash
 
 SRC_DIR=/share/nas2/data/vault/TLE
-TGT_HDFS=/ingest/airforce/vault/tle_2015_2017
+TGT_HDFS=/ingest/airforce/vault/tle_2015_2017_2
 FILTER=/home/kenglish/repo/github.com/cmorris-jacobs/jacobs-vault/etl/IngestTLE.py
 
 #lines per file -- shooting for 12 evenly divided files

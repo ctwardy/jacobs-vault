@@ -9,5 +9,5 @@ CREATE EXTERNAL TABLE af_vault.tle_2015_2017(
 )
     ROW FORMAT DELIMITED FIELDS TERMINATED BY '\t'
     STORED AS TEXTFILE
-    LOCATION '/ingest/airforce/vault/tle_2015_2017/'
+    LOCATION '/ingest/airforce/vault/tle_2015_2017_2/'
 ;

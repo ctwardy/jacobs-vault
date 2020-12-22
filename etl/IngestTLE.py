@@ -25,15 +25,20 @@ def tle_time_to_datetime(tle_time):
     datestd = datetime.strptime(jdate_str, "%Y%j %H:%M:%S.%f")
     return datestd
 #
+def check_valid(line1, line2):
+    is_valid = 0
+    try:
+        if (sgp4.io.compute_checksum(line1) == int(line1[68:69])) and (sgp4.io.compute_checksum(line2) == int(line2[68:69])):
+            is_valid = 1
+    except:
+        pass
+    return is_valid
+#
 def get_meta(line1, line2):
     satellite_rec = Satrec.twoline2rv(line1, line2)
     dt = tle_time_to_datetime(line1[18:32])
     ts = dt.timestamp()
-    is_valid = 1
-    try:
-        sgp4.io.verify_checksum(line1, line2)
-    except:
-        is_valid=0
+    is_valid = check_valid(line1, line2)
     
     return str(ts), str(satellite_rec.satnum), dt.strftime('%Y-%m-%d %H:%M:%S'), str(is_valid)
 #
