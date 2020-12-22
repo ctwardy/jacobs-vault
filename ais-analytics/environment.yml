@@ -1,0 +1,10 @@
+channels:
+    - defaults
+    - conda-forge
+dependencies:
+    - python=3.7
+    - ipython=7.1.1
+    - notebook
+    - pip>=19.3.1
+    - pip:
+        - ua-parser

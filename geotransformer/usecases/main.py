@@ -20,14 +20,19 @@ def main():
     GEO_OUTPUT_TABLE = args.GEO_OUTPUT_TABLE
 
     df = spark.table(GEO_INPUT_TABLE)
+    # df = df.limit(1000000)
     # df = df.withColumn('')
     df.show()
+    print("df length:", df.count())
 
-    gt = GeoTransformer()
+    gt = GeoTransformer(single_partition_length=10000)
     
-    df = gt.generate_lat_long(df)
+    # df = gt.generate_lat_long_pyephem(df)
+    df = gt.generate_lat_long_astropy(df)
+    df.cache()
 
-    # df.show(truncate=False)
+    # df.show()
+    print("df length:", df.count())
 
     df.write.saveAsTable(GEO_OUTPUT_TABLE, mode='overwrite')
 
