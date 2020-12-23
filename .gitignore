@@ -1,3 +1,6 @@
+# Project specific
+ais-analytics/data/
+
 *.bak
 .gitattributes
 .last_checked

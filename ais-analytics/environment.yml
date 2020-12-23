@@ -4,7 +4,10 @@ channels:
 dependencies:
     - python=3.7
     - ipython=7.1.1
+    - prompt_toolkit==2.0.10
     - notebook
+    - numpy
+    - pandas
     - pip>=19.3.1
     - pip:
-        - ua-parser
+        - geopy

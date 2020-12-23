@@ -1,8 +1,11 @@
 #!/bin/bash
 
-TEST_ARGUMENT="Hello world"
-SPARK_OPTIONS="--driver-memory 14g --executor-memory 22g"
-USECASE_PYSPARK_FILE=usecases/main.py
+# AIS_INPUT_TABLE="cmorris.ais_subset_1000_1100"
+AIS_INPUT_TABLE="af_vault.ais"
+VELOCITIES_OUTPUT_TABLE="af_vault.ais_velocities"
+
+SPARK_OPTIONS="--driver-memory 14g --executor-memory 5g"
+USECASE_PYSPARK_FILE=usecases/velocities.py
 
 ###### Only edit below here if you know what you are doing... ##############
 
@@ -19,6 +22,7 @@ mkdir -p ${LOGDIR}
 nohup $SPARK_SUBMIT_LOCATION \
 ${SPARK_OPTIONS} \
 ${USECASE_PYSPARK_FILE} \
---test-argument TEST_ARGUMENT \
+--ais-input-table $AIS_INPUT_TABLE \
+--velocities-output-table $VELOCITIES_OUTPUT_TABLE \
 &> ${LOGDIR}/${LOGFILE_NAME} &
 
