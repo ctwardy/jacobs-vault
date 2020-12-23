@@ -5,8 +5,13 @@ def cli_arguments():
     parser = ArgumentParser()
 
     parser.add_argument(
-        "--test-argument",
-        dest="TEST_ARGUMENT",
+        "--ais-input-table",
+        dest="AIS_INPUT_TABLE",
+    )
+
+    parser.add_argument(
+        "--velocities-output-table",
+        dest="VELOCITIES_OUTPUT_TABLE",
     )
 
     args = parser.parse_args()
