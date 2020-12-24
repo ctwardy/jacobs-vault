@@ -1,0 +1,4 @@
+# This specifies what badges are enabled by default for notebook docs.
+default_badges:
+  colab: true
+  

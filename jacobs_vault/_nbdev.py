@@ -2,9 +2,23 @@
 
 __all__ = ["index", "modules", "custom_doc_links", "git_url"]
 
-index = {"say_hello": "00_core.ipynb"}
+index = {"Vault": "00_core.ipynb",
+         "DAY_FILE_PATH": "01_HitTest.ipynb",
+         "COLUMNS": "01_HitTest.ipynb",
+         "DTYPES": "01_HitTest.ipynb",
+         "dates": "01_HitTest.ipynb",
+         "load_day_file": "01_HitTest.ipynb",
+         "df": "01_HitTest.ipynb",
+         "test_skyfield": "01_HitTest.ipynb",
+         "satellite_alt_az_days": "01_HitTest.ipynb",
+         "df_alt_az_days": "01_HitTest.ipynb",
+         "hit_quality": "01_HitTest.ipynb",
+         "df_hit_quality": "01_HitTest.ipynb",
+         "df_alt_az_days_visible": "01_HitTest.ipynb",
+         "fig": "01_HitTest.ipynb"}
 
-modules = ["core.py"]
+modules = ["vault.py",
+           "hit_test.py"]
 
 doc_url = "https://ctwardy.github.io/jacobs_vault/"
 
