@@ -19,12 +19,24 @@ from .hittest import HitTest
 from datetime import datetime
 from flask import Flask
 from flask import request
-from flask_restplus import Resource, Api
-from flask_restplus import reqparse
+try:
+    # restplus is dead: https://github.com/noirbizarre/flask-restplus/issues/770
+    from flask_restx import Resource, Api
+    from flask_restx import reqparse
+except ImportError:
+    try:
+        from flask_restplus import Resource, Api
+    except ImportError:
+        # Bitten by https://github.com/jarus/flask-testing/issues/143
+        # Bigger issue: flask_restplus is dead
+        import werkzeug
+        werkzeug.cached_property = werkzeug.utils.cached_property
+        from flask_restplus import Resource, Api
+        from flask_restplus import reqparse
 from markupsafe import escape
 import json
 
-DAY_FILE_PATH="../data/VAULT_Data/TLE_daily"
+DAY_FILE_PATHS="../data/VAULT_Data/TLE_daily"
 
 app = Flask(__name__)
 api = Api(app)
