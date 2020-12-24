@@ -24,7 +24,7 @@ from flask_restplus import reqparse
 from markupsafe import escape
 import json
 
-DAY_FILE_PATH="/home/ubuntu/Downloads/VAULT_Data/TLE_daily"
+DAY_FILE_PATH="../data/VAULT_Data/TLE_daily"
 
 app = Flask(__name__)
 api = Api(app)
