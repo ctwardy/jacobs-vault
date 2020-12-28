@@ -10,6 +10,7 @@ dependencies:
     - pandas
     - scikit-learn
     - joblib==0.17.0
+    - matplotlib
     - pip>=19.3.1
     - pip:
         - geopy
