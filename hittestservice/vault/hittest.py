@@ -119,8 +119,9 @@ class HitTest:
                 q = "Good"
             elif row[col] == QUALITY_POOR:
                 q = "Poor"
-            else:
+            elif row[col] == QUALITY_STALE:
                 q = "Stale"
+            # no-else ... leave the NaNs alone
             return q
         #
 
