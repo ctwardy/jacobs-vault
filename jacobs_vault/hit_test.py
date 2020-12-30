@@ -50,7 +50,6 @@ def load_day_file(_day:datetime, folder:str=DAY_FILE_PATH, date_cols=DATE_COLS, 
                      infer_datetime_format=True)
     return df
 
-
 # Cell
 def test_skyfield():
     lat =  45.0
@@ -108,7 +107,6 @@ def satellite_alt_az_days(_t0: datetime, lat: float, lon: float):
     df_alt_az_days.columns = ["altitude", "azimuth", "days"]
     #df_alt_az_days.reindex()
     return df_alt_az_days
-
 
 # Cell
 def hit_quality(df_alt_az_days):
