@@ -10,11 +10,14 @@ entries:
       title: Overview
       url: /
     - output: web,pdf
-      title: 00_core
+      title: Template "core" notebook
       url: /core
     - output: web,pdf
       title: Title
       url: /HitTest
+    - output: web,pdf
+      title: Notes
+      url: /notes
     output: web
     title: jacobs_vault
   output: web

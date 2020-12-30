@@ -31,7 +31,8 @@ nb_path: "nbs/index.ipynb"
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <table>
-    <tr><td><img src="images/Jacobs_logo_rgb_black.png" width="200"/></td>
+    <tr style="background-color:white">
+        <td ><img src="images/Jacobs_logo_rgb_black.svg" width="200"/></td>
         <td><img alt="Satellites Visible" src="images/polar_plot2.png" width="300"></td>
     </tr>
 </table><h1 id="Welcome-to-jacobs-vault.">Welcome to jacobs-vault.<a class="anchor-link" href="#Welcome-to-jacobs-vault."> </a></h1><blockquote><p><strong>jacobs-vault</strong> is Jacobs' response to the Air Force VAULT quick-turn data analysis challenge.</p>
@@ -50,20 +51,15 @@ nb_path: "nbs/index.ipynb"
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>GOAL:</strong> 
-You can install jacobs-vault on your own machines with conda (highly recommended). If you're using <a href="https://www.anaconda.com/products/individual">Anaconda</a> then run:</p>
+<p><strong>When done, you should be able to install as follows:</strong></p>
+<p>You can install jacobs-vault on your own machines with conda (highly recommended). If you're using <a href="https://www.anaconda.com/products/individual">Anaconda</a> then run:</p>
 <div class="highlight"><pre><span></span>conda install -c &lt;CONDA CHANNEL&gt; jacobs-vault gh anaconda
 </pre></div>
-<p><strong>GOAL:</strong>
-...or if you're using <a href="https://docs.conda.io/en/latest/miniconda.html">miniconda</a>) then run:</p>
+<p>...or if you're using <a href="https://docs.conda.io/en/latest/miniconda.html">miniconda</a>) then run:</p>
 <div class="highlight"><pre><span></span>conda install -c &lt;CHANNEL&gt; -c jacobs-vault
 </pre></div>
-<p><strong>GOAL:</strong>
-To install with pip, use: <code>pip install jacobs-vault</code>. If you install with pip, you should install Spark first.</p>
-<p>If you plan to develop ...</p>
-
-<pre><code>git clone https://github.com/cmorris-jacobs/jacobs-vault
-pip install -e "jacobs-vault[dev]"</code></pre>
+<p>To install with pip, use: <code>pip install jacobs-vault</code>.</p>
+<p>If you plan to develop, see below.</p>
 
 </div>
 </div>
@@ -91,14 +87,37 @@ pip install -e "jacobs-vault[dev]"</code></pre>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Tests">Tests<a class="anchor-link" href="#Tests"> </a></h2>
+<h2 id="Key-Required-Packages">Key Required Packages<a class="anchor-link" href="#Key-Required-Packages"> </a></h2><p>Required top-level packages must be listed in <code>settings.ini</code>, or the GitHub Continuous Integration tests will fail. There are three broad categories:</p>
+<h3 id="Scientific-Python-Ecosystem:">Scientific Python Ecosystem:<a class="anchor-link" href="#Scientific-Python-Ecosystem:"> </a></h3><ul>
+<li>Anaconda distribution preferred, though pip should work</li>
+<li>Core: numpy, pandas</li>
+<li>Astronomy: skyfield, ...else?...</li>
+<li>Possibly: scikit-learn (not used yet?)</li>
+<li>Notebooks: jupyter notebook</li>
+</ul>
+<h3 id="Cloud-Computing">Cloud Computing<a class="anchor-link" href="#Cloud-Computing"> </a></h3><ul>
+<li>Spark, PySpark, Hive, Hadoop</li>
+<li>(Other database as req'd)</li>
+<li>Map support: geopandas, ...</li>
+<li>Visualization: plotly, (matplotlib?), (leaflet?), (opensphere?)</li>
+</ul>
+<h3 id="Literate-Programming:">Literate Programming:<a class="anchor-link" href="#Literate-Programming:"> </a></h3><ul>
+<li>nbdev, cookie-cutter</li>
+</ul>
+<h2 id="conda-env">conda env<a class="anchor-link" href="#conda-env"> </a></h2><p>You can create the <code>vault</code> conda env using:</p>
+<div class="highlight"><pre><span></span>conda env create -f environment.yml
+</pre></div>
+<p>and activate it with</p>
+<div class="highlight"><pre><span></span>conda activate vault
+</pre></div>
+<p>The envs/ folder contains related environments for certain pieces.</p>
+
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Everything below needs to be updated for our dependencies etc.</p>
-
+<h2 id="Tests">Tests<a class="anchor-link" href="#Tests"> </a></h2>
 </div>
 </div>
 </div>
@@ -108,9 +127,8 @@ pip install -e "jacobs-vault[dev]"</code></pre>
 <p><code>nbdev_test_nbs</code> or <code>make test</code></p>
 <p>For all the tests to pass, you'll need to install the following optional dependencies:</p>
 
-<pre><code>pip install "sentencepiece&lt;0.1.90" wandb tensorboard albumentations pydicom opencv-python scikit-image pyarrow kornia \
-    catalyst captum neptune-cli</code></pre>
-<p>Tests are written using <code>nbdev</code>, for example see the documentation for <code>test_eq</code>.</p>
+<pre><code>pip install ...</code></pre>
+<p>Tests are written using <code>nbdev</code>, for example see the documentation for <a href="/jacobs-vault/HitTest#hit_quality"><code>hit_quality</code></a> or <a href="/jacobs-vault/HitTest#viz"><code>viz</code></a>.</p>
 
 </div>
 </div>
@@ -123,11 +141,15 @@ pip install -e "jacobs-vault[dev]"</code></pre>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<p>You can clone the repository and install dependencies with ...</p>
+
+<pre><code>git clone https://github.com/cmorris-jacobs/jacobs-vault
+pip install -e "jacobs-vault[dev]"</code></pre>
 <p>After you clone this repository, please run <code>nbdev_install_git_hooks</code> in your terminal. This sets up git hooks, which clean up the notebooks to remove the extraneous stuff stored in the notebooks (e.g. which cells you ran) which causes unnecessary merge conflicts.</p>
 <p>Before submitting a PR, check that the local library and notebooks match. The script <code>nbdev_diff_nbs</code> can let you know if there is a difference between the local library and the notebooks.</p>
 <ul>
-<li>If you made a change to the notebooks in one of the exported cells, you can export it to the library with <code>nbdev_build_lib</code> or <code>make fastai</code>.</li>
-<li>If you made a change to the library, you can export it back to the notebooks with <code>nbdev_update_lib</code>.</li>
+<li>If you made a change to the <em>notebooks</em> in one of the exported cells, you can export it to the library with <code>nbdev_build_lib</code> or <code>make jacobs-vault</code>.</li>
+<li>If you made a (small) change to the <em>library</em>, you can export it back to the notebooks with <code>nbdev_update_lib</code>.</li>
 </ul>
 
 </div>
@@ -141,7 +163,7 @@ pip install -e "jacobs-vault[dev]"</code></pre>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>For those interested in official docker containers for this project, they can be found <a href="https://github.com/fastai/docker-containers#fastai">here</a>.</p>
+<p>We do not yet have official docker containers, but when done they should be available from <a href="https://github.com/cmorris-jacobs/docker-containers#jacobs-vault">the github site</a>.</p>
 
 </div>
 </div>

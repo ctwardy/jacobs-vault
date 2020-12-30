@@ -1,7 +1,8 @@
 {
   "jacobs_vault": {
     "Overview": "/",
-    "00_core": "/core",
-    "Title": "/HitTest"
+    "Template \"core\" notebook": "/core",
+    "Title": "/HitTest",
+    "Notes": "/notes"
   }
 }
