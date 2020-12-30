@@ -11,12 +11,7 @@ index = {"Vault": "00_core.ipynb",
          "test_skyfield": "01_HitTest.ipynb",
          "satellite_alt_az_days": "01_HitTest.ipynb",
          "hit_quality": "01_HitTest.ipynb",
-         "viz": "01_HitTest.ipynb",
-         "dates": "01_HitTest.ipynb",
-         "N_dates": "01_HitTest.ipynb",
-         "N_cols": "01_HitTest.ipynb",
-         "N_rows": "01_HitTest.ipynb",
-         "figs": "01_HitTest.ipynb"}
+         "viz": "01_HitTest.ipynb"}
 
 modules = ["core.py",
            "hit_test.py"]
