@@ -1,19 +1,24 @@
-# Welcome to Jacobs Vault (needs a better name)!
-> Vault finds overlaps/gaps between AIS shipping tracks and satellite orbits. [Insert logo here.]
+# Title
 
 
-**Important**: Insert any version, installation, pre-req, or dietary warnings here.
-* Fix these icons - second row is _fastai_, not us!
 
-![CI](https://github.com/cmorris-jacobs/jacobs-vault/workflows/CI/badge.svg) ![docs](https://github.com/cmorris-jacobs/jacobs-vault/workflows/docs/badge.svg)
+<table>
+    <tr><td><img src="images/Jacobs_logo_rgb_black.png" width="200"/></td>
+        <td><img alt="Satellites Visible" src="images/polar_plot2.png" width="300"></td>
+    </tr>
+</table>
+    
+# Welcome to jacobs-vault.
+ 
+> **jacobs-vault** is Jacobs' response to the Air Force VAULT quick-turn data analysis challenge. 
 
-# [![PyPI](https://img.shields.io/pypi/v/fastai?color=blue&label=pypi%20version)](https://pypi.org/project/fastai/#description) [![Conda (channel only)](https://img.shields.io/conda/vn/fastai/fastai?color=seagreen&label=conda%20version)](https://anaconda.org/fastai/fastai) [![Build fastai images](https://github.com/fastai/docker-containers/workflows/Build%20fastai%20images/badge.svg)](https://github.com/fastai/docker-containers) 
+It contains scripts and notebooks to (a) ingest the provided AIS shipping tracks and satellite TLE data, (b) find what satellites are visible for a given ship track position, and (c) highlight coverage gaps / flaws in the data. 
 
 ## Installing
 
-**GOAL:** You can use jacobs-vault without any installation by using [Google Colab](https://colab.research.google.com/). In fact, every page of this documentation is also available as an interactive notebook - click "Open in colab" at the top of any page to open it. See the documentation on [FIX FIX FIX](https://NotDone/start_colab) for more information.
+We used the `nbdev` and `cookie-cutter` environments to ease packaging and installation, but they haven't been fully integrated.  Many queries expect you to have an Apache Spark environment, though in theory that could be on a single machine.  
 
-**GOAL:**
+**GOAL:** 
 You can install jacobs-vault on your own machines with conda (highly recommended). If you're using [Anaconda](https://www.anaconda.com/products/individual) then run:
 ```bash
 conda install -c <CONDA CHANNEL> jacobs-vault gh anaconda
@@ -22,11 +27,11 @@ conda install -c <CONDA CHANNEL> jacobs-vault gh anaconda
 **GOAL:**
 ...or if you're using [miniconda](https://docs.conda.io/en/latest/miniconda.html)) then run:
 ```bash
-conda install -c fastai -c pytorch fastai
+conda install -c <CHANNEL> -c jacobs-vault
 ```
 
 **GOAL:**
-To install with pip, use: `pip install fastai`. If you install with pip, you should install PyTorch first by following the PyTorch [installation instructions](https://pytorch.org/get-started/locally/).
+To install with pip, use: `pip install jacobs-vault`. If you install with pip, you should install Spark first.
 
 If you plan to develop ...
 
@@ -37,16 +42,14 @@ pip install -e "jacobs-vault[dev]"
 
 ## About jacobs-vault
 
-jacobs-vault is organized around an efficient partition of the data to support either distributed Spark/Dash workflows, or fast single-ship satellite queries. 
+jacobs-vault partitions the data to support either distributed Spark/Dash workflows, or fast single-ship satellite queries. It includes: 
 
-* ETL process
-* approach
-* libraries
-* queries
-* tips
-
-
-<img alt="Satellites Visible" src="nbs/images/polar_plot.png" width="600">
+* ETL scripts in the `etl` folder
+* Call `skyfield` for ephemeris calculations
+* The notebook `nbs/01_HitTest.ipynb` and service `hittestservice/` provide the core functions to read the appropriate TLE file for a given day, and calculate the visible satellites.
+* `geotransformer`
+* `ais-analytics`
+* ...
 
 ## Tests
 
