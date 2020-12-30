@@ -3,7 +3,7 @@
 
 
 <table>
-    <tr style="background-color:white">
+    <tr style="background-color:#EEEEEE">
         <td ><img src="images/Jacobs_logo_rgb_black.svg" width="200"/></td>
         <td><img alt="Satellites Visible" src="images/polar_plot2.png" width="300"></td>
     </tr>
