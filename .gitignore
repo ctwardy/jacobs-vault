@@ -1,5 +1,6 @@
 # Project specific
 ais-analytics/data/
+NoGit/
 
 *.bak
 .gitattributes

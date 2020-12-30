@@ -1,7 +1,7 @@
 {
   "jacobs_vault": {
     "Overview": "/",
-    "Vault (Jacobs)": "/core",
+    "00_core": "/core",
     "Title": "/HitTest"
   }
 }

@@ -1,12 +1,12 @@
 ---
 
-title: Welcome to Jacobs Vault (needs a better name)!
-image: /images/layered.png
+title: Title
+
 keywords: fastai
 sidebar: home_sidebar
 
-summary: "Vault finds overlaps/gaps between AIS shipping tracks and satellite orbits. [Insert logo here.]"
-description: "Vault finds overlaps/gaps between AIS shipping tracks and satellite orbits. [Insert logo here.]"
+
+
 nb_path: "nbs/index.ipynb"
 ---
 <!--
@@ -30,41 +30,36 @@ nb_path: "nbs/index.ipynb"
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>Important</strong>: Insert any version, installation, pre-req, or dietary warnings here.</p>
-<ul>
-<li>Fix these icons - second row is <em>fastai</em>, not us!</li>
-</ul>
+<table>
+    <tr><td><img src="images/Jacobs_logo_rgb_black.png" width="200"/></td>
+        <td><img alt="Satellites Visible" src="images/polar_plot2.png" width="300"></td>
+    </tr>
+</table><h1 id="Welcome-to-jacobs-vault.">Welcome to jacobs-vault.<a class="anchor-link" href="#Welcome-to-jacobs-vault."> </a></h1><blockquote><p><strong>jacobs-vault</strong> is Jacobs' response to the Air Force VAULT quick-turn data analysis challenge.</p>
+</blockquote>
+<p>It contains scripts and notebooks to (a) ingest the provided AIS shipping tracks and satellite TLE data, (b) find what satellites are visible for a given ship track position, and (c) highlight coverage gaps / flaws in the data.</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><img src="https://github.com/cmorris-jacobs/jacobs-vault/workflows/CI/badge.svg" alt="CI"> <img src="https://github.com/cmorris-jacobs/jacobs-vault/workflows/docs/badge.svg" alt="docs"></p>
-<h1><a href="https://pypi.org/project/fastai/#description"><img src="https://img.shields.io/pypi/v/fastai?color=blue&amp;label=pypi%20version" alt="PyPI"></a> <a href="https://anaconda.org/fastai/fastai"><img src="https://img.shields.io/conda/vn/fastai/fastai?color=seagreen&amp;label=conda%20version" alt="Conda (channel only)"></a> <a href="https://github.com/fastai/docker-containers"><img src="https://github.com/fastai/docker-containers/workflows/Build%20fastai%20images/badge.svg" alt="Build fastai images"></a></h1>
+<h2 id="Installing">Installing<a class="anchor-link" href="#Installing"> </a></h2><p>We used the <code>nbdev</code> and <code>cookie-cutter</code> environments to ease packaging and installation, but they haven't been fully integrated.  Many queries expect you to have an Apache Spark environment, though in theory that could be on a single machine.</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Installing">Installing<a class="anchor-link" href="#Installing"> </a></h2>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>GOAL:</strong> You can use jacobs-vault without any installation by using <a href="https://colab.research.google.com/">Google Colab</a>. In fact, every page of this documentation is also available as an interactive notebook - click "Open in colab" at the top of any page to open it. See the documentation on <a href="https://NotDone/start_colab">FIX FIX FIX</a> for more information.</p>
-<p><strong>GOAL:</strong>
+<p><strong>GOAL:</strong> 
 You can install jacobs-vault on your own machines with conda (highly recommended). If you're using <a href="https://www.anaconda.com/products/individual">Anaconda</a> then run:</p>
 <div class="highlight"><pre><span></span>conda install -c &lt;CONDA CHANNEL&gt; jacobs-vault gh anaconda
 </pre></div>
 <p><strong>GOAL:</strong>
 ...or if you're using <a href="https://docs.conda.io/en/latest/miniconda.html">miniconda</a>) then run:</p>
-<div class="highlight"><pre><span></span>conda install -c fastai -c pytorch fastai
+<div class="highlight"><pre><span></span>conda install -c &lt;CHANNEL&gt; -c jacobs-vault
 </pre></div>
 <p><strong>GOAL:</strong>
-To install with pip, use: <code>pip install fastai</code>. If you install with pip, you should install PyTorch first by following the PyTorch <a href="https://pytorch.org/get-started/locally/">installation instructions</a>.</p>
+To install with pip, use: <code>pip install jacobs-vault</code>. If you install with pip, you should install Spark first.</p>
 <p>If you plan to develop ...</p>
 
 <pre><code>git clone https://github.com/cmorris-jacobs/jacobs-vault
@@ -81,21 +76,15 @@ pip install -e "jacobs-vault[dev]"</code></pre>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>jacobs-vault is organized around an efficient partition of the data to support either distributed Spark/Dash workflows, or fast single-ship satellite queries.</p>
+<p>jacobs-vault partitions the data to support either distributed Spark/Dash workflows, or fast single-ship satellite queries. It includes:</p>
 <ul>
-<li>ETL process</li>
-<li>approach</li>
-<li>libraries</li>
-<li>queries</li>
-<li>tips</li>
+<li>ETL scripts in the <code>etl</code> folder</li>
+<li>Call <code>skyfield</code> for ephemeris calculations</li>
+<li>The notebook <code>nbs/01_HitTest.ipynb</code> and service <code>hittestservice/</code> provide the core functions to read the appropriate TLE file for a given day, and calculate the visible satellites.</li>
+<li><code>geotransformer</code></li>
+<li><code>ais-analytics</code></li>
+<li>...</li>
 </ul>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>{% include image.html alt="Satellites Visible" max-width="600" file="/jacobs_vault/images/polar_plot.png" %}</p>
 
 </div>
 </div>
