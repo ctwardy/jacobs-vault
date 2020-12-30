@@ -32,7 +32,9 @@ DTYPES = {'satellite': 'uint16', # observed values are ints in 5..41678, so 0..6
 
 dates = ['day_dt', 'tle_dt']
 
-DAY_FILE_PATH="../data/TLE_daily"
+# DAY_FILE_PATH="../data/TLE_daily"
+DAY_FILE_PATH="../data/VAULT_Data/TLE_daily"
+
 
 # These numbers may seem upside down, but I like the default coloring in the polar plot when hit quality has these values.
 QUALITY_EXCELLENT = 0
@@ -46,6 +48,7 @@ class HitTest:
     '''
     def __init__(self, dt, day_file_base_path=DAY_FILE_PATH):
         df_path = "%s/%4d/%02d/%02d.tab.gz"%(day_file_base_path, dt.year, dt.month, dt.day)
+        print(f"Trying to load {df_path}")
         df = pd.read_csv(df_path,
                          names=COLUMNS, sep='\t', compression='gzip',
                          dtype=DTYPES,

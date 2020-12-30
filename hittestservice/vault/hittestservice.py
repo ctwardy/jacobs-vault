@@ -1,6 +1,6 @@
 ''' VAULT Proposal python module for addressing Technical Scenario objective 1
 
-    | 1) Determine the “hits” where a satellite has geodetic overlap of any vessel(s) 
+    | 1) Determine the "hits" where a satellite has geodetic overlap of any vessel(s) 
     |    at any point(s) in time. For simplicity, it may be assumed that a satellite has 
     |    full view of half the earth (regardless of satellite type or its elevation above 
     |    the earth). However, additional accuracy models with rationale is allowed.
@@ -14,7 +14,7 @@
     pip install Werkzeug==0.16.1
 '''
 
-from .hittest import HitTest
+from .hittest import HitTest, DAY_FILE_PATH
 
 from datetime import datetime
 from flask import Flask
@@ -35,8 +35,6 @@ except ImportError:
         from flask_restplus import reqparse
 from markupsafe import escape
 import json
-
-DAY_FILE_PATHS="../data/VAULT_Data/TLE_daily"
 
 app = Flask(__name__)
 api = Api(app)
