@@ -62,11 +62,11 @@ HTML_TEMPLATE='''
 
 class Demo:
 
-    def __init__(self, year, mmsi):
+    def __init__(self, year, mmsi, ship_data_root="../data/VAULT_Data/demo/ships"):
         year = str(year)
         mmsi = str(mmsi)
 
-        ship_path = os.path.join("/share/nas2/data/airforce/VAULT_Data/demo/ships", year, mmsi+".tab.gz")
+        ship_path = os.path.join(ship_data_root, year, mmsi+".tab.gz")
         # "index_col=False" important here to keep column alignment as expected
         self.df_ais = pd.read_csv(ship_path, sep='\t', compression='gzip', names=AIS_COLUMNS, dtype=dict(zip(AIS_COLUMNS, AIS_TYPES)), index_col=False)
         self.geom_ais = [Point(xy) for xy in zip(self.df_ais.lat, self.df_ais.lon)]
