@@ -1,3 +1,4 @@
+ipyleaflet=0.13.3
 flask==1.1.1
 flask-restplus==0.13.0
 werkzeug==0.16.1
