@@ -50,28 +50,18 @@ class HTMLConvert:
             rv=rv+ visibleRow
         return rv
 
-    def createHtml(self, mmsi, dt, lat, lon, hitData):
-        hitmissdata=hitData["hitmiss"]
+    def createHtml(self, mmsi, dt, lat, lon, hitData):      
+        responseStr=hitData["response"]
+        responseJSON=json.loads(responseStr)
+
+        hitmissdata=responseJSON["hitmiss"]
         hitmisssContent=self.createHitMissSummaryContent(hitmissdata)
 
-        visibleData=hitData["visible"]
+        visibleData=responseJSON["visible"]
         visibleArray=self.calculateVisibleData(visibleData)
         visibleContent=self.createVisibleSummaryContent(visibleArray)
         
         templateFile="hittesttemplate.html"
         rendered = render_template(templateFile, title='MMSI Hits and Misses', mmsi=mmsi, timestamp=dt, lat=lat, lon=lon, hitMisscContent=Markup(hitmisssContent), visibleContent=Markup(visibleContent))        
         return(rendered)
-    
-    def test(self):    
-        mmsi="0123456789"
-        lat="32.3432423"
-        lon="45.1231231"
-        dt="34873482"
-
-        rawJson=open("sample1.json",'r').read().strip()
-        jsonData=json.loads(rawJson)
-        hitData=json.loads(jsonData["response"])
-
-        html=self.createHtml(mmsi, dt, lat, lon, hitData)
-        return html
 
