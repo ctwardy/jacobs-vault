@@ -57,7 +57,7 @@ class HitTestService(Resource):
 
         hittest = HitTest(dt, DAY_FILE_PATH)
 
-        result = {"response": hittest.invoke(dt, args["lat"], args["lon"])}
+        result = {"response": hittest.web_invoke(dt, args["lat"], args["lon"])}
 
         return result
 

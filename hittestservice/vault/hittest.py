@@ -99,13 +99,11 @@ class HitTest:
     #
 
     def invoke(self, dt, lat, lon):
-        ''' Main support function for satellite hit-testing service
+        ''' Main logic for satellite hit-testing service
 
-            returns a json object having two objects:
-            { 
-                "hitmiss": The hit,miss stats table
-                "visible": The information on the visible satellites
-            }
+            returns 2 DataFrames: 
+             - df_hit_miss_table :       The hit,miss stats table
+             - df_alt_az_days_visible :  The information on the visible satellites for star-map plotting
         '''
         df_alt_az_days = self.satellite_alt_az_days(dt, lat, lon)
 
@@ -135,9 +133,23 @@ class HitTest:
 
         df_alt_az_days_visible = df_alt_az_days[df_alt_az_days["altitude"]>0]
 
+        return df_hit_miss_table, df_alt_az_days_visible
+    #
+
+    def web_invoke(self, dt, lat, lon):
+        ''' Main support function for satellite hit-testing service
+
+            returns a json object having two objects:
+            { 
+                "hitmiss": The hit,miss stats table
+                "visible": The information on the visible satellites
+            }
+        '''
+        df_hit_miss_table, df_alt_az_days_visible = self.invoke(dt, lat, lon)
         result = {
             "hitmiss": df_hit_miss_table.to_dict(),
             "visible": df_alt_az_days_visible.to_dict()
         }
         return json.dumps(result)
     #
+
