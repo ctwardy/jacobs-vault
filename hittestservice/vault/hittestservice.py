@@ -18,7 +18,7 @@ from .hittest import HitTest, DAY_FILE_PATH
 
 from datetime import datetime
 from flask import Flask
-from flask import request
+from flask import request, send_file
 try:
     # restplus is dead: https://github.com/noirbizarre/flask-restplus/issues/770
     from flask_restx import Resource, Api
@@ -76,7 +76,7 @@ class ImageServiceBackground(Resource):
 @app.route("/html")
 def index():
         parser = reqparse.RequestParser()
-        parser.add_argument('mmsi', type=string, help='mmsi identifier')
+        parser.add_argument('mmsi', type=str, help='mmsi identifier')
         parser.add_argument('ts', type=int, help='unix epoch seconds')
         parser.add_argument('lat', type=float, help='datetime in unix time format')
         parser.add_argument('lon', type=float, help='datetime in unix time format')
@@ -86,9 +86,9 @@ def index():
 
         hittest = HitTest(dt, DAY_FILE_PATH)
 
-        result = {"response": hittest.invoke(dt, args["lat"], args["lon"])}
+        result = {"response": hittest.web_invoke(dt, args["lat"], args["lon"])}
         htmlconvert = HTMLConvert()
 
-        result2=hittest.createHtml(args["mmsi"], ts, lat, lon, result)
+        result2=htmlconvert.createHtml(args["mmsi"], args["ts"], args["lat"], args["lon"], result)
         return result2
 
