@@ -37,8 +37,9 @@ def createDescriptionTemplate():
     rv="<![CDATA[MMSI: {mmsi}\n<br />"
     rv=rv + "Dt: {datetime}\n\n<br />"
     rv=rv + "Hits: {count}<br />"
-    rv=rv + "<a href='" + hittestserver + "/html?ts={timestamp}&lat={lat}&lon={lon}&mmsi={mmsi}'>Satellite Lookup</a><br />"
+    rv=rv + "<a href='" + hittestserver + "/html?ts={timestamp}&lat={lat}&lon={lon}&mmsi={mmsi}'>Satellite Lookup</a>"
 #    rv=rv + "<img style='max-width:100px;' src='" + hittestserver + "/eval?ts={timestamp}&lat={lat}&lon={lon}&mmsi={mmsi}'>]]>"
+    rv=rv + "]]>"
     return rv
 
 def getStyle(color):
