@@ -32,7 +32,9 @@ DTYPES = {'satellite': 'uint16', # observed values are ints in 5..41678, so 0..6
 
 dates = ['day_dt', 'tle_dt']
 
-DAY_FILE_PATH="../data/TLE_daily"
+# DAY_FILE_PATH="../data/TLE_daily"
+DAY_FILE_PATH="../data/VAULT_Data/TLE_daily"
+
 
 # These numbers may seem upside down, but I like the default coloring in the polar plot when hit quality has these values.
 QUALITY_EXCELLENT = 0
@@ -46,6 +48,7 @@ class HitTest:
     '''
     def __init__(self, dt, day_file_base_path=DAY_FILE_PATH):
         df_path = "%s/%4d/%02d/%02d.tab.gz"%(day_file_base_path, dt.year, dt.month, dt.day)
+        print(f"Trying to load {df_path}")
         df = pd.read_csv(df_path,
                          names=COLUMNS, sep='\t', compression='gzip',
                          dtype=DTYPES,
@@ -96,13 +99,11 @@ class HitTest:
     #
 
     def invoke(self, dt, lat, lon):
-        ''' Main support function for satellite hit-testing service
+        ''' Main logic for satellite hit-testing service
 
-            returns a json object having two objects:
-            { 
-                "hitmiss": The hit,miss stats table
-                "visible": The information on the visible satellites
-            }
+            returns 2 DataFrames: 
+             - df_hit_miss_table :       The hit,miss stats table
+             - df_alt_az_days_visible :  The information on the visible satellites for star-map plotting
         '''
         df_alt_az_days = self.satellite_alt_az_days(dt, lat, lon)
 
@@ -132,9 +133,23 @@ class HitTest:
 
         df_alt_az_days_visible = df_alt_az_days[df_alt_az_days["altitude"]>0]
 
+        return df_hit_miss_table, df_alt_az_days_visible
+    #
+
+    def web_invoke(self, dt, lat, lon):
+        ''' Main support function for satellite hit-testing service
+
+            returns a json object having two objects:
+            { 
+                "hitmiss": The hit,miss stats table
+                "visible": The information on the visible satellites
+            }
+        '''
+        df_hit_miss_table, df_alt_az_days_visible = self.invoke(dt, lat, lon)
         result = {
             "hitmiss": df_hit_miss_table.to_dict(),
             "visible": df_alt_az_days_visible.to_dict()
         }
         return json.dumps(result)
     #
+
