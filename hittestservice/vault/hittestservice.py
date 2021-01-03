@@ -36,7 +36,7 @@ except ImportError:
 from markupsafe import escape
 import json
 
-
+from htmlutil import HTMLConvert
 
 
 app = Flask(__name__)
@@ -60,4 +60,35 @@ class HitTestService(Resource):
         result = {"response": hittest.web_invoke(dt, args["lat"], args["lon"])}
 
         return result
+
+@api.route('/footer.png')
+class ImageServiceFooter(Resource):
+    def get(self):
+        icon1="footer.png"
+        return send_file(icon1, mimetype='image/png')
+
+@api.route('/background.jpg')
+class ImageServiceBackground(Resource):
+    def get(self):
+        icon1="background.jpg"
+        return send_file(icon1, mimetype='image/jpg')
+
+@app.route("/html")
+def index():
+        parser = reqparse.RequestParser()
+        parser.add_argument('mmsi', type=string, help='mmsi identifier')
+        parser.add_argument('ts', type=int, help='unix epoch seconds')
+        parser.add_argument('lat', type=float, help='datetime in unix time format')
+        parser.add_argument('lon', type=float, help='datetime in unix time format')
+        args = parser.parse_args()
+
+        dt = datetime.fromtimestamp(args["ts"])
+
+        hittest = HitTest(dt, DAY_FILE_PATH)
+
+        result = {"response": hittest.invoke(dt, args["lat"], args["lon"])}
+        htmlconvert = HTMLConvert()
+
+        result2=hittest.createHtml(args["mmsi"], ts, lat, lon, result)
+        return result2
 
