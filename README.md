@@ -4,15 +4,14 @@
 
 ## Installing
 
-**TBD:** 
+**Note:** We still need to _build_ these packages.
 
 We recommend installing from conda. 
 
 | Conda | Pip | Git |
 | ---- | ---- | ---- |
-| Full [Anaconda](https://www.anaconda.com/products/individual):`conda install -c <CONDA CHANNEL> jacobs-vault gh anaconda`
-[Miniconda](https://docs.conda.io/en/latest/miniconda.html): 
-`conda install -c <CHANNEL> -c jacobs-vault` | `pip install jacobs-vault` | `git clone git@github.com:cmorris-jacobs/jacobs-vault.git` or  `git clone https://github.com/cmorris-jacobs/jacobs-vault.git` |
+| [Anaconda](https://www.anaconda.com/products/individual): `conda install -c <CONDA CHANNEL> jacobs-vault gh anaconda` | `pip install jacobs-vault` | **ssh:** `git clone git@github.com:cmorris-jacobs/jacobs-vault.git` |
+| [Miniconda](https://docs.conda.io/en/latest/miniconda.html): `conda install -c <CHANNEL> -c jacobs-vault` | | **https:** `git clone https://github.com/cmorris-jacobs/jacobs-vault.git` |
 
 ## Using
 
