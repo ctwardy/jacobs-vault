@@ -10,25 +10,9 @@ We recommend installing from conda.
 
 | Conda | Pip | Git |
 | ---- | ---- | ---- |
-| Full [Anaconda](https://www.anaconda.com/products/individual):
-```bash
-conda install -c <CONDA CHANNEL> jacobs-vault gh anaconda
-```
-[Miniconda](https://docs.conda.io/en/latest/miniconda.html)):
-```bash
-conda install -c <CHANNEL> -c jacobs-vault
-```
-| ```bash
-pip install jacobs-vault
-```
-| ```bash
-git clone git@github.com:cmorris-jacobs/jacobs-vault.git
-```
-or 
-```bash
-git clone https://github.com/cmorris-jacobs/jacobs-vault.git
-```
-|
+| Full [Anaconda](https://www.anaconda.com/products/individual):`conda install -c <CONDA CHANNEL> jacobs-vault gh anaconda`
+[Miniconda](https://docs.conda.io/en/latest/miniconda.html): 
+`conda install -c <CHANNEL> -c jacobs-vault` | `pip install jacobs-vault` | `git clone git@github.com:cmorris-jacobs/jacobs-vault.git` or  `git clone https://github.com/cmorris-jacobs/jacobs-vault.git` |
 
 ## Using
 
