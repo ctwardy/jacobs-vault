@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ title }}</title>
+    <meta name="description" content="DESCRIPTION___">
+    <!--    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    -->
+    <style>
+        body, html {
+            height: 100%;
+            width: 100%;
+            background-image: url("background.jpg");
+            color: #f7f7f7;
+            overflow-y: hidden;
+            overflow-x: hidden;
+        }
+
+        #mainContent {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+        }
+
+        .bg {
+            /* The image used */
+            background-image: url("background.jpg");
+            /* Full height */
+            height: 100%;
+            /* Center and scale the image nicely */
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        #header {
+            position: fixed;
+            top: 0px;
+            left: 0px;
+            right: 0px;
+            margin-top: 0;
+            margin-left: 0;
+            margin-right: 0;
+            height: 120px;
+            font-size: 200%;
+            font-weight: bold;
+            background-color: #2317d9;
+        }
+
+        .headerItem {
+            float: left;
+            min-width: 200px;
+            margin-top: 40px;
+            margin-left: 40px;
+        }
+
+        #hitMissContent {
+            position: fixed;
+            top: 200px;
+            left: 150px;
+            width: 300px;
+            font-size: 150%;
+            font-weight: bold;
+            color: #d5d5d5;
+        }
+
+        .hitMissItem {
+            height: 50px;
+            margin-top: 20px;
+            padding: 5px;
+            padding-top: 15px;
+            background-color: #134cff; /*#050150;*/
+            border-radius: 10px;
+        }
+
+        .hitMissLabel {
+            float: left;
+            width: 150px;
+            text-align: right;
+            margin-right: 10px;
+        }
+
+        .hitMissValue {
+            text-align: left;
+            margin-left: 5px;
+        }
+
+        #visibleContent {
+            position: fixed;
+            left: 40%;
+            margin-left: 10px;
+            top: 200px;
+            width: 50%;
+            bottom: 150px;
+            overflow: -moz-scrollbars-vertical;
+            overflow-y: scroll;
+            font-size: 120%;
+            background-color: #5a6268;
+        }
+
+        .visibleTable {
+            width: 100%;
+            height: 100%;
+            /*background-color: red;*/
+        }
+
+        .footer {
+            position: fixed;
+            height: 95px;
+            width: 100%;
+            bottom: 0;
+            right: 0;
+            background-image: url("footer.png");
+        }
+
+        .visibleRow {
+        }
+
+        .visibleRowHeader {
+            font-weight: bold;
+            min-width: 150px;
+
+        }
+
+        .visiblerowitem {
+            padding: 2px;
+            min-width: 150px;
+        }
+
+    </style>
+</head>
+<body>
+<div class="bg"></div>
+<div id="mainContent">
+    <div id="header">
+        <div class="headerItem">MMSI: {{ mmsi }}</div>
+        <div class="headerItem">TimeStamp: {{ timestamp }}</div>
+        <div class="headerItem">Lat: {{ lat }}</div>
+        <div class="headerItem">Lon: {{ lon }}</div>
+    </div>
+
+
+    <div id="hitMissContent">
+        {{ hitMisscContent}}
+    </div>
+
+    <div id="visibleContent">
+        <table class="visibleTable" border="1">
+            <tbody>
+            <tr>
+                <td><span class="visibleRowItem">Sat</span></td>
+                <td><span class="visibleRowItem">Hits</span></td>
+                <td><span class="visibleRowItem">Altitude</span></td>
+                <td><span class="visibleRowItem">Days</span></td>
+                <td><span class="visibleRowItem">Azimuth</span></td>
+            </tr>
+            {{ visibleContent }}
+            </tbody>
+        </table>
+    </div>
+    <div class="footer">
+
+    </div>
+
+</div>
+</body>
+</html>
+

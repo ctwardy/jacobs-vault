@@ -4,7 +4,7 @@
 
 # Download AIS data
 
-currdir=TLE
+currdir=AIS
 mkdir $currdir
 
 wget --directory-prefix=${currdir} https://afdata.s3-us-gov-west-1.amazonaws.com/Scenario_Data/AIS/AIS_2015_01_Zone01.zip
@@ -21,6 +21,7 @@ wget --directory-prefix=${currdir} https://afdata.s3-us-gov-west-1.amazonaws.com
 wget --directory-prefix=${currdir} https://afdata.s3-us-gov-west-1.amazonaws.com/Scenario_Data/AIS/Zone10_2011_01.gdb.zip
 wget --directory-prefix=${currdir} https://afdata.s3-us-gov-west-1.amazonaws.com/Scenario_Data/AIS/Zone10_2012_01.gdb.zip
 wget --directory-prefix=${currdir} https://afdata.s3-us-gov-west-1.amazonaws.com/Scenario_Data/AIS/Zone10_2013_01.gdb.zip
+wget --directory-prefix=${currdir} https://afdata.s3-us-gov-west-1.amazonaws.com/Scenario_Data/AIS/Zone10_2014_01.zip
 wget --directory-prefix=${currdir} https://afdata.s3-us-gov-west-1.amazonaws.com/Scenario_Data/AIS/Zone10_2014_01.zip.wzd
 
 # Download TLE data

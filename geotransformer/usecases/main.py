@@ -22,17 +22,24 @@ def main():
     df = spark.table(GEO_INPUT_TABLE)
     # df = df.limit(1000000)
     # df = df.withColumn('')
-    df.show()
-    print("df length:", df.count())
+    # df.show()
+    # print("df length:", df.count())
 
-    gt = GeoTransformer(single_partition_length=10000)
+    # Filter any null lines
+    columns_list = ['line1','line2']
+    for column in columns_list:
+        df = df.filter(~F.isnull(df[column]))
+
+    gt = GeoTransformer(single_partition_length=2000, extra_columns_list=columns_list)
     
     # df = gt.generate_lat_long_pyephem(df)
-    df = gt.generate_lat_long_astropy(df)
-    df.cache()
+    # df = gt.generate_lat_long_astropy(df)
+    df = gt.generate_orbital_parameters_astropy(df, spark)
+    # df.cache()
 
+    # df.explain()
     # df.show()
-    print("df length:", df.count())
+    # print("df length:", df.count())
 
     df.write.saveAsTable(GEO_OUTPUT_TABLE, mode='overwrite')
 

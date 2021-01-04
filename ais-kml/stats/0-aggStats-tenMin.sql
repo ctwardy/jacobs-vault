@@ -12,11 +12,11 @@ set hive.exec.compress.output=true;
 
 use af_vault;
 
-create table ais_agg_stats_hourly stored as parquet as 
+create table ais_agg_stats_tenmin stored as parquet as 
 select 
 	mmsi, 
 	substr(basedatetime,0,4)  as year, 
-	CONCAT(substr(basedatetime,0,13),":00:00") as datetime,
+	CONCAT(substr(basedatetime,0,15),"0:00") as datetime,
 
 	min(cast(sog as float)) as sog_min,
         max(cast(sog as float)) as sog_max,
@@ -59,7 +59,7 @@ from
 group by
         mmsi,
         substr(basedatetime,0,4),
-        substr(basedatetime,0,13),
+        substr(basedatetime,0,15),
         vesselname,
         imo,
         callsign,

@@ -1,9 +1,11 @@
 #!/bin/bash
 
-GEO_INPUT_TABLE="af_vault.tle_2015_2017"
+# GEO_INPUT_TABLE="af_vault.tle_2015_2017"
+GEO_INPUT_TABLE="cmorris.af_vault_tle"
 # GEO_OUTPUT_TABLE="cmorris.tle_geo_test_w_sgp4_astropy_v2"
-GEO_OUTPUT_TABLE="af_vault.tle_2015_2017_geo_sgp4_astropy"
-SPARK_OPTIONS="--driver-memory 14g --executor-memory 10g --num-executors 10"
+# GEO_OUTPUT_TABLE="af_vault.tle_2015_2017_geo_sgp4_astropy"
+GEO_OUTPUT_TABLE="cmorris.af_vault_tle_params_fixed_v2"
+SPARK_OPTIONS="--driver-memory 14g --executor-memory 20g" # --num-executors 10"
 USECASE_PYSPARK_FILE=usecases/main.py
 
 ###### Only edit below here if you know what you are doing... ##############

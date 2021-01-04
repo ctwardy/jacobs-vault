@@ -18,7 +18,7 @@ from .hittest import HitTest, DAY_FILE_PATH
 
 from datetime import datetime
 from flask import Flask
-from flask import request
+from flask import request, send_file
 try:
     # restplus is dead: https://github.com/noirbizarre/flask-restplus/issues/770
     from flask_restx import Resource, Api
@@ -35,6 +35,9 @@ except ImportError:
         from flask_restplus import reqparse
 from markupsafe import escape
 import json
+
+from htmlutil import HTMLConvert
+
 
 app = Flask(__name__)
 api = Api(app)
@@ -57,3 +60,35 @@ class HitTestService(Resource):
         result = {"response": hittest.web_invoke(dt, args["lat"], args["lon"])}
 
         return result
+
+@api.route('/footer.png')
+class ImageServiceFooter(Resource):
+    def get(self):
+        icon1="footer.png"
+        return send_file(icon1, mimetype='image/png')
+
+@api.route('/background.jpg')
+class ImageServiceBackground(Resource):
+    def get(self):
+        icon1="background.jpg"
+        return send_file(icon1, mimetype='image/jpg')
+
+@app.route("/html")
+def index():
+        parser = reqparse.RequestParser()
+        parser.add_argument('mmsi', type=str, help='mmsi identifier')
+        parser.add_argument('ts', type=int, help='unix epoch seconds')
+        parser.add_argument('lat', type=float, help='datetime in unix time format')
+        parser.add_argument('lon', type=float, help='datetime in unix time format')
+        args = parser.parse_args()
+
+        dt = datetime.fromtimestamp(args["ts"])
+
+        hittest = HitTest(dt, DAY_FILE_PATH)
+
+        result = {"response": hittest.web_invoke(dt, args["lat"], args["lon"])}
+        htmlconvert = HTMLConvert()
+
+        result2=htmlconvert.createHtml(args["mmsi"], args["ts"], args["lat"], args["lon"], result)
+        return result2
+

@@ -65,7 +65,7 @@ class VelocityCalculations:
             try:
                 t0 = datetime.fromisoformat(basedatetime_previous)
                 t1 = datetime.fromisoformat(basedatetime)
-                delta_hrs = (t1 - t0).total_seconds() / 60
+                delta_hrs = (t1 - t0).total_seconds() / 60 / 60
             except Exception as e:
                 error = str(e)
                 delta_hrs = float('NaN')
