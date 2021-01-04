@@ -1,6 +1,6 @@
 ---
 
-title: Title
+title: Jacobs VAULT
 
 keywords: fastai
 sidebar: home_sidebar
@@ -30,36 +30,50 @@ nb_path: "nbs/index.ipynb"
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Installing">Installing<a class="anchor-link" href="#Installing"> </a></h2><p><strong>TBD:</strong></p>
+<p>We recommend installing from conda.</p>
 <table>
-    <tr style="background-color:#EEEEEE">
-        <td ><img src="images/Jacobs_logo_rgb_black.svg" width="200"/></td>
-        <td><img alt="Satellites Visible" src="images/polar_plot2.png" width="300"></td>
-    </tr>
-</table><h1 id="Welcome-to-jacobs-vault.">Welcome to jacobs-vault.<a class="anchor-link" href="#Welcome-to-jacobs-vault."> </a></h1><blockquote><p><strong>jacobs-vault</strong> is Jacobs' response to the Air Force VAULT quick-turn data analysis challenge.</p>
-</blockquote>
-<p>It contains scripts and notebooks to (a) ingest the provided AIS shipping tracks and satellite TLE data, (b) find what satellites are visible for a given ship track position, and (c) highlight coverage gaps / flaws in the data.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Installing">Installing<a class="anchor-link" href="#Installing"> </a></h2><p>We used the <code>nbdev</code> and <code>cookie-cutter</code> environments to ease packaging and installation, but they haven't been fully integrated.  Many queries expect you to have an Apache Spark environment, though in theory that could be on a single machine.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>When done, you should be able to install as follows:</strong></p>
-<p>You can install jacobs-vault on your own machines with conda (highly recommended). If you're using <a href="https://www.anaconda.com/products/individual">Anaconda</a> then run:</p>
+<thead><tr>
+<th>Conda</th>
+<th>Pip</th>
+<th>Git</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Full <a href="https://www.anaconda.com/products/individual">Anaconda</a>:</td>
+</tr>
+</tbody>
+</table>
 <div class="highlight"><pre><span></span>conda install -c &lt;CONDA CHANNEL&gt; jacobs-vault gh anaconda
 </pre></div>
-<p>...or if you're using <a href="https://docs.conda.io/en/latest/miniconda.html">miniconda</a>) then run:</p>
+<p><a href="https://docs.conda.io/en/latest/miniconda.html">Miniconda</a>):</p>
 <div class="highlight"><pre><span></span>conda install -c &lt;CHANNEL&gt; -c jacobs-vault
 </pre></div>
-<p>To install with pip, use: <code>pip install jacobs-vault</code>.</p>
-<p>If you plan to develop, see below.</p>
+<p>| ```bash
+pip install jacobs-vault</p>
+
+<pre><code>| ```bash
+git clone git@github.com:cmorris-jacobs/jacobs-vault.git</code></pre>
+<p>or</p>
+<div class="highlight"><pre><span></span>git clone https://github.com/cmorris-jacobs/jacobs-vault.git
+</pre></div>
+<p>|</p>
+<h2 id="Using">Using<a class="anchor-link" href="#Using"> </a></h2><p>Change to the <code>jacobs-vault</code> folder and ensure that <code>data/</code> contains or points to the VAULT data. (SAY MORE!)  Then explore these options:</p>
+<h3 id="Demo">Demo<a class="anchor-link" href="#Demo"> </a></h3><div class="highlight"><pre><span></span><span class="nb">cd</span> demo
+. run.sh
+</pre></div>
+<p>May require linking <code>demo/data</code> to the data folder, e.g. <code>ln -s ../data ./</code>.</p>
+<h3 id="Run-the-notebooks-in-nbs/">Run the notebooks in nbs/<a class="anchor-link" href="#Run-the-notebooks-in-nbs/"> </a></h3><p>Activate the <code>vault</code> Python virtual environment and start a new jupyter kernel.</p>
+<div class="highlight"><pre><span></span>conda env -f environment.yml
+conda activate vault
+jupyter notebook
+</pre></div>
+<p>You can now explore and run the notebooks in the <code>nbs/</code> folder.</p>
+<h3 id="Notes">Notes<a class="anchor-link" href="#Notes"> </a></h3><ul>
+<li>Notebooks in <code>nbs/</code> contain <code>nbdev</code> markup. The <code>nbdev</code> package uses them to generate the project docs (including this README), generate some python modules, run tests, and perform limited Continuous Integration testing upon <code>git push</code> events. </li>
+<li>Some code expects an Apache Spark setup with Hive and Hadoop available, and we have only tested on our cluster. However, our <code>cookie-cutter</code> template packages the Spark environments and our run scripts distribute those to the compute nodes for reproducibility. </li>
+</ul>
 
 </div>
 </div>
@@ -72,11 +86,15 @@ nb_path: "nbs/index.ipynb"
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>jacobs-vault partitions the data to support either distributed Spark/Dash workflows, or fast single-ship satellite queries. It includes:</p>
+<p>jacobs-vault partitions the data to support either distributed workflows (Spark), or fast single-ship satellite queries. It includes:</p>
 <ul>
 <li>ETL scripts in the <code>etl</code> folder</li>
 <li>Call <code>skyfield</code> for ephemeris calculations</li>
-<li>The notebook <code>nbs/01_HitTest.ipynb</code> and service <code>hittestservice/</code> provide the core functions to read the appropriate TLE file for a given day, and calculate the visible satellites.</li>
+<li>Notebooks folder <code>nbs/</code> for exploration.<ul>
+<li>Via the <code>nbdev</code> package, notebooks generate modules that can be called by other scripts, and documentation (including this README).</li>
+<li><code>nbs/01_HitTest.ipynb</code> generates jacobs-vault/hittest.py, used by <code>hittestservice.py</code> to display satellite starmaps given queries. </li>
+</ul>
+</li>
 <li><code>geotransformer</code></li>
 <li><code>ais-analytics</code></li>
 <li>...</li>
@@ -87,12 +105,14 @@ nb_path: "nbs/index.ipynb"
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Key-Required-Packages">Key Required Packages<a class="anchor-link" href="#Key-Required-Packages"> </a></h2><p>Required top-level packages must be listed in <code>settings.ini</code>, or the GitHub Continuous Integration tests will fail. There are three broad categories:</p>
+<h2 id="Key-Required-Packages">Key Required Packages<a class="anchor-link" href="#Key-Required-Packages"> </a></h2><p>After cloning the repository, use the <code>conda</code> package manager to install the main dependencies. (We provide files for <code>pip</code>, but we recommend conda.)</p>
+<div class="highlight"><pre><span></span>conda env create -f environment.yml
+</pre></div>
+<p>Key top-level packages fall in three broad categories:</p>
 <h3 id="Scientific-Python-Ecosystem:">Scientific Python Ecosystem:<a class="anchor-link" href="#Scientific-Python-Ecosystem:"> </a></h3><ul>
-<li>Anaconda distribution preferred, though pip should work</li>
-<li>Core: numpy, pandas</li>
-<li>Astronomy: skyfield, ...else?...</li>
-<li>Possibly: scikit-learn (not used yet?)</li>
+<li>Core: numpy, pandas, ipython</li>
+<li>Astronomy: skyfield, astropy, GDAL, pyephem, pyorbital  # &lt;-- do we really use all these still?</li>
+<li>Clustering: <a href="https://hdbscan.readthedocs.io/en/latest/index.html">HDBSCAN</a></li>
 <li>Notebooks: jupyter notebook</li>
 </ul>
 <h3 id="Cloud-Computing">Cloud Computing<a class="anchor-link" href="#Cloud-Computing"> </a></h3><ul>
@@ -104,13 +124,6 @@ nb_path: "nbs/index.ipynb"
 <h3 id="Literate-Programming:">Literate Programming:<a class="anchor-link" href="#Literate-Programming:"> </a></h3><ul>
 <li>nbdev, cookie-cutter</li>
 </ul>
-<h2 id="conda-env">conda env<a class="anchor-link" href="#conda-env"> </a></h2><p>You can create the <code>vault</code> conda env using:</p>
-<div class="highlight"><pre><span></span>conda env create -f environment.yml
-</pre></div>
-<p>and activate it with</p>
-<div class="highlight"><pre><span></span>conda activate vault
-</pre></div>
-<p>The envs/ folder contains related environments for certain pieces.</p>
 
 </div>
 </div>

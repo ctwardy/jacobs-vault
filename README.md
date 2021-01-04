@@ -2,61 +2,83 @@
 
 
 
-<table>
-    <tr style="background-color:#EEEEEE">
-        <td ><img src="images/Jacobs_logo_rgb_black.svg" width="200"/></td>
-        <td><img alt="Satellites Visible" src="images/polar_plot2.png" width="300"></td>
-    </tr>
-</table>
-    
-# Welcome to jacobs-vault.
- 
-> **jacobs-vault** is Jacobs' response to the Air Force VAULT quick-turn data analysis challenge. 
-
-It contains scripts and notebooks to (a) ingest the provided AIS shipping tracks and satellite TLE data, (b) find what satellites are visible for a given ship track position, and (c) highlight coverage gaps / flaws in the data. 
-
 ## Installing
 
-We used the `nbdev` and `cookie-cutter` environments to ease packaging and installation, but they haven't been fully integrated.  Many queries expect you to have an Apache Spark environment, though in theory that could be on a single machine.  
+**TBD:** 
 
-**When done, you should be able to install as follows:** 
+We recommend installing from conda. 
 
-You can install jacobs-vault on your own machines with conda (highly recommended). If you're using [Anaconda](https://www.anaconda.com/products/individual) then run:
+| Conda | Pip | Git |
+| ---- | ---- | ---- |
+| Full [Anaconda](https://www.anaconda.com/products/individual):
 ```bash
 conda install -c <CONDA CHANNEL> jacobs-vault gh anaconda
 ```
-...or if you're using [miniconda](https://docs.conda.io/en/latest/miniconda.html)) then run:
+[Miniconda](https://docs.conda.io/en/latest/miniconda.html)):
 ```bash
 conda install -c <CHANNEL> -c jacobs-vault
 ```
-To install with pip, use: `pip install jacobs-vault`. 
+| ```bash
+pip install jacobs-vault
+```
+| ```bash
+git clone git@github.com:cmorris-jacobs/jacobs-vault.git
+```
+or 
+```bash
+git clone https://github.com/cmorris-jacobs/jacobs-vault.git
+```
+|
 
+## Using
 
-If you plan to develop, see below.
+Change to the `jacobs-vault` folder and ensure that `data/` contains or points to the VAULT data. (SAY MORE!)  Then explore these options:
+
+### Demo
+```bash
+cd demo
+. run.sh
+```
+May require linking `demo/data` to the data folder, e.g. `ln -s ../data ./`. 
+
+### Run the notebooks in nbs/
+Activate the `vault` Python virtual environment and start a new jupyter kernel.
+```bash
+conda env -f environment.yml
+conda activate vault
+jupyter notebook
+```
+You can now explore and run the notebooks in the `nbs/` folder.
+
+### Notes
+* Notebooks in `nbs/` contain `nbdev` markup. The `nbdev` package uses them to generate the project docs (including this README), generate some python modules, run tests, and perform limited Continuous Integration testing upon `git push` events. 
+* Some code expects an Apache Spark setup with Hive and Hadoop available, and we have only tested on our cluster. However, our `cookie-cutter` template packages the Spark environments and our run scripts distribute those to the compute nodes for reproducibility. 
+
 
 ## About jacobs-vault
 
-jacobs-vault partitions the data to support either distributed Spark/Dash workflows, or fast single-ship satellite queries. It includes: 
+jacobs-vault partitions the data to support either distributed workflows (Spark), or fast single-ship satellite queries. It includes: 
 
 * ETL scripts in the `etl` folder
 * Call `skyfield` for ephemeris calculations
-* The notebook `nbs/01_HitTest.ipynb` and service `hittestservice/` provide the core functions to read the appropriate TLE file for a given day, and calculate the visible satellites.
-* Notebooks folder for exploration
-    * Nbdev package means notebooks in nbs/ generate both module code that can be called by other scripts, and documentation. 
-    * nbs/01_HitTest.ipynb and service hittestservice/ provide the core functions to read the appropriate TLE file for a given day, and calculate the visible satellites.
-
+* Notebooks folder `nbs/` for exploration.
+  * Via the `nbdev` package, notebooks generate modules that can be called by other scripts, and documentation (including this README).
+  * `nbs/01_HitTest.ipynb` generates jacobs-vault/hittest.py, used by `hittestservice.py` to display satellite starmaps given queries. 
 * `geotransformer`
 * `ais-analytics`
 * ...
 
 ## Key Required Packages
 
-Required top-level packages must be listed in `settings.ini`, or the GitHub Continuous Integration tests will fail. There are three broad categories:
+After cloning the repository, use the `conda` package manager to install the main dependencies. (We provide files for `pip`, but we recommend conda.)
+```bash
+conda env create -f environment.yml
+```
+Key top-level packages fall in three broad categories:
 
 ### Scientific Python Ecosystem:
-* Installing the Anaconda distribution is preferred, but the included conda environment.yml files will allow for full reproduction of the environments used for analysis.
 * Core: numpy, pandas, ipython
-* Astronomy: Skyfield, SGP4, astropy, GDAL, pyephem, pyorbital
+* Astronomy: skyfield, astropy, GDAL, pyephem, pyorbital  # <-- do we really use all these still?
 * Clustering: [HDBSCAN](https://hdbscan.readthedocs.io/en/latest/index.html)
 * Notebooks: jupyter notebook
 
@@ -68,18 +90,6 @@ Required top-level packages must be listed in `settings.ini`, or the GitHub Cont
 
 ### Literate Programming: 
 * nbdev, cookie-cutter
-
-## conda env
-You can create the <code>vault</code> conda env using: 
-```bash
-conda env create -f environment.yml
-``` 
-and activate it with
-```bash
-conda activate vault
-```
-
-The envs/ folder contains related environments for certain pieces. 
 
 
 ## Tests

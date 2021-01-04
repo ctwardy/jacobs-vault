@@ -3,7 +3,7 @@ output: web
 topnav_title: jacobs-vault
 site_title: jacobs-vault
 company_name: Jacobs
-description: Jacobs' response to VAULT challenge: analyze ship AIS & satellite TLE data.
+description: Jacobs' response to VAULT challenge - analyze ship AIS & satellite TLE data.
 # Set to false to disable KaTeX math
 use_math: true
 # Add Google analytics id if you have one and want to use it here

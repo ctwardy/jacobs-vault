@@ -16,6 +16,9 @@ entries:
       title: Title
       url: /HitTest
     - output: web,pdf
+      title: Demo_Chris
+      url: /demo_chris
+    - output: web,pdf
       title: Notes
       url: /notes
     output: web

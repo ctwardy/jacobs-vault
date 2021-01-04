@@ -3,15 +3,18 @@
 __all__ = ["index", "modules", "custom_doc_links", "git_url"]
 
 index = {"Vault": "00_core.ipynb",
-         "COLUMNS": "01_HitTest.ipynb",
-         "DTYPES": "01_HitTest.ipynb",
-         "DATE_COLS": "01_HitTest.ipynb",
-         "load_day_file": "01_HitTest.ipynb",
-         "DAY_FILE_PATH": "01_HitTest.ipynb",
-         "test_skyfield": "01_HitTest.ipynb",
-         "satellite_alt_az_days": "01_HitTest.ipynb",
-         "hit_quality": "01_HitTest.ipynb",
-         "viz": "01_HitTest.ipynb"}
+         "COLUMNS": "05_HitTest.ipynb",
+         "DTYPES": "05_HitTest.ipynb",
+         "DATE_COLS": "05_HitTest.ipynb",
+         "load_day_file": "01_Early_HitTest.ipynb",
+         "DAY_FILE_PATH": "05_HitTest.ipynb",
+         "test_skyfield": "05_HitTest.ipynb",
+         "satellite_alt_az_days": "01_Early_HitTest.ipynb",
+         "hit_quality": "05_HitTest.ipynb",
+         "viz": "05_HitTest.ipynb",
+         "HitTest": "05_HitTest.ipynb",
+         "colorize": "05_HitTest.ipynb",
+         "QUALITY_COLORS": "05_HitTest.ipynb"}
 
 modules = ["core.py",
            "hit_test.py"]
