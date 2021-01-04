@@ -1,0 +1,22 @@
+name: vaultgeowextras
+channels:
+  - default
+  - conda-forge
+  - plotly
+dependencies:
+  - python=3.7
+  - ipython=7.1.1
+  - prompt_toolkit==2.0.10
+  - notebook
+  - numpy
+  - pandas
+  - requests
+  - plotly==4.14.1
+  - pip>=19.3.1
+  - pip:
+    - ephem
+    - pyorbital
+    - skyfield
+    - astropy
+    - sgp4
+    - geopy
