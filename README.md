@@ -1,4 +1,4 @@
-# Title
+# Jacobs VAULT
 
 
 
@@ -41,6 +41,10 @@ jacobs-vault partitions the data to support either distributed Spark/Dash workfl
 * ETL scripts in the `etl` folder
 * Call `skyfield` for ephemeris calculations
 * The notebook `nbs/01_HitTest.ipynb` and service `hittestservice/` provide the core functions to read the appropriate TLE file for a given day, and calculate the visible satellites.
+* Notebooks folder for exploration
+    * Nbdev package means notebooks in nbs/ generate both module code that can be called by other scripts, and documentation. 
+    * nbs/01_HitTest.ipynb and service hittestservice/ provide the core functions to read the appropriate TLE file for a given day, and calculate the visible satellites.
+
 * `geotransformer`
 * `ais-analytics`
 * ...
@@ -50,10 +54,10 @@ jacobs-vault partitions the data to support either distributed Spark/Dash workfl
 Required top-level packages must be listed in `settings.ini`, or the GitHub Continuous Integration tests will fail. There are three broad categories:
 
 ### Scientific Python Ecosystem:
-* Anaconda distribution preferred, though pip should work
-* Core: numpy, pandas
-* Astronomy: skyfield, ...else?...
-* Possibly: scikit-learn (not used yet?)
+* Installing the Anaconda distribution is preferred, but the included conda environment.yml files will allow for full reproduction of the environments used for analysis.
+* Core: numpy, pandas, ipython
+* Astronomy: Skyfield, SGP4, astropy, GDAL, pyephem, pyorbital
+* Clustering: [HDBSCAN](https://hdbscan.readthedocs.io/en/latest/index.html)
 * Notebooks: jupyter notebook
 
 ### Cloud Computing
