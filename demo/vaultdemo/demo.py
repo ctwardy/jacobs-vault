@@ -111,15 +111,16 @@ class Demo:
         dt = datetime.strptime(dt_lat_lat_hittest_obj["dt"], "%Y-%m-%dT%H:%M:%S")
         ht = HitTest(dt)
         
-        hit_miss_table, self.df_alt_az_days_visible = ht.invoke(dt, dt_lat_lat_hittest_obj["lat"], dt_lat_lat_hittest_obj["lon"])
+        hit_miss_table, df_alt_az_days = ht.invoke(dt, dt_lat_lat_hittest_obj["lat"], dt_lat_lat_hittest_obj["lon"])
+        self.df_alt_az_days_visible = df_alt_az_days[df_alt_az_days["hit"].notnull() & df_alt_az_days["altitude"]>0.0].copy()
         return hit_miss_table
     #
     def starmap(self):
-        self.df_alt_az_days_visible["color"] = 2
-        self.df_alt_az_days_visible.loc[(self.df_alt_az_days_visible["days"] <= 14.0), "color"] = 1
-        self.df_alt_az_days_visible.loc[(self.df_alt_az_days_visible["days"] <= 2.0), "color"] = 0
+        # self.df_alt_az_days_visible["color"] = 2
+        # self.df_alt_az_days_visible.loc[(self.df_alt_az_days_visible["days"] <= 14.0), "color"] = 1
+        # self.df_alt_az_days_visible.loc[(self.df_alt_az_days_visible["days"] <= 2.0), "color"] = 0
         self.df_alt_az_days_visible["R"] = 90.0 - self.df_alt_az_days_visible["altitude"]
-        fig = px.scatter_polar(self.df_alt_az_days_visible, r="R", theta="azimuth", color="color")
+        fig = px.scatter_polar(self.df_alt_az_days_visible, r="R", theta="azimuth", color="days")
         fig.show()
-        
+   #
 

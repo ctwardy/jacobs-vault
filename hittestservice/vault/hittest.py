@@ -48,7 +48,6 @@ class HitTest:
     '''
     def __init__(self, dt, day_file_base_path=DAY_FILE_PATH):
         df_path = "%s/%4d/%02d/%02d.tab.gz"%(day_file_base_path, dt.year, dt.month, dt.day)
-        print(f"Trying to load {df_path}")
         df = pd.read_csv(df_path,
                          names=COLUMNS, sep='\t', compression='gzip',
                          dtype=DTYPES,
@@ -80,6 +79,7 @@ class HitTest:
                     qvals = [math.nan, QUALITY_EXCELLENT]
             elif delta_days <= 14.0:
                 if alt.degrees > 0.0:
+                    # print((row["tle_dt"], abs(dt - row['tle_dt']).days, row["line1"], row["line2"]))
                     qvals = [QUALITY_GOOD, math.nan]
                 else:
                     qvals = [math.nan, QUALITY_GOOD]
@@ -122,7 +122,13 @@ class HitTest:
                 q = "Poor"
             elif row[col] == QUALITY_STALE:
                 q = "Stale"
-            # no-else ... leave the NaNs alone
+            else:
+                if col == "miss":
+                    # The data was so bad we didn't fill in the daily-record .. beyond stale
+                    q = "Stale"
+                else:
+                    q = "N/A"
+
             return q
         #
 
@@ -130,6 +136,9 @@ class HitTest:
                 df_alt_az_days.apply(partial(apply_quality_str, col="hit"), axis=1).value_counts(),
                 df_alt_az_days.apply(partial(apply_quality_str, col="miss"), axis=1).value_counts()]
             , axis=1, sort=False)
+        df_hit_miss_table.columns=["hit", "miss"]
+        # strip "N/A" row 
+        df_hit_miss_table = df_hit_miss_table[df_hit_miss_table.index != "N/A"].copy()
 
         df_alt_az_days_visible = df_alt_az_days[df_alt_az_days["altitude"]>0]
 
