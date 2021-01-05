@@ -30,7 +30,7 @@ nb_path: "nbs/index.ipynb"
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Installing">Installing<a class="anchor-link" href="#Installing"> </a></h2><p><strong>TBD:</strong></p>
+<h2 id="Installing">Installing<a class="anchor-link" href="#Installing"> </a></h2><p><strong>Note:</strong> we still need to <em>build</em> these packages so this works.</p>
 <p>We recommend installing from conda.</p>
 <table>
 <thead><tr>
@@ -41,24 +41,17 @@ nb_path: "nbs/index.ipynb"
 </thead>
 <tbody>
 <tr>
-<td>Full <a href="https://www.anaconda.com/products/individual">Anaconda</a>:</td>
+<td><a href="https://www.anaconda.com/products/individual">Anaconda</a>: <code>conda install -c &lt;CONDA CHANNEL&gt; jacobs-vault gh anaconda</code></td>
+<td><code>pip install jacobs-vault</code></td>
+<td><strong>ssh:</strong> <code>git clone git@github.com:cmorris-jacobs/jacobs-vault.git</code></td>
+</tr>
+<tr>
+<td><a href="https://docs.conda.io/en/latest/miniconda.html">Miniconda</a>: <code>conda install -c &lt;CHANNEL&gt; -c jacobs-vault</code></td>
+<td></td>
+<td><strong>https:</strong> <code>git clone https://github.com/cmorris-jacobs/jacobs-vault.git</code></td>
 </tr>
 </tbody>
 </table>
-<div class="highlight"><pre><span></span>conda install -c &lt;CONDA CHANNEL&gt; jacobs-vault gh anaconda
-</pre></div>
-<p><a href="https://docs.conda.io/en/latest/miniconda.html">Miniconda</a>):</p>
-<div class="highlight"><pre><span></span>conda install -c &lt;CHANNEL&gt; -c jacobs-vault
-</pre></div>
-<p>| ```bash
-pip install jacobs-vault</p>
-
-<pre><code>| ```bash
-git clone git@github.com:cmorris-jacobs/jacobs-vault.git</code></pre>
-<p>or</p>
-<div class="highlight"><pre><span></span>git clone https://github.com/cmorris-jacobs/jacobs-vault.git
-</pre></div>
-<p>|</p>
 <h2 id="Using">Using<a class="anchor-link" href="#Using"> </a></h2><p>Change to the <code>jacobs-vault</code> folder and ensure that <code>data/</code> contains or points to the VAULT data. (SAY MORE!)  Then explore these options:</p>
 <h3 id="Demo">Demo<a class="anchor-link" href="#Demo"> </a></h3><div class="highlight"><pre><span></span><span class="nb">cd</span> demo
 . run.sh
@@ -70,10 +63,6 @@ conda activate vault
 jupyter notebook
 </pre></div>
 <p>You can now explore and run the notebooks in the <code>nbs/</code> folder.</p>
-<h3 id="Notes">Notes<a class="anchor-link" href="#Notes"> </a></h3><ul>
-<li>Notebooks in <code>nbs/</code> contain <code>nbdev</code> markup. The <code>nbdev</code> package uses them to generate the project docs (including this README), generate some python modules, run tests, and perform limited Continuous Integration testing upon <code>git push</code> events. </li>
-<li>Some code expects an Apache Spark setup with Hive and Hadoop available, and we have only tested on our cluster. However, our <code>cookie-cutter</code> template packages the Spark environments and our run scripts distribute those to the compute nodes for reproducibility. </li>
-</ul>
 
 </div>
 </div>
@@ -86,19 +75,32 @@ jupyter notebook
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>jacobs-vault partitions the data to support either distributed workflows (Spark), or fast single-ship satellite queries. It includes:</p>
+<p>Jacobs-VAULT is the result of a hackathon challenge, so in addition to a working demo and analysis notebooks, it still has exploratory paths and alternate approaches. Folders are in three rough groups:</p>
+<h3 id="ETL-Folders">ETL Folders<a class="anchor-link" href="#ETL-Folders"> </a></h3><ul>
+<li><code>etl</code> - Original ETL scripts, mostly Spark SQL and Hive.</li>
+<li><code>ais-analytics</code> - Subproject Spark to analyze AIS data. Alternate ETL.</li>
+<li><code>geotransformer</code> - Subproject using Spark to analyze TLE data. Alternate ETL. Directly calls <code>sgp4</code> and the <code>astropy</code> package, instead of <code>skyfield</code>.</li>
+</ul>
+<h3 id="nbdev-Folders">nbdev Folders<a class="anchor-link" href="#nbdev-Folders"> </a></h3><p>A mix of exploratory notebooks and literate programming notebooks that generate Python modules and documentation (including this README) via the <code>nbdev</code> package. Controlled by the toplevel <code>Makefile</code>, using the <code>vault</code> virtual environment captured in <code>environment.yml</code>.</p>
 <ul>
-<li>ETL scripts in the <code>etl</code> folder</li>
-<li>Call <code>skyfield</code> for ephemeris calculations</li>
-<li>Notebooks folder <code>nbs/</code> for exploration.<ul>
-<li>Via the <code>nbdev</code> package, notebooks generate modules that can be called by other scripts, and documentation (including this README).</li>
-<li><code>nbs/01_HitTest.ipynb</code> generates jacobs-vault/hittest.py, used by <code>hittestservice.py</code> to display satellite starmaps given queries. </li>
+<li><code>nbs</code> - Toplevel notebooks, generate docs, modules, and README.</li>
+<li><code>jacobs_vault</code> - Python modules generated from <code>nbs/</code> by <code>nbdev</code> package</li>
+<li><code>docs</code> - Documentation generated from <code>nbs/</code> by <code>nbdev</code> package</li>
+<li><code>data</code> - (See "Demo Folders".)</li>
 </ul>
-</li>
-<li><code>geotransformer</code></li>
-<li><code>ais-analytics</code></li>
-<li>...</li>
+<h3 id="Demo-Folders">Demo Folders<a class="anchor-link" href="#Demo-Folders"> </a></h3><p>The demo supports a notebook with an interactive map-based walktrhough of getting AIS tracks, and querying a track for satellite coverage, using the <code>Skyfield</code> package for ephemeris calculations.</p>
+<ul>
+<li><code>demo</code> - As much of the demo as possible lives under here, for completeness.</li>
+<li><code>data</code> - Daily satellite files stored (or linked) as<code>data/VAULT_Data/TLE_daily/</code><em>year</em><code>/</code><em>MM</em><code>/</code><em>nn</em><code>.tab.gz</code>. Used by the demo and other notebooks &amp; scripts.  </li>
 </ul>
+<h3 id="Other-folders">Other folders<a class="anchor-link" href="#Other-folders"> </a></h3><ul>
+<li><code>autoencoder</code> - Exploratory work using a PyTorch deep network to discover high-level features and pattersn in the AIS data.</li>
+<li><code>ais-kml</code> - Concurrent visualization attempt using OpenSphere.</li>
+<li><code>hitttestservice</code> - First attempt to wrap HitTest code into a web service.</li>
+<li><code>scripts</code> - A collection of scripts, esp. SQL queries.</li>
+</ul>
+<h3 id="A-note-on-Spark">A note on Spark<a class="anchor-link" href="#A-note-on-Spark"> </a></h3><p>Some code expects an Apache Spark setup with Hive and Hadoop available. The <code>ais-analytics</code> and <code>geotransformer</code> folders contain <code>cookie-cutter</code> setups with scripts that 
+will start Spark-enabled jupyter notebooks, or launch a spark job with the required virtual environment.</p>
 
 </div>
 </div>
@@ -110,19 +112,19 @@ jupyter notebook
 </pre></div>
 <p>Key top-level packages fall in three broad categories:</p>
 <h3 id="Scientific-Python-Ecosystem:">Scientific Python Ecosystem:<a class="anchor-link" href="#Scientific-Python-Ecosystem:"> </a></h3><ul>
-<li>Core: numpy, pandas, ipython</li>
-<li>Astronomy: skyfield, astropy, GDAL, pyephem, pyorbital  # &lt;-- do we really use all these still?</li>
+<li>Core: <a href="https://numpy.org">numpy</a>, <a href="https://pandas.pydata.org">pandas</a></li>
+<li>Astronomy: <a href="https://rhodesmill.org/skyfield/">Skyfield</a>, <a href="https://www.astropy.org">astropy</a>, <a href="https://gdal.org">GDAL</a>, (pyorbital??)</li>
 <li>Clustering: <a href="https://hdbscan.readthedocs.io/en/latest/index.html">HDBSCAN</a></li>
-<li>Notebooks: jupyter notebook</li>
+<li>Notebooks:  <a href="https://ipython.org">ipython</a>, <a href="https://jupyter.org">jupyter</a> notebooks.</li>
 </ul>
 <h3 id="Cloud-Computing">Cloud Computing<a class="anchor-link" href="#Cloud-Computing"> </a></h3><ul>
-<li>Spark, PySpark, Hive, Hadoop</li>
+<li><a href="https://spark.apache.org">Spark</a> including PySpark, <a href="https://hive.apache.org">Hive</a>, <a href="https://hadoop.apache.org">Hadoop</a></li>
 <li>(Other database as req'd)</li>
 <li>Map support: geopandas, ...</li>
 <li>Visualization: plotly, (matplotlib?), (leaflet?), (opensphere?)</li>
 </ul>
 <h3 id="Literate-Programming:">Literate Programming:<a class="anchor-link" href="#Literate-Programming:"> </a></h3><ul>
-<li>nbdev, cookie-cutter</li>
+<li><a href="https://nbdev.fast.ai">nbdev</a>, <a href="https://cookiecutter.readthedocs.io/en/latest/README.html">cookie-cutter</a></li>
 </ul>
 
 </div>
@@ -136,7 +138,7 @@ jupyter notebook
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>To run the tests in parallel, launch:</p>
+<p>Tests are automatically extracted from notebooks in <code>nbs/</code>. To run the tests in parallel, launch:</p>
 <p><code>nbdev_test_nbs</code> or <code>make test</code></p>
 <p>For all the tests to pass, you'll need to install the following optional dependencies:</p>
 

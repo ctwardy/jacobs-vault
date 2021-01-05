@@ -16,7 +16,8 @@ index = {"Vault": "00_core.ipynb",
          "colorize": "05_HitTest.ipynb",
          "QUALITY_COLORS": "05_HitTest.ipynb"}
 
-modules = ["core.py",
+modules = ["template.py",
+           "ht1.py",
            "hit_test.py"]
 
 doc_url = "https://cmorris-jacobs.github.io/jacobs-vault/"

@@ -4,7 +4,7 @@
 
 ## Installing
 
-**Note:** We still need to _build_ these packages.
+**Note:** we still need to _build_ these packages so this works. 
 
 We recommend installing from conda. 
 
@@ -33,23 +33,38 @@ jupyter notebook
 ```
 You can now explore and run the notebooks in the `nbs/` folder.
 
-### Notes
-* Notebooks in `nbs/` contain `nbdev` markup. The `nbdev` package uses them to generate the project docs (including this README), generate some python modules, run tests, and perform limited Continuous Integration testing upon `git push` events. 
-* Some code expects an Apache Spark setup with Hive and Hadoop available, and we have only tested on our cluster. However, our `cookie-cutter` template packages the Spark environments and our run scripts distribute those to the compute nodes for reproducibility. 
-
 
 ## About jacobs-vault
 
-jacobs-vault partitions the data to support either distributed workflows (Spark), or fast single-ship satellite queries. It includes: 
+Jacobs-VAULT is the result of a hackathon challenge, so in addition to a working demo and analysis notebooks, it still has exploratory paths and alternate approaches. Folders are in three rough groups:
 
-* ETL scripts in the `etl` folder
-* Call `skyfield` for ephemeris calculations
-* Notebooks folder `nbs/` for exploration.
-  * Via the `nbdev` package, notebooks generate modules that can be called by other scripts, and documentation (including this README).
-  * `nbs/01_HitTest.ipynb` generates jacobs-vault/hittest.py, used by `hittestservice.py` to display satellite starmaps given queries. 
-* `geotransformer`
-* `ais-analytics`
-* ...
+### ETL Folders
+* `etl` - Original ETL scripts, mostly Spark SQL and Hive.
+* `ais-analytics` - Subproject Spark to analyze AIS data. Alternate ETL.
+* `geotransformer` - Subproject using Spark to analyze TLE data. Alternate ETL. Directly calls `sgp4` and the `astropy` package, instead of `skyfield`.
+
+### nbdev Folders
+A mix of exploratory notebooks and literate programming notebooks that generate Python modules and documentation (including this README) via the `nbdev` package. Controlled by the toplevel `Makefile`, using the `vault` virtual environment captured in `environment.yml`.  
+* `nbs` - Toplevel notebooks, generate docs, modules, and README.
+* `jacobs_vault` - Python modules generated from `nbs/` by `nbdev` package
+* `docs` - Documentation generated from `nbs/` by `nbdev` package
+* `data` - (See "Demo Folders".)
+
+### Demo Folders
+The demo supports a notebook with an interactive map-based walktrhough of getting AIS tracks, and querying a track for satellite coverage, using the `Skyfield` package for ephemeris calculations.  
+* `demo` - As much of the demo as possible lives under here, for completeness.
+* `data` - Daily satellite files stored (or linked) as`data/VAULT_Data/TLE_daily/`_year_`/`_MM_`/`_nn_`.tab.gz`. Used by the demo and other notebooks & scripts.  
+
+### Other folders
+* `autoencoder` - Exploratory work using a PyTorch deep network to discover high-level features and pattersn in the AIS data.
+* `ais-kml` - Concurrent visualization attempt using OpenSphere.
+* `hitttestservice` - First attempt to wrap HitTest code into a web service.
+* `scripts` - A collection of scripts, esp. SQL queries.
+
+
+### A note on Spark
+Some code expects an Apache Spark setup with Hive and Hadoop available. The `ais-analytics` and `geotransformer` folders contain `cookie-cutter` setups with scripts that 
+will start Spark-enabled jupyter notebooks, or launch a spark job with the required virtual environment.
 
 ## Key Required Packages
 
@@ -60,24 +75,24 @@ conda env create -f environment.yml
 Key top-level packages fall in three broad categories:
 
 ### Scientific Python Ecosystem:
-* Core: numpy, pandas, ipython
-* Astronomy: skyfield, astropy, GDAL, pyephem, pyorbital  # <-- do we really use all these still?
+* Core: [numpy](https://numpy.org), [pandas](https://pandas.pydata.org)
+* Astronomy: [Skyfield](https://rhodesmill.org/skyfield/), [astropy](https://www.astropy.org), [GDAL](https://gdal.org), (pyorbital??)
 * Clustering: [HDBSCAN](https://hdbscan.readthedocs.io/en/latest/index.html)
-* Notebooks: jupyter notebook
+* Notebooks:  [ipython](https://ipython.org), [jupyter](https://jupyter.org) notebooks.
 
 ### Cloud Computing
-* Spark, PySpark, Hive, Hadoop
+* [Spark](https://spark.apache.org) including PySpark, [Hive](https://hive.apache.org), [Hadoop](https://hadoop.apache.org)
 * (Other database as req'd)
 * Map support: geopandas, ...
 * Visualization: plotly, (matplotlib?), (leaflet?), (opensphere?)
 
 ### Literate Programming: 
-* nbdev, cookie-cutter
+* [nbdev](https://nbdev.fast.ai), [cookie-cutter](https://cookiecutter.readthedocs.io/en/latest/README.html)
 
 
 ## Tests
 
-To run the tests in parallel, launch:
+Tests are automatically extracted from notebooks in `nbs/`. To run the tests in parallel, launch:
 
 `nbdev_test_nbs` or `make test`
 
