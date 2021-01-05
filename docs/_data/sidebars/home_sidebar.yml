@@ -10,10 +10,13 @@ entries:
       title: Overview
       url: /
     - output: web,pdf
-      title: Template "core" notebook
+      title: Template notebook
       url: /core
     - output: web,pdf
-      title: Title
+      title: ht1 - old hittest
+      url: /Early_HitTest
+    - output: web,pdf
+      title: HitTest
       url: /HitTest
     - output: web,pdf
       title: Demo_Chris
