@@ -51,7 +51,11 @@ for line in sys.stdin:
         line1 = line
     elif line[0:2] == "2 ":
         line2 = line
-        ts_str, satnum_str, dt_str, is_valid = get_meta(line1, line2)
+        try:
+            ts_str, satnum_str, dt_str, is_valid = get_meta(line1, line2)
+        except:
+            ts_str, satnum_str, dt_str, is_valid = "", "", "", "0"
+       
         out_line = '\t'.join([ts_str, satnum_str, dt_str, is_valid, line1, line2]) + '\n'
         sys.stdout.write(out_line)
 #

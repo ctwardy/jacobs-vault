@@ -2,89 +2,109 @@
 
 
 
+VAULT contains scripts and notebooks that (a) ingest and characterize the provided AIS shipping tracks and satellite TLE data, (b) find "hits" - satellites are visible for a given ship position, and (c) highlight coverage gaps / flaws in the data.  Here is an example starmap showing satellites visible from one point on track, colored by quality of the satellite's TLE data. 
 <table>
     <tr style="background-color:#EEEEEE">
         <td ><img src="images/Jacobs_logo_rgb_black.svg" width="200"/></td>
         <td><img alt="Satellites Visible" src="images/polar_plot2.png" width="300"></td>
     </tr>
 </table>
-    
-# Welcome to jacobs-vault.
- 
-> **jacobs-vault** is Jacobs' response to the Air Force VAULT quick-turn data analysis challenge. 
-
-It contains scripts and notebooks to (a) ingest the provided AIS shipping tracks and satellite TLE data, (b) find what satellites are visible for a given ship track position, and (c) highlight coverage gaps / flaws in the data. 
+(For demo purposes, we treat all entries in the TLE file as viable satellites, when in reality most are space junk.)
 
 ## Installing
 
-We used the `nbdev` and `cookie-cutter` environments to ease packaging and installation, but they haven't been fully integrated.  Many queries expect you to have an Apache Spark environment, though in theory that could be on a single machine.  
+**Note:** we still need to _build_ these packages so this works. 
 
-**When done, you should be able to install as follows:** 
+We recommend installing from conda, but any of these should work:
 
-You can install jacobs-vault on your own machines with conda (highly recommended). If you're using [Anaconda](https://www.anaconda.com/products/individual) then run:
+| [Anaconda](https://www.anaconda.com/products/individual) | Pip | Git |
+| ---- | ---- | ---- |
+| `conda install -c <CONDA CHANNEL> jacobs-vault gh anaconda` | `pip install jacobs-vault` | `git clone git@github.com:cmorris-jacobs/jacobs-vault.git` |
+
+Alternatives:
+* [Miniconda](https://docs.conda.io/en/latest/miniconda.html): `conda install -c <CHANNEL> -c jacobs-vault` 
+* Git https: `git clone https://github.com/cmorris-jacobs/jacobs-vault.git` 
+
+## Using
+
+Change to the `jacobs-vault` folder and ensure that `data/` contains or points to the VAULT data. (SAY MORE!)  Then explore these options:
+
+### Demo
 ```bash
-conda install -c <CONDA CHANNEL> jacobs-vault gh anaconda
+cd demo
+. run.sh
 ```
-...or if you're using [miniconda](https://docs.conda.io/en/latest/miniconda.html)) then run:
+May require linking `demo/data` to the data folder, e.g. `ln -s ../data ./`. 
+
+### Run the notebooks in nbs/
+Activate the `vault` Python virtual environment and start a new jupyter kernel.
 ```bash
-conda install -c <CHANNEL> -c jacobs-vault
+conda env -f environment.yml
+conda activate vault
+jupyter notebook
 ```
-To install with pip, use: `pip install jacobs-vault`. 
+You can now explore and run the notebooks in the `nbs/` folder.
 
-
-If you plan to develop, see below.
 
 ## About jacobs-vault
 
-jacobs-vault partitions the data to support either distributed Spark/Dash workflows, or fast single-ship satellite queries. It includes: 
+Jacobs-VAULT is the result of a hackathon challenge, so in addition to a working demo and analysis notebooks, it still has exploratory paths and alternate approaches. Folders are in three rough groups:
 
-* ETL scripts in the `etl` folder
-* Call `skyfield` for ephemeris calculations
-* The notebook `nbs/01_HitTest.ipynb` and service `hittestservice/` provide the core functions to read the appropriate TLE file for a given day, and calculate the visible satellites.
-* Notebooks folder for exploration
-    * Nbdev package means notebooks in nbs/ generate both module code that can be called by other scripts, and documentation. 
-    * nbs/01_HitTest.ipynb and service hittestservice/ provide the core functions to read the appropriate TLE file for a given day, and calculate the visible satellites.
+### ETL Folders
+* `etl` - Original ETL scripts, mostly Spark SQL and Hive.
+* `ais-analytics` - Subproject Spark to analyze AIS data. Alternate ETL.
+* `geotransformer` - Subproject using Spark to analyze TLE data. Alternate ETL. Directly calls `sgp4` and the `astropy` package, instead of `skyfield`.
 
-* `geotransformer`
-* `ais-analytics`
-* ...
+### nbdev Folders
+A mix of exploratory notebooks and literate programming notebooks that generate Python modules and documentation (including this README) via the `nbdev` package. Controlled by the toplevel `Makefile`, using the `vault` virtual environment captured in `environment.yml`.  
+* `nbs` - Toplevel notebooks, generate docs, modules, and README.
+* `jacobs_vault` - Python modules generated from `nbs/` by `nbdev` package
+* `docs` - Documentation generated from `nbs/` by `nbdev` package
+* `data` - (See "Demo Folders".)
+
+### Demo Folders
+The demo supports a notebook with an interactive map-based walktrhough of getting AIS tracks, and querying a track for satellite coverage, using the `Skyfield` package for ephemeris calculations.  
+* `demo` - As much of the demo as possible lives under here, for completeness.
+* `data` - Daily satellite files stored (or linked) as`data/VAULT_Data/TLE_daily/`_year_`/`_MM_`/`_nn_`.tab.gz`. Used by the demo and other notebooks & scripts.  
+
+### Other folders
+* `autoencoder` - Exploratory work using a PyTorch deep network to discover high-level features and pattersn in the AIS data.
+* `ais-kml` - Concurrent visualization attempt using OpenSphere.
+* `hitttestservice` - First attempt to wrap HitTest code into a web service.
+* `scripts` - A collection of scripts, esp. SQL queries.
+
+
+### A note on Spark
+Some code expects an Apache Spark setup with Hive and Hadoop available. The `ais-analytics` and `geotransformer` folders contain `cookie-cutter` setups with scripts that 
+will start Spark-enabled jupyter notebooks, or launch a spark job with the required virtual environment.
 
 ## Key Required Packages
 
-Required top-level packages must be listed in `settings.ini`, or the GitHub Continuous Integration tests will fail. There are three broad categories:
+After cloning the repository, use the `conda` package manager to install the main dependencies. (We provide files for `pip`, but we recommend conda.)
+```bash
+conda env create -f environment.yml
+```
+Key top-level packages fall in three broad categories:
 
 ### Scientific Python Ecosystem:
-* Installing the Anaconda distribution is preferred, but the included conda environment.yml files will allow for full reproduction of the environments used for analysis.
-* Core: numpy, pandas, ipython
-* Astronomy: Skyfield, SGP4, astropy, GDAL, pyephem, pyorbital
+* Core: [numpy](https://numpy.org), [pandas](https://pandas.pydata.org)
+* Astronomy: [Skyfield](https://rhodesmill.org/skyfield/), [astropy](https://www.astropy.org), [GDAL](https://gdal.org), (pyorbital??)
 * Clustering: [HDBSCAN](https://hdbscan.readthedocs.io/en/latest/index.html)
-* Notebooks: jupyter notebook
+* Notebooks:  [ipython](https://ipython.org), [jupyter](https://jupyter.org) notebooks.
 
 ### Cloud Computing
-* Spark, PySpark, Hive, Hadoop
+* [Spark](https://spark.apache.org) including PySpark, [Hive](https://hive.apache.org), [Hadoop](https://hadoop.apache.org)
 * (Other database as req'd)
 * Map support: geopandas, ...
 * Visualization: plotly, (matplotlib?), (leaflet?), (opensphere?)
 
 ### Literate Programming: 
-* nbdev, cookie-cutter
-
-## conda env
-You can create the <code>vault</code> conda env using: 
-```bash
-conda env create -f environment.yml
-``` 
-and activate it with
-```bash
-conda activate vault
-```
-
-The envs/ folder contains related environments for certain pieces. 
+* [nbdev](https://nbdev.fast.ai), [cookie-cutter](https://cookiecutter.readthedocs.io/en/latest/README.html)
 
 
 ## Tests
 
-To run the tests in parallel, launch:
+Tests are automatically extracted from notebooks in `nbs/`. To run the tests in parallel, launch:
 
 `nbdev_test_nbs` or `make test`
 
