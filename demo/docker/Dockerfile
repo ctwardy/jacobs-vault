@@ -22,5 +22,8 @@ WORKDIR /github.com/cmorris-jacobs/jacobs-vault/demo
 
 ENV PYTHONPATH=/github.com/cmorris-jacobs/jacobs-vault/hittestservice
 
+ADD java_home.tar.gz /usr/java/
+ADD hive_lib.tar.gz /opt/cloudera/parcels/CDH-6.1.0-1.cdh6.1.0.p0.770702/lib/hive/
+
 #CMD [ "/opt/conda/bin/jupyter", "notebook", "--ip=0.0.0.0", "--port=2080", "VAULT_Demo.ipynb"]
 CMD [ "/opt/conda/bin/jupyter", "notebook", "--allow-root", "--ip=0.0.0.0", "--port=2080"]
