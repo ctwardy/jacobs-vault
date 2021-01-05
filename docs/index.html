@@ -30,28 +30,42 @@ nb_path: "nbs/index.ipynb"
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<p>VAULT contains scripts and notebooks that (a) ingest and characterize the provided AIS shipping tracks and satellite TLE data, (b) find "hits" - satellites are visible for a given ship position, and (c) highlight coverage gaps / flaws in the data.  Here is an example starmap showing satellites visible from one point on track, colored by quality of the satellite's TLE data.</p>
+<p><table>
+    <tr style="background-color:#EEEEEE">
+        <td ><img src="images/Jacobs_logo_rgb_black.svg" width="200"/></td>
+        <td><img alt="Satellites Visible" src="images/polar_plot2.png" width="300"></td>
+    </tr>
+</table>
+(For demo purposes, we treat all entries in the TLE file as viable satellites, when in reality most are space junk.)</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Installing">Installing<a class="anchor-link" href="#Installing"> </a></h2><p><strong>Note:</strong> we still need to <em>build</em> these packages so this works.</p>
-<p>We recommend installing from conda.</p>
+<p>We recommend installing from conda, but any of these should work:</p>
 <table>
 <thead><tr>
-<th>Conda</th>
+<th><a href="https://www.anaconda.com/products/individual">Anaconda</a></th>
 <th>Pip</th>
 <th>Git</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><a href="https://www.anaconda.com/products/individual">Anaconda</a>: <code>conda install -c &lt;CONDA CHANNEL&gt; jacobs-vault gh anaconda</code></td>
+<td><code>conda install -c &lt;CONDA CHANNEL&gt; jacobs-vault gh anaconda</code></td>
 <td><code>pip install jacobs-vault</code></td>
-<td><strong>ssh:</strong> <code>git clone git@github.com:cmorris-jacobs/jacobs-vault.git</code></td>
-</tr>
-<tr>
-<td><a href="https://docs.conda.io/en/latest/miniconda.html">Miniconda</a>: <code>conda install -c &lt;CHANNEL&gt; -c jacobs-vault</code></td>
-<td></td>
-<td><strong>https:</strong> <code>git clone https://github.com/cmorris-jacobs/jacobs-vault.git</code></td>
+<td><code>git clone git@github.com:cmorris-jacobs/jacobs-vault.git</code></td>
 </tr>
 </tbody>
 </table>
+<p>Alternatives:</p>
+<ul>
+<li><a href="https://docs.conda.io/en/latest/miniconda.html">Miniconda</a>: <code>conda install -c &lt;CHANNEL&gt; -c jacobs-vault</code> </li>
+<li>Git https: <code>git clone https://github.com/cmorris-jacobs/jacobs-vault.git</code> </li>
+</ul>
 <h2 id="Using">Using<a class="anchor-link" href="#Using"> </a></h2><p>Change to the <code>jacobs-vault</code> folder and ensure that <code>data/</code> contains or points to the VAULT data. (SAY MORE!)  Then explore these options:</p>
 <h3 id="Demo">Demo<a class="anchor-link" href="#Demo"> </a></h3><div class="highlight"><pre><span></span><span class="nb">cd</span> demo
 . run.sh

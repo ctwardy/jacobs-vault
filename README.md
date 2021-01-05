@@ -2,16 +2,28 @@
 
 
 
+VAULT contains scripts and notebooks that (a) ingest and characterize the provided AIS shipping tracks and satellite TLE data, (b) find "hits" - satellites are visible for a given ship position, and (c) highlight coverage gaps / flaws in the data.  Here is an example starmap showing satellites visible from one point on track, colored by quality of the satellite's TLE data. 
+<table>
+    <tr style="background-color:#EEEEEE">
+        <td ><img src="images/Jacobs_logo_rgb_black.svg" width="200"/></td>
+        <td><img alt="Satellites Visible" src="images/polar_plot2.png" width="300"></td>
+    </tr>
+</table>
+(For demo purposes, we treat all entries in the TLE file as viable satellites, when in reality most are space junk.)
+
 ## Installing
 
 **Note:** we still need to _build_ these packages so this works. 
 
-We recommend installing from conda. 
+We recommend installing from conda, but any of these should work:
 
-| Conda | Pip | Git |
+| [Anaconda](https://www.anaconda.com/products/individual) | Pip | Git |
 | ---- | ---- | ---- |
-| [Anaconda](https://www.anaconda.com/products/individual): `conda install -c <CONDA CHANNEL> jacobs-vault gh anaconda` | `pip install jacobs-vault` | **ssh:** `git clone git@github.com:cmorris-jacobs/jacobs-vault.git` |
-| [Miniconda](https://docs.conda.io/en/latest/miniconda.html): `conda install -c <CHANNEL> -c jacobs-vault` | | **https:** `git clone https://github.com/cmorris-jacobs/jacobs-vault.git` |
+| `conda install -c <CONDA CHANNEL> jacobs-vault gh anaconda` | `pip install jacobs-vault` | `git clone git@github.com:cmorris-jacobs/jacobs-vault.git` |
+
+Alternatives:
+* [Miniconda](https://docs.conda.io/en/latest/miniconda.html): `conda install -c <CHANNEL> -c jacobs-vault` 
+* Git https: `git clone https://github.com/cmorris-jacobs/jacobs-vault.git` 
 
 ## Using
 
