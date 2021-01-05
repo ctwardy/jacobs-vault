@@ -35,6 +35,10 @@ dates = ['day_dt', 'tle_dt']
 # DAY_FILE_PATH="../data/TLE_daily"
 DAY_FILE_PATH="../data/VAULT_Data/TLE_daily"
 
+# Arguments can be made for this number to be greater than 0 
+# ... but our entire approach is more realistic than minimal
+# requirements given
+VISIBLE_ALTITUDE_ANGLE = 0.0
 
 # These numbers may seem upside down, but I like the default coloring in the polar plot when hit quality has these values.
 QUALITY_EXCELLENT = 0
@@ -73,18 +77,20 @@ class HitTest:
             topocentric = difference.at(t)
             alt, az, distance = topocentric.altaz()
             
+            # For each row we assign a TLE quality rating to either the hits or the misses
+            # qvals: [ <hit_quality> , <miss_quality> ]
             if delta_days <= 2.0:
-                if alt.degrees > 0.0:
+                if alt.degrees > VISIBLE_ALTITUDE_ANGLE:
                     qvals = [QUALITY_EXCELLENT, math.nan]
                 else:
                     qvals = [math.nan, QUALITY_EXCELLENT]
             elif delta_days <= 14.0:
-                if alt.degrees > 0.0:
+                if alt.degrees > VISIBLE_ALTITUDE_ANGLE:
                     qvals = [QUALITY_GOOD, math.nan]
                 else:
                     qvals = [math.nan, QUALITY_GOOD]
             elif delta_days <= 56.0:
-                if alt.degrees > 0.0:
+                if alt.degrees > VISIBLE_ALTITUDE_ANGLE:
                     qvals = [QUALITY_POOR, math.nan]
                 else:
                     qvals = [math.nan, QUALITY_POOR]
