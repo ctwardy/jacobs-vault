@@ -1,212 +1,259 @@
-name: vault
-channels:
-  - defaults
-  - conda-forge
-dependencies:
-  - affine=2.3.0=py_0
-  - appnope=0.1.0=py38_1001
-  - argon2-cffi=20.1.0=py38haf1e3a3_1
-  - arrow=0.16.0=py38_0
-  - async_generator=1.10=py_0
-  - attrs=20.3.0=pyhd3eb1b0_0
-  - backcall=0.2.0=py_0
-  - binaryornot=0.4.4=py_1
-  - blas=1.0=mkl
-  - bleach=3.2.1=py_0
-  - boost-cpp=1.72.0=hdf9ef73_0
-  - brotlipy=0.7.0=py38h9ed2024_1003
-  - bzip2=1.0.8=h1de35cc_0
-  - ca-certificates=2020.12.8=hecd8cb5_0
-  - cairo=1.16.0=hec6a9b0_1003
-  - cartopy=0.17.0=py38h4076dca_1009
-  - certifi=2020.12.5=py38hecd8cb5_0
-  - cffi=1.14.4=py38h2125817_0
-  - cfitsio=3.470=hee0f690_5
-  - chardet=3.0.4=py38hecd8cb5_1003
-  - click=7.1.2=py_0
-  - click-plugins=1.1.1=py_0
-  - cligj=0.7.1=py38hecd8cb5_0
-  - contextily=1.0.1=py_0
-  - cookiecutter=1.7.2=pyh9f0ad1d_0
-  - cryptography=3.2.1=py38hbcfaee0_1
-  - curl=7.69.1=ha441bb4_0
-  - cycler=0.10.0=py38_0
-  - dbus=1.13.18=h18a8e69_0
-  - decorator=4.4.2=py_0
-  - defusedxml=0.6.0=py_0
-  - descartes=1.1.0=py_4
-  - entrypoints=0.3=py38_0
-  - expat=2.2.10=hb1e8313_2
-  - fiona=1.8.13=py38he71f6a4_0
-  - fontconfig=2.13.1=h6b1039f_1001
-  - freetype=2.10.4=ha233b18_0
-  - freexl=1.0.5=h1de35cc_0
-  - gdal=3.0.2=py38h97c3584_7
-  - geographiclib=1.50=py_0
-  - geopandas=0.8.1=py_0
-  - geoplot=0.4.1=py_0
-  - geopy=2.0.0=pyh9f0ad1d_0
-  - geos=3.8.0=hb1e8313_0
-  - geotiff=1.5.1=h0b0f252_0
-  - gettext=0.19.8.1=hb0f4f8b_2
-  - giflib=5.2.1=haf1e3a3_0
-  - glib=2.66.1=h9bbe63b_0
-  - graphviz=2.42.3=h98dfb87_0
-  - hdf4=4.2.13=h39711bb_2
-  - hdf5=1.10.5=nompi_h0cbb7df_1103
-  - icu=64.2=h6de7cb9_1
-  - idna=2.10=py_0
-  - importlib-metadata=2.0.0=py_1
-  - importlib_metadata=2.0.0=1
-  - intel-openmp=2019.4=233
-  - ipykernel=5.3.4=py38h5ca1d4c_0
-  - ipython=7.19.0=py38h01d92e1_0
-  - ipython_genutils=0.2.0=pyhd3eb1b0_1
-  - ipywidgets=7.5.1=py_1
-  - jedi=0.17.2=py38_0
-  - jinja2=2.11.2=py_0
-  - jinja2-time=0.2.0=py_2
-  - joblib=0.17.0=py_0
-  - jpeg=9d=hbcb3906_0
-  - json-c=0.13.1=h3efe00b_0
-  - jsonschema=3.2.0=py_2
-  - jupyter=1.0.0=py38_7
-  - jupyter_client=6.1.7=py_0
-  - jupyter_console=6.2.0=py_0
-  - jupyter_core=4.7.0=py38hecd8cb5_0
-  - jupyterlab_pygments=0.1.2=py_0
-  - kealib=1.4.13=h2324030_0
-  - kiwisolver=1.3.0=py38h23ab428_0
-  - krb5=1.17.1=hddcf347_0
-  - lcms2=2.11=h92f6f08_0
-  - libcurl=7.69.1=h051b688_0
-  - libcxx=10.0.0=1
-  - libdap4=3.20.6=h8c15375_0
-  - libedit=3.1.20191231=h1de35cc_1
-  - libffi=3.3=hb1e8313_2
-  - libgdal=3.0.2=h9e48cab_7
-  - libgfortran=3.0.1=h93005f0_2
-  - libiconv=1.16=h1de35cc_0
-  - libkml=1.3.0=h169b8f9_1011
-  - libnetcdf=4.7.3=nompi_hda4e5f1_101
-  - libpng=1.6.37=ha441bb4_0
-  - libpq=12.2=h051b688_0
-  - libsodium=1.0.18=h1de35cc_0
-  - libspatialindex=1.9.3=h0a44026_0
-  - libspatialite=4.3.0a=h5142b36_0
-  - libssh2=1.9.0=ha12b0ac_1
-  - libtiff=4.1.0=hcb84e12_1
-  - libwebp=1.0.2=hd3bf737_5
-  - libxml2=2.9.10=h53d96d6_0
-  - llvm-openmp=10.0.0=h28b9765_0
-  - lz4-c=1.9.2=h79c402e_3
-  - mapclassify=2.3.0=py_0
-  - markupsafe=1.1.1=py38h1de35cc_1
-  - matplotlib=3.3.2=0
-  - matplotlib-base=3.3.2=py38h181983e_0
-  - memory_profiler=0.58.0=py_0
-  - mercantile=1.1.6=pyh9f0ad1d_0
-  - mistune=0.8.4=py38h1de35cc_1001
-  - mkl=2019.4=233
-  - mkl-service=2.3.0=py38hfbe908c_0
-  - mkl_fft=1.2.0=py38hc64f4ea_0
-  - mkl_random=1.1.1=py38h959d312_0
-  - munch=2.5.0=py_0
-  - nbclient=0.5.1=py_0
-  - nbconvert=6.0.7=py38_0
-  - nbformat=5.0.8=py_0
-  - ncurses=6.2=h0a44026_1
-  - nest-asyncio=1.4.3=pyhd3eb1b0_0
-  - networkx=2.5=py_0
-  - notebook=6.1.4=py38_0
-  - numpy=1.19.2=py38h456fd55_0
-  - numpy-base=1.19.2=py38hcfb5961_0
-  - olefile=0.46=py_0
-  - openjdk=11.0.6=h7bc2e8c_1
-  - openjpeg=2.3.1=h254dc36_3
-  - openssl=1.1.1i=h9ed2024_0
-  - owslib=0.20.0=py_0
-  - packaging=20.4=py_0
-  - pandas=1.1.3=py38hb1e8313_0
-  - pandoc=2.11=h0dc7051_0
-  - pandocfilters=1.4.3=py38hecd8cb5_1
-  - parso=0.7.0=py_0
-  - pcre=8.44=hb1e8313_0
-  - pexpect=4.8.0=pyhd3eb1b0_3
-  - pickleshare=0.7.5=py38_1001
-  - pillow=8.0.1=py38h5270095_0
-  - pip=20.3=py38hecd8cb5_0
-  - pixman=0.38.0=h1de35cc_0
-  - pomegranate=0.13.5=py38h65c3604_0
-  - poppler=0.67.0=h16886b5_8
-  - poppler-data=0.4.10=hecd8cb5_0
-  - postgresql=12.2=h051b688_0
-  - poyo=0.5.0=py_0
-  - proj=6.2.1=hfd5b9e3_0
-  - prometheus_client=0.9.0=pyhd3eb1b0_0
-  - prompt-toolkit=3.0.8=py_0
-  - prompt_toolkit=3.0.8=0
-  - psutil=5.7.2=py38haf1e3a3_0
-  - ptyprocess=0.6.0=pyhd3eb1b0_2
-  - pycparser=2.20=py_2
-  - pydot=1.4.1=py38_0
-  - pyepsg=0.4.0=py_0
-  - pygments=2.7.2=pyhd3eb1b0_0
-  - pygraphviz=1.6=py38hff60589_1
-  - pykdtree=1.3.4=py38hf3d72b9_0
-  - pyopenssl=20.0.0=pyhd3eb1b0_1
-  - pyparsing=2.4.7=py_0
-  - pyproj=2.6.1.post1=py38h6d9c95c_1
-  - pyqt=5.9.2=py38h655552a_2
-  - pyrsistent=0.17.3=py38haf1e3a3_0
-  - pyshp=2.1.2=py_0
-  - pysocks=1.7.1=py38_1
-  - python=3.8.5=h26836e1_1
-  - python-dateutil=2.8.1=py_0
-  - python-javabridge=4.0.0=py38h4d0b108_3
-  - python-slugify=4.0.1=py_0
-  - python_abi=3.8=1_cp38
-  - pytz=2020.4=pyhd3eb1b0_0
-  - pyyaml=5.3.1=py38haf1e3a3_1
-  - pyzmq=20.0.0=py38h23ab428_1
-  - qt=5.9.7=h8cf7e54_3
-  - qtconsole=4.7.7=py_0
-  - qtpy=1.9.0=py_0
-  - rasterio=1.1.2=py38he71f6a4_0
-  - readline=8.0=h1de35cc_0
-  - requests=2.25.0=pyhd3eb1b0_0
-  - rtree=0.9.4=py38_1
-  - scikit-learn=0.23.2=py38h959d312_0
-  - scipy=1.5.2=py38h2515648_0
-  - seaborn=0.11.0=py_0
-  - send2trash=1.5.0=py38_0
-  - setuptools=50.3.1=py38hecd8cb5_1
-  - shapely=1.7.1=py38hb435bde_0
-  - sip=4.19.8=py38h0a44026_0
-  - six=1.15.0=py38hecd8cb5_0
-  - snuggs=1.4.7=py_0
-  - sqlite=3.33.0=hffcf06c_0
-  - tbb=2020.3=h879752b_0
-  - terminado=0.9.1=py38_0
-  - testpath=0.4.4=py_0
-  - text-unidecode=1.3=py_0
-  - threadpoolctl=2.1.0=pyh5ca1d4c_0
-  - tiledb=1.7.0=h84aa2a7_4
-  - tk=8.6.10=hb0a8c7a_0
-  - tornado=6.0.4=py38h1de35cc_1
-  - traitlets=5.0.5=py_0
-  - unidecode=1.1.1=py_0
-  - urllib3=1.25.11=py_0
-  - wcwidth=0.2.5=py_0
-  - webencodings=0.5.1=py38_1
-  - wheel=0.35.1=pyhd3eb1b0_0
-  - whichcraft=0.6.1=py_0
-  - widgetsnbextension=3.5.1=py38_0
-  - xerces-c=3.2.2=h8f8adb3_1004
-  - xz=5.2.5=h1de35cc_0
-  - yaml=0.2.5=haf1e3a3_0
-  - zeromq=4.3.3=hb1e8313_3
-  - zipp=3.4.0=pyhd3eb1b0_0
-  - zlib=1.2.11=h1de35cc_3
-  - zstd=1.4.5=h41d2c2f_0
-prefix: /Users/Charles.Twardy/anaconda/envs/peregrine
+# This file may be used to create an environment using:
+# $ conda create --name <env> --file <this file>
+# platform: osx-64
+@EXPLICIT
+https://conda.anaconda.org/conda-forge/osx-64/ld_impl_linux-64-2.35.1-he8a2a44_1.tar.bz2
+https://conda.anaconda.org/plotly/osx-64/plotly-orca-1.3.1-1.tar.bz2
+https://repo.anaconda.com/pkgs/main/osx-64/blas-1.0-mkl.conda
+https://repo.anaconda.com/pkgs/main/osx-64/bzip2-1.0.8-h1de35cc_0.conda
+https://repo.anaconda.com/pkgs/main/osx-64/c-ares-1.17.1-h9ed2024_0.conda
+https://conda.anaconda.org/conda-forge/osx-64/ca-certificates-2020.12.5-h033912b_0.tar.bz2
+https://repo.anaconda.com/pkgs/main/osx-64/gettext-0.19.8.1-hb0f4f8b_2.conda
+https://repo.anaconda.com/pkgs/main/osx-64/giflib-5.2.1-haf1e3a3_0.conda
+https://repo.anaconda.com/pkgs/main/osx-64/intel-openmp-2019.4-233.conda
+https://conda.anaconda.org/conda-forge/osx-64/jpeg-9d-hbcb3906_0.tar.bz2
+https://repo.anaconda.com/pkgs/main/osx-64/json-c-0.13.1-h3efe00b_0.conda
+https://conda.anaconda.org/conda-forge/osx-64/kaleido-core-0.1.0-h35c211d_0.tar.bz2
+https://repo.anaconda.com/pkgs/main/osx-64/libcxx-10.0.0-1.conda
+https://repo.anaconda.com/pkgs/main/osx-64/libgfortran-3.0.1-h93005f0_2.conda
+https://repo.anaconda.com/pkgs/main/osx-64/libiconv-1.16-h1de35cc_0.conda
+https://repo.anaconda.com/pkgs/main/osx-64/libsodium-1.0.18-h1de35cc_0.conda
+https://repo.anaconda.com/pkgs/main/osx-64/llvm-openmp-10.0.0-h28b9765_0.conda
+https://repo.anaconda.com/pkgs/main/osx-64/openjdk-11.0.6-h7bc2e8c_1.conda
+https://repo.anaconda.com/pkgs/main/osx-64/pandoc-2.11-h0dc7051_0.conda
+https://repo.anaconda.com/pkgs/main/osx-64/pixman-0.38.0-h1de35cc_0.conda
+https://repo.anaconda.com/pkgs/main/osx-64/poppler-data-0.4.10-hecd8cb5_0.conda
+https://repo.anaconda.com/pkgs/main/osx-64/xz-5.2.5-h1de35cc_0.conda
+https://repo.anaconda.com/pkgs/main/osx-64/yaml-0.2.5-haf1e3a3_0.conda
+https://repo.anaconda.com/pkgs/main/osx-64/zlib-1.2.11-h1de35cc_3.conda
+https://repo.anaconda.com/pkgs/main/osx-64/abseil-cpp-20200225.2-h23ab428_0.conda
+https://repo.anaconda.com/pkgs/main/osx-64/brotli-1.0.9-hb1e8313_2.conda
+https://repo.anaconda.com/pkgs/main/osx-64/expat-2.2.10-hb1e8313_2.conda
+https://repo.anaconda.com/pkgs/main/osx-64/freexl-1.0.5-h1de35cc_0.conda
+https://repo.anaconda.com/pkgs/main/osx-64/geos-3.8.0-hb1e8313_0.conda
+https://repo.anaconda.com/pkgs/main/osx-64/gflags-2.2.2-h0a44026_0.conda
+https://repo.anaconda.com/pkgs/main/osx-64/hdf4-4.2.13-h39711bb_2.conda
+https://conda.anaconda.org/conda-forge/osx-64/hdf5-1.10.5-nompi_h0cbb7df_1103.tar.bz2
+https://conda.anaconda.org/conda-forge/osx-64/icu-64.2-h6de7cb9_1.tar.bz2
+https://repo.anaconda.com/pkgs/main/osx-64/libffi-3.3-hb1e8313_2.conda
+https://repo.anaconda.com/pkgs/main/osx-64/libpng-1.6.37-ha441bb4_0.conda
+https://repo.anaconda.com/pkgs/main/osx-64/libprotobuf-3.11.4-hd9629dc_0.conda
+https://repo.anaconda.com/pkgs/main/osx-64/libspatialindex-1.9.3-h0a44026_0.conda
+https://repo.anaconda.com/pkgs/main/osx-64/lz4-c-1.9.2-h79c402e_3.conda
+https://repo.anaconda.com/pkgs/main/osx-64/mkl-2019.4-233.conda
+https://repo.anaconda.com/pkgs/main/osx-64/ncurses-6.2-h0a44026_1.conda
+https://conda.anaconda.org/conda-forge/osx-64/openssl-1.1.1i-h35c211d_0.tar.bz2
+https://repo.anaconda.com/pkgs/main/osx-64/pcre-8.44-hb1e8313_0.conda
+https://repo.anaconda.com/pkgs/main/osx-64/re2-2019.08.01-h0a44026_0.conda
+https://repo.anaconda.com/pkgs/main/osx-64/snappy-1.1.8-hb1e8313_0.conda
+https://repo.anaconda.com/pkgs/main/osx-64/tbb-2020.3-h879752b_0.conda
+https://repo.anaconda.com/pkgs/main/osx-64/tk-8.6.10-hb0a8c7a_0.conda
+https://repo.anaconda.com/pkgs/main/osx-64/zeromq-4.3.3-hb1e8313_3.conda
+https://conda.anaconda.org/conda-forge/osx-64/boost-cpp-1.72.0-hdf9ef73_0.tar.bz2
+https://repo.anaconda.com/pkgs/main/osx-64/freetype-2.10.4-ha233b18_0.conda
+https://repo.anaconda.com/pkgs/main/osx-64/glib-2.66.1-h9bbe63b_0.conda
+https://repo.anaconda.com/pkgs/main/osx-64/glog-0.4.0-h0a44026_0.conda
+https://conda.anaconda.org/conda-forge/osx-64/grpc-cpp-1.28.1-h0284957_2.tar.bz2
+https://conda.anaconda.org/conda-forge/osx-64/kealib-1.4.13-h2324030_0.tar.bz2
+https://repo.anaconda.com/pkgs/main/osx-64/libedit-3.1.20191231-h1de35cc_1.conda
+https://conda.anaconda.org/conda-forge/osx-64/libevent-2.1.10-hddc9c9b_3.tar.bz2
+https://repo.anaconda.com/pkgs/main/osx-64/libssh2-1.9.0-ha12b0ac_1.conda
+https://conda.anaconda.org/conda-forge/osx-64/libxml2-2.9.10-h53d96d6_0.tar.bz2
+https://repo.anaconda.com/pkgs/main/osx-64/readline-8.0-h1de35cc_0.conda
+https://conda.anaconda.org/conda-forge/osx-64/xerces-c-3.2.2-h8f8adb3_1004.tar.bz2
+https://repo.anaconda.com/pkgs/main/osx-64/zstd-1.4.5-h41d2c2f_0.conda
+https://repo.anaconda.com/pkgs/main/osx-64/dbus-1.13.18-h18a8e69_0.conda
+https://conda.anaconda.org/conda-forge/osx-64/fontconfig-2.13.1-h6b1039f_1001.tar.bz2
+https://repo.anaconda.com/pkgs/main/osx-64/krb5-1.17.1-hddcf347_0.conda
+https://conda.anaconda.org/conda-forge/osx-64/libkml-1.3.0-h169b8f9_1011.tar.bz2
+https://repo.anaconda.com/pkgs/main/osx-64/libtiff-4.1.0-hcb84e12_1.conda
+https://conda.anaconda.org/conda-forge/osx-64/libxslt-1.1.33-h320ff13_0.tar.bz2
+https://repo.anaconda.com/pkgs/main/osx-64/sqlite-3.33.0-hffcf06c_0.conda
+https://conda.anaconda.org/conda-forge/osx-64/thrift-cpp-0.13.0-h0a7acf3_2.tar.bz2
+https://conda.anaconda.org/conda-forge/osx-64/cairo-1.16.0-hec6a9b0_1003.tar.bz2
+https://conda.anaconda.org/conda-forge/osx-64/graphviz-2.42.3-h98dfb87_0.tar.bz2
+https://repo.anaconda.com/pkgs/main/osx-64/lcms2-2.11-h92f6f08_0.conda
+https://repo.anaconda.com/pkgs/main/osx-64/libcurl-7.69.1-h051b688_0.conda
+https://repo.anaconda.com/pkgs/main/osx-64/libpq-12.2-h051b688_0.conda
+https://conda.anaconda.org/conda-forge/osx-64/libwebp-1.0.2-hd3bf737_5.tar.bz2
+https://conda.anaconda.org/conda-forge/osx-64/openjpeg-2.3.1-h254dc36_3.tar.bz2
+https://repo.anaconda.com/pkgs/main/osx-64/proj-6.2.1-hfd5b9e3_0.conda
+https://repo.anaconda.com/pkgs/main/osx-64/python-3.8.5-h26836e1_1.conda
+https://conda.anaconda.org/conda-forge/osx-64/qt-5.9.7-h8cf7e54_3.tar.bz2
+https://repo.anaconda.com/pkgs/main/noarch/affine-2.3.0-py_0.conda
+https://repo.anaconda.com/pkgs/main/osx-64/appnope-0.1.0-py38_1001.conda
+https://repo.anaconda.com/pkgs/main/noarch/async_generator-1.10-py_0.conda
+https://repo.anaconda.com/pkgs/main/noarch/attrs-20.3.0-pyhd3eb1b0_0.conda
+https://repo.anaconda.com/pkgs/main/noarch/backcall-0.2.0-py_0.conda
+https://repo.anaconda.com/pkgs/main/osx-64/cfitsio-3.470-hee0f690_5.conda
+https://repo.anaconda.com/pkgs/main/osx-64/chardet-3.0.4-py38hecd8cb5_1003.conda
+https://repo.anaconda.com/pkgs/main/noarch/click-7.1.2-py_0.conda
+https://repo.anaconda.com/pkgs/main/osx-64/curl-7.69.1-ha441bb4_0.conda
+https://repo.anaconda.com/pkgs/main/noarch/decorator-4.4.2-py_0.conda
+https://repo.anaconda.com/pkgs/main/noarch/defusedxml-0.6.0-py_0.tar.bz2
+https://repo.anaconda.com/pkgs/main/osx-64/entrypoints-0.3-py38_0.conda
+https://conda.anaconda.org/conda-forge/noarch/geographiclib-1.50-py_0.tar.bz2
+https://repo.anaconda.com/pkgs/main/osx-64/geotiff-1.5.1-h0b0f252_0.conda
+https://repo.anaconda.com/pkgs/main/noarch/idna-2.10-py_0.conda
+https://repo.anaconda.com/pkgs/main/noarch/ipython_genutils-0.2.0-pyhd3eb1b0_1.conda
+https://repo.anaconda.com/pkgs/main/noarch/itsdangerous-1.1.0-py_0.conda
+https://repo.anaconda.com/pkgs/main/osx-64/kiwisolver-1.3.0-py38h23ab428_0.conda
+https://repo.anaconda.com/pkgs/main/osx-64/lazy-object-proxy-1.4.3-py38h9ed2024_2.conda
+https://repo.anaconda.com/pkgs/main/osx-64/libspatialite-4.3.0a-h5142b36_0.conda
+https://repo.anaconda.com/pkgs/main/osx-64/markupsafe-1.1.1-py38h1de35cc_1.conda
+https://repo.anaconda.com/pkgs/main/osx-64/mccabe-0.6.1-py38_1.conda
+https://repo.anaconda.com/pkgs/main/osx-64/mistune-0.8.4-py38h1de35cc_1001.conda
+https://repo.anaconda.com/pkgs/main/noarch/nest-asyncio-1.4.3-pyhd3eb1b0_0.conda
+https://repo.anaconda.com/pkgs/main/noarch/olefile-0.46-py_0.conda
+https://repo.anaconda.com/pkgs/main/osx-64/pandocfilters-1.4.3-py38hecd8cb5_1.conda
+https://repo.anaconda.com/pkgs/main/noarch/parso-0.7.0-py_0.conda
+https://repo.anaconda.com/pkgs/main/osx-64/pickleshare-0.7.5-py38_1001.conda
+https://repo.anaconda.com/pkgs/main/osx-64/postgresql-12.2-h051b688_0.conda
+https://conda.anaconda.org/conda-forge/noarch/poyo-0.5.0-py_0.tar.bz2
+https://repo.anaconda.com/pkgs/main/noarch/prometheus_client-0.9.0-pyhd3eb1b0_0.conda
+https://repo.anaconda.com/pkgs/main/osx-64/psutil-5.7.2-py38haf1e3a3_0.conda
+https://repo.anaconda.com/pkgs/main/noarch/ptyprocess-0.6.0-pyhd3eb1b0_2.conda
+https://repo.anaconda.com/pkgs/main/noarch/py4j-0.10.9-py_0.conda
+https://repo.anaconda.com/pkgs/main/noarch/pycparser-2.20-py_2.conda
+https://repo.anaconda.com/pkgs/main/noarch/pyparsing-2.4.7-py_0.conda
+https://repo.anaconda.com/pkgs/main/osx-64/pyproj-2.6.1.post1-py38h6d9c95c_1.conda
+https://repo.anaconda.com/pkgs/main/osx-64/pyrsistent-0.17.3-py38haf1e3a3_0.conda
+https://repo.anaconda.com/pkgs/main/noarch/pyshp-2.1.2-py_0.conda
+https://repo.anaconda.com/pkgs/main/osx-64/pysocks-1.7.1-py38_1.conda
+https://conda.anaconda.org/conda-forge/noarch/python-kaleido-0.1.0-pyhd8ed1ab_0.tar.bz2
+https://conda.anaconda.org/conda-forge/osx-64/python_abi-3.8-1_cp38.tar.bz2
+https://repo.anaconda.com/pkgs/main/noarch/pytz-2020.4-pyhd3eb1b0_0.conda
+https://repo.anaconda.com/pkgs/main/osx-64/pyyaml-5.3.1-py38haf1e3a3_1.conda
+https://repo.anaconda.com/pkgs/main/osx-64/pyzmq-20.0.0-py38h23ab428_1.conda
+https://repo.anaconda.com/pkgs/main/noarch/qtpy-1.9.0-py_0.conda
+https://repo.anaconda.com/pkgs/main/osx-64/rtree-0.9.4-py38_1.conda
+https://repo.anaconda.com/pkgs/main/osx-64/send2trash-1.5.0-py38_0.conda
+https://conda.anaconda.org/conda-forge/noarch/sgp4-2.10-pyh6957fcd_0.tar.bz2
+https://repo.anaconda.com/pkgs/main/osx-64/sip-4.19.8-py38h0a44026_0.conda
+https://repo.anaconda.com/pkgs/main/osx-64/six-1.15.0-py38hecd8cb5_0.conda
+https://repo.anaconda.com/pkgs/main/noarch/testpath-0.4.4-py_0.tar.bz2
+https://repo.anaconda.com/pkgs/main/noarch/text-unidecode-1.3-py_0.conda
+https://repo.anaconda.com/pkgs/main/noarch/threadpoolctl-2.1.0-pyh5ca1d4c_0.conda
+https://repo.anaconda.com/pkgs/main/noarch/toml-0.10.1-py_0.conda
+https://repo.anaconda.com/pkgs/main/osx-64/tornado-6.0.4-py38h1de35cc_1.conda
+https://repo.anaconda.com/pkgs/main/noarch/unidecode-1.1.1-py_0.conda
+https://repo.anaconda.com/pkgs/main/noarch/wcwidth-0.2.5-py_0.conda
+https://repo.anaconda.com/pkgs/main/osx-64/webencodings-0.5.1-py38_1.conda
+https://repo.anaconda.com/pkgs/main/noarch/werkzeug-1.0.1-py_0.conda
+https://repo.anaconda.com/pkgs/main/noarch/wheel-0.35.1-pyhd3eb1b0_0.conda
+https://conda.anaconda.org/conda-forge/noarch/whichcraft-0.6.1-py_0.tar.bz2
+https://repo.anaconda.com/pkgs/main/osx-64/wrapt-1.11.2-py38h9ed2024_0.conda
+https://repo.anaconda.com/pkgs/main/noarch/zipp-3.4.0-pyhd3eb1b0_0.conda
+https://conda.anaconda.org/conda-forge/osx-64/aws-sdk-cpp-1.7.164-h5c602de_1.tar.bz2
+https://conda.anaconda.org/conda-forge/noarch/binaryornot-0.4.4-py_1.tar.bz2
+https://conda.anaconda.org/conda-forge/osx-64/certifi-2020.12.5-py38h50d1736_0.tar.bz2
+https://repo.anaconda.com/pkgs/main/osx-64/cffi-1.14.4-py38h2125817_0.conda
+https://repo.anaconda.com/pkgs/main/noarch/click-plugins-1.1.1-py_0.conda
+https://repo.anaconda.com/pkgs/main/osx-64/cligj-0.7.1-py38hecd8cb5_0.conda
+https://repo.anaconda.com/pkgs/main/osx-64/cycler-0.10.0-py38_0.conda
+https://conda.anaconda.org/conda-forge/noarch/geopy-2.0.0-pyh9f0ad1d_0.tar.bz2
+https://repo.anaconda.com/pkgs/main/noarch/importlib-metadata-2.0.0-py_1.conda
+https://repo.anaconda.com/pkgs/main/osx-64/jedi-0.17.2-py38_0.conda
+https://conda.anaconda.org/conda-forge/osx-64/libdap4-3.20.6-h8c15375_0.tar.bz2
+https://conda.anaconda.org/conda-forge/osx-64/libnetcdf-4.7.3-nompi_hda4e5f1_101.tar.bz2
+https://conda.anaconda.org/conda-forge/osx-64/lxml-4.6.2-py38h249bda7_0.tar.bz2
+https://repo.anaconda.com/pkgs/main/noarch/memory_profiler-0.58.0-py_0.conda
+https://repo.anaconda.com/pkgs/main/osx-64/mkl-service-2.3.0-py38hfbe908c_0.conda
+https://repo.anaconda.com/pkgs/main/noarch/packaging-20.4-py_0.conda
+https://repo.anaconda.com/pkgs/main/noarch/pexpect-4.8.0-pyhd3eb1b0_3.conda
+https://repo.anaconda.com/pkgs/main/osx-64/pillow-8.0.1-py38h5270095_0.conda
+https://conda.anaconda.org/conda-forge/osx-64/poppler-0.67.0-h16886b5_8.tar.bz2
+https://repo.anaconda.com/pkgs/main/osx-64/pydot-1.4.1-py38_0.conda
+https://conda.anaconda.org/conda-forge/osx-64/pygraphviz-1.6-py38hff60589_1.tar.bz2
+https://repo.anaconda.com/pkgs/main/osx-64/pyqt-5.9.2-py38h655552a_2.conda
+https://repo.anaconda.com/pkgs/main/noarch/python-dateutil-2.8.1-py_0.conda
+https://repo.anaconda.com/pkgs/main/noarch/python-slugify-4.0.1-py_0.conda
+https://repo.anaconda.com/pkgs/main/noarch/retrying-1.3.3-py_2.conda
+https://repo.anaconda.com/pkgs/main/osx-64/terminado-0.9.1-py38_0.conda
+https://conda.anaconda.org/conda-forge/osx-64/tiledb-1.7.0-h84aa2a7_4.tar.bz2
+https://repo.anaconda.com/pkgs/main/noarch/traitlets-5.0.5-py_0.conda
+https://repo.anaconda.com/pkgs/main/noarch/aniso8601-8.1.0-pyhd3eb1b0_0.conda
+https://repo.anaconda.com/pkgs/main/osx-64/argon2-cffi-20.1.0-py38haf1e3a3_1.conda
+https://repo.anaconda.com/pkgs/main/osx-64/arrow-0.16.0-py38_0.conda
+https://repo.anaconda.com/pkgs/main/osx-64/brotlipy-0.7.0-py38h9ed2024_1003.conda
+https://repo.anaconda.com/pkgs/main/osx-64/cryptography-3.2.1-py38hbcfaee0_1.conda
+https://repo.anaconda.com/pkgs/main/noarch/importlib_metadata-2.0.0-1.conda
+https://repo.anaconda.com/pkgs/main/osx-64/jupyter_core-4.7.0-py38hecd8cb5_0.conda
+https://conda.anaconda.org/conda-forge/osx-64/libgdal-3.0.2-h9e48cab_7.tar.bz2
+https://repo.anaconda.com/pkgs/main/osx-64/numpy-base-1.19.2-py38hcfb5961_0.conda
+https://repo.anaconda.com/pkgs/main/osx-64/setuptools-50.3.1-py38hecd8cb5_1.conda
+https://repo.anaconda.com/pkgs/main/osx-64/astroid-2.4.2-py38_0.conda
+https://repo.anaconda.com/pkgs/main/noarch/bleach-3.2.1-py_0.conda
+https://repo.anaconda.com/pkgs/main/noarch/isort-5.6.4-py_0.conda
+https://repo.anaconda.com/pkgs/main/noarch/jinja2-2.11.2-py_0.conda
+https://repo.anaconda.com/pkgs/main/noarch/joblib-0.17.0-py_0.conda
+https://repo.anaconda.com/pkgs/main/noarch/jsonschema-3.2.0-py_2.conda
+https://repo.anaconda.com/pkgs/main/noarch/jupyter_client-6.1.7-py_0.conda
+https://conda.anaconda.org/conda-forge/noarch/mercantile-1.1.6-pyh9f0ad1d_0.tar.bz2
+https://repo.anaconda.com/pkgs/main/noarch/munch-2.5.0-py_0.conda
+https://repo.anaconda.com/pkgs/main/noarch/networkx-2.5-py_0.conda
+https://repo.anaconda.com/pkgs/main/osx-64/pip-20.3.3-py38hecd8cb5_0.conda
+https://repo.anaconda.com/pkgs/main/noarch/plotly-4.14.1-pyhd3eb1b0_0.conda
+https://repo.anaconda.com/pkgs/main/noarch/pygments-2.7.2-pyhd3eb1b0_0.conda
+https://repo.anaconda.com/pkgs/main/noarch/pyopenssl-20.0.0-pyhd3eb1b0_1.conda
+https://conda.anaconda.org/fastai/noarch/fastcore-1.3.13-py_0.tar.bz2
+https://repo.anaconda.com/pkgs/main/noarch/flask-1.1.2-py_0.conda
+https://conda.anaconda.org/conda-forge/noarch/jinja2-time-0.2.0-py_2.tar.bz2
+https://repo.anaconda.com/pkgs/main/noarch/jupyterlab_pygments-0.1.2-py_0.conda
+https://repo.anaconda.com/pkgs/main/noarch/nbformat-5.0.8-py_0.conda
+https://repo.anaconda.com/pkgs/main/noarch/prompt-toolkit-3.0.8-py_0.conda
+https://repo.anaconda.com/pkgs/main/osx-64/pylint-2.6.0-py38_0.conda
+https://repo.anaconda.com/pkgs/main/noarch/urllib3-1.25.11-py_0.conda
+https://conda.anaconda.org/conda-forge/osx-64/flask-restplus-0.13.0-py38_0.tar.bz2
+https://repo.anaconda.com/pkgs/main/noarch/flask-restx-0.2.0-py_0.conda
+https://repo.anaconda.com/pkgs/main/osx-64/ipython-7.19.0-py38h01d92e1_0.conda
+https://repo.anaconda.com/pkgs/main/noarch/nbclient-0.5.1-py_0.conda
+https://conda.anaconda.org/conda-forge/osx-64/nbconvert-5.6.1-py38h32f6830_1.tar.bz2
+https://repo.anaconda.com/pkgs/main/noarch/prompt_toolkit-3.0.8-0.conda
+https://repo.anaconda.com/pkgs/main/noarch/requests-2.25.0-pyhd3eb1b0_0.conda
+https://conda.anaconda.org/conda-forge/noarch/cookiecutter-1.7.2-pyh9f0ad1d_0.tar.bz2
+https://repo.anaconda.com/pkgs/main/osx-64/ipykernel-5.3.4-py38h5ca1d4c_0.conda
+https://repo.anaconda.com/pkgs/main/noarch/owslib-0.20.0-py_0.conda
+https://repo.anaconda.com/pkgs/main/noarch/pyepsg-0.4.0-py_0.conda
+https://repo.anaconda.com/pkgs/main/noarch/jupyter_console-6.2.0-py_0.conda
+https://repo.anaconda.com/pkgs/main/osx-64/notebook-6.1.4-py38_0.conda
+https://repo.anaconda.com/pkgs/main/noarch/qtconsole-4.7.7-py_0.conda
+https://conda.anaconda.org/conda-forge/noarch/jupyter_contrib_core-0.3.3-py_2.tar.bz2
+https://repo.anaconda.com/pkgs/main/osx-64/widgetsnbextension-3.5.1-py38_0.conda
+https://repo.anaconda.com/pkgs/main/noarch/ipywidgets-7.5.1-py_1.conda
+https://conda.anaconda.org/conda-forge/osx-64/jupyter_highlight_selected_word-0.2.0-py38h32f6830_1002.tar.bz2
+https://conda.anaconda.org/conda-forge/osx-64/jupyter_latex_envs-1.4.6-py38h32f6830_1001.tar.bz2
+https://conda.anaconda.org/conda-forge/osx-64/jupyter_nbextensions_configurator-0.4.1-py38h32f6830_2.tar.bz2
+https://repo.anaconda.com/pkgs/main/osx-64/jupyter-1.0.0-py38_7.conda
+https://conda.anaconda.org/conda-forge/osx-64/jupyter_contrib_nbextensions-0.5.1-py38h32f6830_1.tar.bz2
+https://conda.anaconda.org/conda-forge/noarch/jplephem-2.15-pyh2f6353c_0.tar.bz2
+https://conda.anaconda.org/conda-forge/noarch/parquet-cpp-1.5.1-2.tar.bz2
+https://conda.anaconda.org/conda-forge/noarch/skyfield-1.34-pyhd3deb0d_0.tar.bz2
+https://conda.anaconda.org/conda-forge/osx-64/arrow-cpp-0.17.0-py38hee00afd_0.tar.bz2
+https://conda.anaconda.org/conda-forge/osx-64/gdal-3.0.2-py38h97c3584_7.tar.bz2
+https://conda.anaconda.org/conda-forge/osx-64/pykdtree-1.3.4-py38hf3d72b9_0.tar.bz2
+https://conda.anaconda.org/conda-forge/osx-64/python-javabridge-4.0.0-py38h4d0b108_3.tar.bz2
+https://repo.anaconda.com/pkgs/main/noarch/descartes-1.1.0-py_4.conda
+https://repo.anaconda.com/pkgs/main/noarch/snuggs-1.4.7-py_0.conda
+https://conda.anaconda.org/conda-forge/osx-64/rasterio-1.1.2-py38he71f6a4_0.tar.bz2
+https://conda.anaconda.org/conda-forge/noarch/contextily-1.0.1-py_0.tar.bz2
+https://repo.anaconda.com/pkgs/main/osx-64/matplotlib-3.3.2-0.conda
+https://repo.anaconda.com/pkgs/main/osx-64/matplotlib-base-3.3.2-py38h181983e_0.conda
+https://repo.anaconda.com/pkgs/main/osx-64/mkl_fft-1.2.0-py38hc64f4ea_0.conda
+https://repo.anaconda.com/pkgs/main/osx-64/mkl_random-1.1.1-py38h959d312_0.conda
+https://repo.anaconda.com/pkgs/main/osx-64/numpy-1.19.2-py38h456fd55_0.conda
+https://conda.anaconda.org/fastai/noarch/fastscript-1.0.0-0.tar.bz2
+https://repo.anaconda.com/pkgs/main/osx-64/pandas-1.1.3-py38hb1e8313_0.conda
+https://repo.anaconda.com/pkgs/main/osx-64/scipy-1.5.2-py38h2515648_0.conda
+https://repo.anaconda.com/pkgs/main/osx-64/shapely-1.7.1-py38hb435bde_0.conda
+https://conda.anaconda.org/conda-forge/osx-64/cartopy-0.17.0-py38h4076dca_1009.tar.bz2
+https://conda.anaconda.org/conda-forge/osx-64/fiona-1.8.13-py38he71f6a4_0.tar.bz2
+https://conda.anaconda.org/fastai/noarch/nbdev-0.2.40-pyh39e3cac_0.tar.bz2
+https://repo.anaconda.com/pkgs/main/osx-64/pomegranate-0.13.5-py38h65c3604_0.conda
+https://conda.anaconda.org/conda-forge/osx-64/pyarrow-0.17.0-py38hb42247f_0.tar.bz2
+https://repo.anaconda.com/pkgs/main/osx-64/scikit-learn-0.23.2-py38h959d312_0.conda
+https://repo.anaconda.com/pkgs/main/noarch/seaborn-0.11.0-py_0.conda
+https://repo.anaconda.com/pkgs/main/noarch/geopandas-0.8.1-py_0.conda
+https://repo.anaconda.com/pkgs/main/noarch/mapclassify-2.3.0-py_0.conda
+https://repo.anaconda.com/pkgs/main/noarch/pyspark-3.0.0-py_0.conda
+https://conda.anaconda.org/conda-forge/noarch/geoplot-0.4.1-py_0.tar.bz2
