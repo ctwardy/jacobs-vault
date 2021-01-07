@@ -21,7 +21,7 @@ colidx_lat=23
 colidx_lon=26
 colidx_cnt=27
 
-hittestserver="http://10.121.20.10:5000"
+hittestserver="http://vault-demo.austin-dev.com:5000"
 
 def randomColor():
     r = lambda: random.randint(0,255)
@@ -53,7 +53,7 @@ def getStyle(color):
     return shared_style_common
 
 def createShipKml(mmsi, vesselname, shipRows):
-    kml = Kml(name='mmsi-' + mmsi, open=1)
+    kml = Kml(name='' + mmsi, open=1)
     model_ship = Model(altitudemode=AltitudeMode.clamptoground,
                            orientation=Orientation(heading=0.0),
                            scale=Scale(x=1.0, y=1.0, z=1.0))
@@ -91,7 +91,7 @@ def createShipKml(mmsi, vesselname, shipRows):
 #        pnt.style=shared_style_common
           
     # Saving
-    filename="mmsi-" 
+    filename="" 
     if(vesselname!=""):
         filename=filename + vesselname + "-"
     filename=filename + mmsi
@@ -109,7 +109,7 @@ sqlContext = SQLContext(sc)
 sparkSession = SparkSession(sc)
 tblAis=sparkSession.table("af_vault.ais_agg_stats_hourly").filter("datetime like '2017%'") 
 
-tblFilterTable=sqlContext.sql("select mmsi as mmsi2, sum(cnt) as c from af_vault.ais_agg_stats_hourly where datetime like '2017%' group by mmsi2 order by c desc limit 1000").select("mmsi2")
+tblFilterTable=sqlContext.sql("select mmsi2, c from (select mmsi as mmsi2, sum(cnt) as c from af_vault.ais_agg_stats_hourly where datetime like '2017%' group by mmsi2) tblB where c>=10 order by c desc").select("mmsi2")
 tblAis = tblAis.join(tblFilterTable,tblAis.mmsi==tblFilterTable.mmsi2, how="inner")
 
 tblShip=tblAis.sort("mmsi","datetime")
@@ -134,13 +134,13 @@ filename, kml=createShipKml(last_mmsi,vesselname, shipRows)
 kmls.extend([(filename, kml)])
 
 
-kml=Kml(name="mmsi-Index", open=1)
+kml=Kml(name="Vault-2017", open=1)
 for x in kmls:
     (filename,kml2)=x
     if(filename!=""):
         lnk=kml.newnetworklink(name=filename)
         lnk.link.href = "/kml/placemarks/" + filename + ".kmz"
 #    lnk.link.viewrefreshmode = simplekml.ViewRefreshMode.onrequest
-kml.save("index.kml")
+kml.save("placemarks-2017.kml")
 
 
