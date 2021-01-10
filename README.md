@@ -2,14 +2,27 @@
 
 
 
-VAULT contains scripts and notebooks that (a) ingest and characterize the provided AIS shipping tracks and satellite TLE data, (b) find "hits" - satellites are visible for a given ship position, and (c) highlight coverage gaps / flaws in the data.  Here is an example starmap showing satellites visible from one point on track, colored by quality of the satellite's TLE data. 
+VAULT converts AIS ship records into clickable tracks that show satellite coverage for the location clicked. The demo shows both Jupyter maps (via iPyLeaflet) and Google-Earth style maps (using OpenSphere).  
+
+<img src="nbs/images/vault-demo-3.gif">
+
+For demo purposes, we treat all entries in the TLE file as viable satellites. In reality most of these are space junk, but within 10 years there could be over 10,000 cubesats. 
+
+The project also contains scripts & notebooks to ingest, characterize, and clean the AIS & TLE data, detect outliers, and cluster tracks. 
+
 <table>
-    <tr style="background-color:#EEEEEE">
-        <td ><img src="images/Jacobs_logo_rgb_black.svg" width="200"/></td>
+    <tr style="background-color:#FFFFFF">
+        <td style="background-color:#FFFFFF">
+            <img src="images/Jacobs_logo_rgb_black.svg" width="200"/>
+        </td>
         <td><img alt="Satellites Visible" src="images/polar_plot2.png" width="300"></td>
     </tr>
 </table>
-(For demo purposes, we treat all entries in the TLE file as viable satellites, when in reality most are space junk.)
+
+
+
+## Documentation
+Further documents are hosted on [GitHub Pages](https://cmorris-jacobs.github.io/jacobs-vault/).
 
 ## Installing
 
@@ -40,14 +53,34 @@ The main Jupyter page will be displayed.
 * Click on the "Cell" menu item and choose "Run All"
 
 
-## Exploring More
+## Contributing and Exploring
 
-If you are familiar with `git`, then you can `git clone` this repository into say `jacobs-vault`. 
-* Change to that folder
-* VAULT data has to be obtained separately. ETL'ed data must be available via `data/`.
+To explore further, 
 
-### Demo
-Once data are in place, the demo can be run like this:
+1. Clone the repository with ...
+
+```bash
+git clone https://github.com/cmorris-jacobs/jacobs-vault
+cd jacobs-vault
+``` 
+
+2. Obtain a copy of the VAULT data, and put it in `jacobs-vault/data`, for example with :
+```bash
+ln -s path/to/data data
+```
+
+3. Using either conda or pip, create the vault virtual environment so you have the required packages. Using conda, that would be:
+```bash
+conda create -f environment.yml
+```
+Wait while it installs packages...
+
+4. Activate the vault virtual environment.
+```bash
+conda activate vault
+```
+
+5. To run the **demo** from here:
 ```bash
 cd demo
 ln -s ../data ./
@@ -55,8 +88,14 @@ ln -s ../data ./
 ```
 The `ln` line just makes ETL'd data visible from `demo/data`. Use other techniques if you prefer.
 
+5. If you plan to be pushing to git, then use nbdev to install git hooks - mostly relevant to notebooks in `nbs/`:
+```bash
+nbdev_install_git_hooks
+```
+If you will be modifying notebooks in that folder, familiarize yourself with fastai's nbdev, and do a `make` before commit/push to update associated modules and docs.
 
-## About jacobs-vault
+
+## Folders
 
 Jacobs-VAULT is the result of a hackathon challenge, so in addition to a working demo and analysis notebooks, it still has exploratory paths and alternate approaches. Folders are in three rough groups:
 
@@ -100,11 +139,7 @@ will start Spark-enabled jupyter notebooks, or launch a spark job with the requi
 
 ## Key Required Packages
 
-After cloning the repository, use the `conda` package manager to install the main dependencies. (We provide files for `pip`, but we recommend conda.)
-```bash
-conda env create -f environment.yml
-```
-Key top-level packages fall in three broad categories:
+The `environment.yml` file invoked above has the full package list, but key top-level packages fall in three broad categories:
 
 ### Scientific Python Ecosystem:
 * Core: [numpy](https://numpy.org), [pandas](https://pandas.pydata.org)
@@ -135,23 +170,3 @@ pip install ...
 ```
 
 Tests are written using <code>nbdev</code>, for example see the documentation for `hit_quality` or `viz`.
-
-## Contributing
-
-You can clone the repository and install dependencies with ...
-
-``` 
-git clone https://github.com/cmorris-jacobs/jacobs-vault
-pip install -e "jacobs-vault[dev]"
-``` 
-
-After you clone this repository, please run `nbdev_install_git_hooks` in your terminal. This sets up git hooks, which clean up the notebooks to remove the extraneous stuff stored in the notebooks (e.g. which cells you ran) which causes unnecessary merge conflicts.
-
-Before submitting a PR, check that the local library and notebooks match. The script `nbdev_diff_nbs` can let you know if there is a difference between the local library and the notebooks.
-
-- If you made a change to the *notebooks* in one of the exported cells, you can export it to the library with `nbdev_build_lib` or `make jacobs-vault`.
-- If you made a (small) change to the *library*, you can export it back to the notebooks with `nbdev_update_lib`.
-
-## Docker Containers
-
-We do not yet have official docker containers, but when done they should be available from [the github site](https://github.com/cmorris-jacobs/docker-containers#jacobs-vault).
