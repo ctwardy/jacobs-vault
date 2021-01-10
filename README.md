@@ -13,37 +13,47 @@ VAULT contains scripts and notebooks that (a) ingest and characterize the provid
 
 ## Installing
 
-**Note:** we still need to _build_ these packages so this works. 
+These instructions require Docker [(obtained here)](https://docs.docker.com/get-docker/) and a DockerHub account [(obtained here)](https://hub.docker.com/). 
 
-We recommend installing from conda, but any of these should work:
+Once docker is installed and the DockerHub account is established, in your operating system command line run:
+```bash
+docker login
+docker pull ke2jacobs/jacobs-vault-nb-with-data:latest
+docker run --rm -it -p 2080:2080 ke2jacobs/jacobs-vault-nb-with-data:latest
+```
 
-| [Anaconda](https://www.anaconda.com/products/individual) | Pip | Git |
-| ---- | ---- | ---- |
-| `conda install -c <CONDA CHANNEL> jacobs-vault gh anaconda` | `pip install jacobs-vault` | `git clone git@github.com:cmorris-jacobs/jacobs-vault.git` |
+The container will present a message:
+```
+To access the notebook, open this file in a browser:         
+file:///root/.local/share/jupyter/runtime/nbserver-1-open.html    
+Or copy and paste one of these URLs:       
+http://d20796a21c64:2080/?token=455d272e289a90dbc2533de2cb7ddec9a5574dc3fac5ef66
+     or     
+http://127.0.0.1:2080/?token=455d272e289a90dbc2533de2cb7ddec9a5574dc3fac5ef66
+```
+Open a browser window and paste the URL into the browser (http://127.0.0.1: … is usually the best choice)
 
-Alternatives:
-* [Miniconda](https://docs.conda.io/en/latest/miniconda.html): `conda install -c <CHANNEL> -c jacobs-vault` 
-* Git https: `git clone https://github.com/cmorris-jacobs/jacobs-vault.git` 
+The main Jupyter page will be displayed.
+ 
+* Click on the folder named "demo"
+* Click on the file named "VAULT_Demo.ipynb"
+* Click on the "Cell" menu item and choose "Run All"
 
-## Using
 
-Change to the `jacobs-vault` folder and ensure that `data/` contains or points to the VAULT data. (SAY MORE!)  Then explore these options:
+## Exploring More
+
+If you are familiar with `git`, then you can `git clone` this repository into say `jacobs-vault`. 
+* Change to that folder
+* VAULT data has to be obtained separately. ETL'ed data must be available via `data/`.
 
 ### Demo
+Once data are in place, the demo can be run like this:
 ```bash
 cd demo
+ln -s ../data ./
 . run.sh
 ```
-May require linking `demo/data` to the data folder, e.g. `ln -s ../data ./`. 
-
-### Run the notebooks in nbs/
-Activate the `vault` Python virtual environment and start a new jupyter kernel.
-```bash
-conda env -f environment.yml
-conda activate vault
-jupyter notebook
-```
-You can now explore and run the notebooks in the `nbs/` folder.
+The `ln` line just makes ETL'd data visible from `demo/data`. Use other techniques if you prefer.
 
 
 ## About jacobs-vault
@@ -62,10 +72,20 @@ A mix of exploratory notebooks and literate programming notebooks that generate 
 * `docs` - Documentation generated from `nbs/` by `nbdev` package
 * `data` - (See "Demo Folders".)
 
+To run the notebooks in the `nbs/` folder, 
+activate the `vault` Python virtual environment and start a new jupyter kernel.
+```bash
+conda env -f environment.yml
+conda activate vault
+jupyter notebook
+```
+That should start a jupyter session in your browser. You can now explore and run the notebooks in the `nbs/` folder.
+
 ### Demo Folders
 The demo supports a notebook with an interactive map-based walktrhough of getting AIS tracks, and querying a track for satellite coverage, using the `Skyfield` package for ephemeris calculations.  
 * `demo` - As much of the demo as possible lives under here, for completeness.
-* `data` - Daily satellite files stored (or linked) as`data/VAULT_Data/TLE_daily/`_year_`/`_MM_`/`_nn_`.tab.gz`. Used by the demo and other notebooks & scripts.  
+* `data` - Daily satellite files stored (or linked) as`data/VAULT_Data/TLE_daily/`_year_`/`_MM_`/`_nn_`.tab.gz`. Used by the demo *and* other notebooks & scripts.  
+
 
 ### Other folders
 * `autoencoder` - Exploratory work using a PyTorch deep network to discover high-level features and pattersn in the AIS data.

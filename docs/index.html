@@ -44,39 +44,38 @@ nb_path: "nbs/index.ipynb"
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Installing">Installing<a class="anchor-link" href="#Installing"> </a></h2><p><strong>Note:</strong> we still need to <em>build</em> these packages so this works.</p>
-<p>We recommend installing from conda, but any of these should work:</p>
-<table>
-<thead><tr>
-<th><a href="https://www.anaconda.com/products/individual">Anaconda</a></th>
-<th>Pip</th>
-<th>Git</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>conda install -c &lt;CONDA CHANNEL&gt; jacobs-vault gh anaconda</code></td>
-<td><code>pip install jacobs-vault</code></td>
-<td><code>git clone git@github.com:cmorris-jacobs/jacobs-vault.git</code></td>
-</tr>
-</tbody>
-</table>
-<p>Alternatives:</p>
+<h2 id="Installing">Installing<a class="anchor-link" href="#Installing"> </a></h2><p>These instructions require Docker <a href="https://docs.docker.com/get-docker/">(obtained here)</a> and a DockerHub account <a href="https://hub.docker.com/">(obtained here)</a>.</p>
+<p>Once docker is installed and the DockerHub account is established, in your operating system command line run:</p>
+<div class="highlight"><pre><span></span>docker login
+docker pull ke2jacobs/jacobs-vault-nb-with-data:latest
+docker run --rm -it -p <span class="m">2080</span>:2080 ke2jacobs/jacobs-vault-nb-with-data:latest
+</pre></div>
+<p>The container will present a message:</p>
+
+<pre><code>To access the notebook, open this file in a browser:         
+file:///root/.local/share/jupyter/runtime/nbserver-1-open.html    
+Or copy and paste one of these URLs:       
+http://d20796a21c64:2080/?token=455d272e289a90dbc2533de2cb7ddec9a5574dc3fac5ef66
+     or     
+http://127.0.0.1:2080/?token=455d272e289a90dbc2533de2cb7ddec9a5574dc3fac5ef66</code></pre>
+<p>Open a browser window and paste the URL into the browser (<a href="http://127.0.0.1">http://127.0.0.1</a>: … is usually the best choice)</p>
+<p>The main Jupyter page will be displayed.</p>
 <ul>
-<li><a href="https://docs.conda.io/en/latest/miniconda.html">Miniconda</a>: <code>conda install -c &lt;CHANNEL&gt; -c jacobs-vault</code> </li>
-<li>Git https: <code>git clone https://github.com/cmorris-jacobs/jacobs-vault.git</code> </li>
+<li>Click on the folder named "demo"</li>
+<li>Click on the file named "VAULT_Demo.ipynb"</li>
+<li>Click on the "Cell" menu item and choose "Run All"</li>
 </ul>
-<h2 id="Using">Using<a class="anchor-link" href="#Using"> </a></h2><p>Change to the <code>jacobs-vault</code> folder and ensure that <code>data/</code> contains or points to the VAULT data. (SAY MORE!)  Then explore these options:</p>
-<h3 id="Demo">Demo<a class="anchor-link" href="#Demo"> </a></h3><div class="highlight"><pre><span></span><span class="nb">cd</span> demo
+<h2 id="Exploring-More">Exploring More<a class="anchor-link" href="#Exploring-More"> </a></h2><p>If you are familiar with <code>git</code>, then you can <code>git clone</code> this repository into say <code>jacobs-vault</code>.</p>
+<ul>
+<li>Change to that folder</li>
+<li>VAULT data has to be obtained separately. ETL'ed data must be available via <code>data/</code>.</li>
+</ul>
+<h3 id="Demo">Demo<a class="anchor-link" href="#Demo"> </a></h3><p>Once data are in place, the demo can be run like this:</p>
+<div class="highlight"><pre><span></span><span class="nb">cd</span> demo
+ln -s ../data ./
 . run.sh
 </pre></div>
-<p>May require linking <code>demo/data</code> to the data folder, e.g. <code>ln -s ../data ./</code>.</p>
-<h3 id="Run-the-notebooks-in-nbs/">Run the notebooks in nbs/<a class="anchor-link" href="#Run-the-notebooks-in-nbs/"> </a></h3><p>Activate the <code>vault</code> Python virtual environment and start a new jupyter kernel.</p>
-<div class="highlight"><pre><span></span>conda env -f environment.yml
-conda activate vault
-jupyter notebook
-</pre></div>
-<p>You can now explore and run the notebooks in the <code>nbs/</code> folder.</p>
+<p>The <code>ln</code> line just makes ETL'd data visible from <code>demo/data</code>. Use other techniques if you prefer.</p>
 
 </div>
 </div>
@@ -102,10 +101,17 @@ jupyter notebook
 <li><code>docs</code> - Documentation generated from <code>nbs/</code> by <code>nbdev</code> package</li>
 <li><code>data</code> - (See "Demo Folders".)</li>
 </ul>
+<p>To run the notebooks in the <code>nbs/</code> folder, 
+activate the <code>vault</code> Python virtual environment and start a new jupyter kernel.</p>
+<div class="highlight"><pre><span></span>conda env -f environment.yml
+conda activate vault
+jupyter notebook
+</pre></div>
+<p>That should start a jupyter session in your browser. You can now explore and run the notebooks in the <code>nbs/</code> folder.</p>
 <h3 id="Demo-Folders">Demo Folders<a class="anchor-link" href="#Demo-Folders"> </a></h3><p>The demo supports a notebook with an interactive map-based walktrhough of getting AIS tracks, and querying a track for satellite coverage, using the <code>Skyfield</code> package for ephemeris calculations.</p>
 <ul>
 <li><code>demo</code> - As much of the demo as possible lives under here, for completeness.</li>
-<li><code>data</code> - Daily satellite files stored (or linked) as<code>data/VAULT_Data/TLE_daily/</code><em>year</em><code>/</code><em>MM</em><code>/</code><em>nn</em><code>.tab.gz</code>. Used by the demo and other notebooks &amp; scripts.  </li>
+<li><code>data</code> - Daily satellite files stored (or linked) as<code>data/VAULT_Data/TLE_daily/</code><em>year</em><code>/</code><em>MM</em><code>/</code><em>nn</em><code>.tab.gz</code>. Used by the demo <em>and</em> other notebooks &amp; scripts.  </li>
 </ul>
 <h3 id="Other-folders">Other folders<a class="anchor-link" href="#Other-folders"> </a></h3><ul>
 <li><code>autoencoder</code> - Exploratory work using a PyTorch deep network to discover high-level features and pattersn in the AIS data.</li>
