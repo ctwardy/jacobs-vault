@@ -129,7 +129,7 @@ The demo supports a notebook with an interactive map-based walktrhough of gettin
 ### Other folders
 * `autoencoder` - Exploratory work using a PyTorch deep network to discover high-level features and pattersn in the AIS data.
 * `ais-kml` - Concurrent visualization attempt using OpenSphere.
-* `hitttestservice` - First attempt to wrap HitTest code into a web service.
+* `hittestservice` - First attempt to wrap HitTest code into a web service.
 * `scripts` - A collection of scripts, esp. SQL queries.
 
 
