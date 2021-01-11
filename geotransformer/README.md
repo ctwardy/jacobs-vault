@@ -1,22 +1,32 @@
 # geotransformer
 
+The `geotransformer` repository's purpose it to take TLE files that have already been ETLed into Hive, and extract relevant satellite parameters of interest at scale. It requires an input table with only two columns, `line1` and `line2` corresponding to the two lines of a TLE record. It outputs a table with satellite info:
+
+- `group_id`: Internal parameter used for debugging.
+- `line1`: Line 1 of the TLE record.
+- `line2`: Line 2 of the TLE record.
+- `basedatetime`: Datetime of the TLE record, in format `yyyy-MM-ddTHH:mm:SSZ`, which is UTC time.
+- `satellite`: NORAD satellite ID number.
+- `ndot`: First derivative of the mean motion.
+- `nddots`: Second derivative of the mean motion.
+- `bstar`: Ballistic drag coefficient.
+- `inclination`: Orbital inclination in radians.
+- `right_asc`: Orbital right ascension in radians.
+- `eccentricity`: Orbital eccentricity.
+- `intnl_des`: International satellite designation.
+- `error`: Tracks any errors produced by specific lines during processing.
+- `execution_time`: Internal parameter used for debugging.
+
+The use case is run with `scripts/main.sh` as described later in this README. Bash parameters that should be set here are:
+```
+GEO_INPUT_TABLE: Input Hive table with input data (`line1`, `line2`), as `databasename.tablename`
+GEO_OUTPUT_TABLE: Output Hive table with as `databasename.tablename`
+```
 # Getting started
-
-## Set up git tracking and push an initial commit
-
-If you wish to track the project on Gitlab, use the following steps. From inside the top level directory of your project, `geotransformer`, run the following:
-```
-git init
-git checkout -b main
-git add -A
-git commit -m "Initial commit with template PySpark code"
-git push --set-upstream git@172.21.10.211:jacobs-vault/geotransformer.git main
-```
-This structure assumes you have set up an ssh key in Gitlab and have the appropriate permissions to push to the `jacobs-vault` Gitlab namespace. Note that this sets up your repository to use `main` as the primary branch, not `master`.
 
 ## Push the project to the cloud
 
-Usually the project will be run on a cloud, such as Silverdale. If this is the case, from the directory containing geotransformer (i.e. if you are inside the `geotransformer` directory, first `cd ..`) run:
+Usually the project will be run on a cloud, where it is assumed Spark is installed across the cluster already and can be called in the usual manner with `spark-submit` (i.e. the Spark binaries are in the `$PATH`). If this is the case, from the directory containing geotransformer (i.e. if you are inside the `geotransformer` directory, first `cd ..`) run:
 
 ```
 rsync -avz --no-perms --exclude-from geotransformer/rsync_exclude.txt geotransformer user@remotehost:path/to/where/you/want/it
@@ -30,7 +40,7 @@ after replace `user`, `host`, and `path/to/where/you/want/it` with appropriate v
 
 ## Building the project
 
-In order to run this code in PySpark, you will need to modify `environment.yml` to contain all the packages your code needs. You will need to build the environment on the target system, i.e. if you are running on a remote server like Silverdale, you need to run these commands there once you have rsynced the code up. The first time you build the conda environment, run:
+In order to run this code in PySpark, you will need to build the environment, using the `environment.yml` in this directory. You will need to build the environment on the target system, i.e. if you are running on a remote server/cloud, you need to run these commands there once you have rsynced the code up. This created environment is then shipped around to the cloud nodes as your Spark application runs. This eliminates the need to synch environments across the cloud. A single build on the staging server where you launch the Spark job is adequate. The first time you build the conda environment, run:
 
 `make build`
 
@@ -63,7 +73,7 @@ The output can be found in the new `logs` directory.
 
 ## Running the project as you edit/refine
 
-As you edit the project and re-run things locally, you'll want to then push them up to the cloud. This command will sync your local files to the cloud, excluding all the git stuff (or anything contained in `rsync_exclude.txt`). It should be run one directory up from your main package directory on your local machine. Replace your username, remote host (usually Silverdale staging2 `172.21.10.111`), and path where you want the repo to go on the remote host, and `your_repo_name` with the name of your repository's folder:
+As you edit the project and re-run things locally, you'll want to then push them up to the cloud. This command will sync your local files to the cloud, excluding all the git stuff (or anything contained in `rsync_exclude.txt`). It should be run one directory up from your main package directory on your local machine. Replace your username, remote host, and path where you want the repo to go on the remote host:
 
 ```
 rsync -avz --no-perms --exclude-from geotransformer/rsync_exclude.txt geotransformer user@remotehost:path/to/where/you/want/it

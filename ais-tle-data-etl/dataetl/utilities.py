@@ -44,6 +44,11 @@ def cli_arguments():
         dest="OUTPUT_GDB_TABLE",
     )
 
+    arser.add_argument(
+        "--usecase",
+        dest="USECASE",
+    )
+
     args = parser.parse_args()
 
     return args

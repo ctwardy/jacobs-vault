@@ -18,16 +18,20 @@ class VelocityCalculations:
         self.single_partition_length = single_partition_length
 
     def compute_velocities(self, df, ):
+        # Select the columns relevant for computation
         df = df.select('imo', 'basedatetime', 'lat', 'lon')
 
+        # Pull lat and lon together into a tuple structure
         df = df.withColumn('latlon', F.struct('lat', 'lon'))
 
+        # Create the Spark Window that allows the data to be ordered within each IMO
         w = Window.orderBy('basedatetime').partitionBy('imo')
 
         # These index columns help create groupings of latlons within an individual IMO
         df = df.withColumn('index', F.row_number().over(w))
         df = df.withColumn('index_previous', F.lag(df['index']).over(w))
 
+        # Create lagged pairs of lat-lon and basedatetime
         df = df.withColumn('latlon_previous', F.lag(df['latlon']).over(w))
         df = df.withColumn('basedatetime_previous', F.lag(df['basedatetime']).over(w))
 
@@ -41,7 +45,9 @@ class VelocityCalculations:
 
         # Find the total volume for each IMO
         # dfg = df.groupBy('imo').agg(F.max('index_previous').alias('total_rows'))
-
+        
+        # Collect lists of these records, to make the PySpark UDF more efficient, as 
+        # these UDFs operate more quickly the more data that can be pushed into a single instance
         df = df.withColumn('group_id', F.floor(df['index_previous'] / self.single_partition_length))
 
         # Create lists for faster operation in the UDF
@@ -52,9 +58,10 @@ class VelocityCalculations:
         # df.show()
 
         def dist_time_vel(latlon_previous, latlon, basedatetime_previous, basedatetime):
-
+            """From lat-lon pairs at two timestamps, calculate the distnace,
+            time, and average velocity traveled.
+            """
             
-
             error = "No error"
             try:
                 dist = distance.distance(latlon_previous, latlon).km
@@ -81,7 +88,10 @@ class VelocityCalculations:
             return (dist, delta_hrs, velocity, error)
 
         def dist_time_vel_list(latlon_pair_list, basedatetime_pair_list):
-
+            """This function is set up as a PySpark UDF that operates
+            over lists. This increases the function of the UDF, by purposefully
+            bringing more data locally for each Spark executor.
+            """
             start = perf_counter()
             
             dist_list, delta_hrs_list, velocity_list, error_list = [], [], [], []
@@ -108,6 +118,7 @@ class VelocityCalculations:
 
             return (dist_list, delta_hrs_list, velocity_list, error_list, execution_time)
 
+        # Register the UDF and its schema
         schema = StructType([
                     StructField("distance_km", ArrayType(FloatType()), True),
                     StructField("delta_hrs", ArrayType(FloatType()), True),
@@ -118,11 +129,14 @@ class VelocityCalculations:
 
         dist_time_vel_udf = F.udf(dist_time_vel_list, schema)
 
+        # Compute the UDF value for each
         df = df.withColumn('combined_output', dist_time_vel_udf(
                                                                 'latlon_pair',
                                                                 'basedatetime_pair',
                                                             ))
 
+        # Extract the desired columns, and undo the list creation from 
+        # earlier that allowed for more efficient PySpark calculation
         extract_cols = ['distance_km', 'delta_hrs', 'velocities_kph', 'error']
         for column in extract_cols + ['execution_time']:
             df = df.withColumn(column, df['combined_output'].getItem(column))

@@ -1,22 +1,46 @@
 # ais-tle-data-etl
 
+The AIS-TLE Data ETL repository contains scaled Spark processes to ETL the 3 data types encountered for this challenge: AIS `.txt` files in CSV format, AIS File Geodatabase (`.gdb`) files, TLE line separated files. Each of these three use cases can be run seperately, using the `--usecase` flag in the specific bash script for the usecase.
+
+For the `--usecase` selection for each use case: 
+
+AIS `.txt` file processing: `"AIS"`. Associated bash script: `main.sh`
+
+AIS `.gdb` file processing: `"GDB"`. Associated bash script: `gdb_etl.sh`
+
+TLE file processing: `"TLE"`. Associated bash script: `main.sh`
+
+The relevant input parameters for the bash scripts:
+
+`main.sh`:
+
+For the AIS use case:
+```
+INPUT_AIS_DIR: local file system directory containing the AIS data, in the folder structure distributed for VAULT.
+OUTPUT_AIS_TABLE: Hive output table in the format databasename.tablename where the records should be written.
+HDFS_DIR: An intermediate directory in HDFS where processed files can be placed. Helps with scalability.
+```
+For the TLE use case:
+```
+INPUT_TLE_DIR: local file system directory containing the TLE data, in the folder structure distributed for VAULT.
+OUTPUT_TLE_TABLE: Hive output table in the format databasename.tablename where the records should be written.
+HDFS_DIR: An intermediate directory in HDFS where processed files can be placed. Helps with scalability.
+```
+`gdb_etl.sh`:
+
+For the GDB use case, each year is run separately:
+```
+INPUT_GDB_DIR: local file system directory containing the GDB data, in the folder structure distributed for VAULT. For example "/home/cmorris/vault/data/raw/AIS/Zone10_2009_01.gdb"
+OUTPUT_LOCAL_GDB_DIR: local file system directory to output the processed data.
+OUTPUT_GDB_TABLE: Hive output table in the format databasename.tablename where the records should be written.
+HDFS_DIR: An intermediate directory in HDFS where processed files can be placed. Helps with scalability.
+```
+
 # Getting started
-
-## Set up git tracking and push an initial commit
-
-If you wish to track the project on Gitlab, use the following steps. From inside the top level directory of your project, `ais-tle-data-etl`, run the following:
-```
-git init
-git checkout -b main
-git add -A
-git commit -m "Initial commit with template PySpark code"
-git push --set-upstream git@172.21.10.211:jacobs-vault/ais-tle-data-etl.git main
-```
-This structure assumes you have set up an ssh key in Gitlab and have the appropriate permissions to push to the `jacobs-vault` Gitlab namespace. Note that this sets up your repository to use `main` as the primary branch, not `master`.
 
 ## Push the project to the cloud
 
-Usually the project will be run on a cloud, such as Silverdale. If this is the case, from the directory containing ais-tle-data-etl (i.e. if you are inside the `ais-tle-data-etl` directory, first `cd ..`) run:
+Usually the project will be run on a cloud, where it is assumed Spark is installed across the cluster already and can be called in the usual manner with `spark-submit` (i.e. the Spark binaries are in the `$PATH`). If this is the case, from the directory containing ais-tle-data-etl (i.e. if you are inside the `ais-tle-data-etl` directory, first `cd ..`) run the following to push your code modifications to the cloud:
 
 ```
 rsync -avz --no-perms --exclude-from ais-tle-data-etl/rsync_exclude.txt ais-tle-data-etl user@remotehost:path/to/where/you/want/it
@@ -30,7 +54,7 @@ after replace `user`, `host`, and `path/to/where/you/want/it` with appropriate v
 
 ## Building the project
 
-In order to run this code in PySpark, you will need to modify `environment.yml` to contain all the packages your code needs. You will need to build the environment on the target system, i.e. if you are running on a remote server like Silverdale, you need to run these commands there once you have rsynced the code up. The first time you build the conda environment, run:
+In order to run this code in PySpark, you will need to build the environment, using the `environment.yml` in this directory. You will need to build the environment on the target system, i.e. if you are running on a remote server/cloud, you need to run these commands there once you have rsynced the code up. This created environment is then shipped around to the cloud nodes as your Spark application runs. This eliminates the need to synch environments across the cloud. A single build on the staging server where you launch the Spark job is adequate. The first time you build the conda environment, run:
 
 `make build`
 
@@ -63,7 +87,7 @@ The output can be found in the new `logs` directory.
 
 ## Running the project as you edit/refine
 
-As you edit the project and re-run things locally, you'll want to then push them up to the cloud. This command will sync your local files to the cloud, excluding all the git stuff (or anything contained in `rsync_exclude.txt`). It should be run one directory up from your main package directory on your local machine. Replace your username, remote host (usually Silverdale staging2 `172.21.10.111`), and path where you want the repo to go on the remote host, and `your_repo_name` with the name of your repository's folder:
+As you edit the project and re-run things locally, you'll want to then push them up to the cloud. This command will sync your local files to the cloud, excluding all the git stuff (or anything contained in `rsync_exclude.txt`). It should be run one directory up from your main package directory on your local machine. Replace your username, remote host, and path where you want the repo to go on the remote host:
 
 ```
 rsync -avz --no-perms --exclude-from ais-tle-data-etl/rsync_exclude.txt ais-tle-data-etl user@remotehost:path/to/where/you/want/it

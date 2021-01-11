@@ -3,15 +3,16 @@
 # INPUT_GDB_DIR="/home/cmorris/vault/data/raw/AIS/Zone10_2013_01.gdb"
 INPUT_GDB_DIR="/home/cmorris/vault/data/raw/AIS/Zone10_2009_01.gdb"
 OUTPUT_LOCAL_GDB_DIR="/home/cmorris/vault/data/processed/gdb_fixed"
+OUTPUT_GDB_TABLE="cmorris.gdb_ais_fixed"
+HDFS_DIR='/user/cmorris/vault/gdb_fixed'
+
 mkdir -p $OUTPUT_LOCAL_GDB_DIR
 
 export PROJ_LIB=$INPUT_GDB_DIR
 # export HADOOP_CONF_DIR=/etc/hadoop/conf
 export HADOOP_CONF_DIR=/etc/spark/conf/yarn-conf/*:/etc/hive/conf:/etc/hive/conf
 
-OUTPUT_GDB_TABLE="cmorris.gdb_ais_fixed"
 
-HDFS_DIR='/user/cmorris/vault/gdb_fixed'
 hdfs dfs -mkdir -p $HDFS_DIR
 
 SPARK_OPTIONS="--driver-memory 14g --executor-memory 22g"
@@ -40,5 +41,6 @@ ${USECASE_PYSPARK_FILE} \
 --output-local-gdb-dir $OUTPUT_LOCAL_GDB_DIR \
 --output-gdb-table $OUTPUT_GDB_TABLE \
 --hdfs-dir $HDFS_DIR \
+--usecase "GDB" \
 &> ${LOGDIR}/${LOGFILE_NAME} &
 

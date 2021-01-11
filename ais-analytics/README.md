@@ -1,22 +1,25 @@
 # ais-analytics
 
+The primary analytic use case developed for the `AIS` table, calculation of velocities for ships based on sequential AIS checkins. This allows for further investigation of calculated velocities, and discovery of anomalous velocity valuse. On a per vessel basis, all records are ordered at scale, and adjacent records in time are used to compute the distance traveled, and time elapsed between adjacent records. This in turn is used to calculate the velocity.
+
+The input and output tables (which must be Hive tables in HDFS) are defined in `scripts/velocities.sh`:
+
+```
+AIS_INPUT_TABLE="af_vault.ais"
+VELOCITIES_OUTPUT_TABLE="af_vault.ais_velocities"
+```
+
+Four specific columns are required for the AIS input table:
+`imo`: The vessel IMO.
+`basedatetime`: The datetime, formatted as a string.
+`lat`: The lattitude of the vessel.
+`lon`: The longitude of the vessel.
+
 # Getting started
-
-## Set up git tracking and push an initial commit
-
-If you wish to track the project on Gitlab, use the following steps. From inside the top level directory of your project, `ais-analytics`, run the following:
-```
-git init
-git checkout -b main
-git add -A
-git commit -m "Initial commit with template PySpark code"
-git push --set-upstream git@172.21.10.211:jacobs-vault/ais-analytics.git main
-```
-This structure assumes you have set up an ssh key in Gitlab and have the appropriate permissions to push to the `jacobs-vault` Gitlab namespace. Note that this sets up your repository to use `main` as the primary branch, not `master`.
 
 ## Push the project to the cloud
 
-Usually the project will be run on a cloud, such as Silverdale. If this is the case, from the directory containing ais-analytics (i.e. if you are inside the `ais-analytics` directory, first `cd ..`) run:
+Usually the project will be run on a cloud, where it is assumed Spark is installed across the cluster already and can be called in the usual manner with `spark-submit` (i.e. the Spark binaries are in the `$PATH`). If this is the case, from the directory containing ais-analytics on your local machine (i.e. if you are inside the `ais-analytics` directory, first `cd ..`) run the following to push your code modifications to the cloud:
 
 ```
 rsync -avz --no-perms --exclude-from ais-analytics/rsync_exclude.txt ais-analytics user@remotehost:path/to/where/you/want/it
@@ -30,7 +33,7 @@ after replace `user`, `host`, and `path/to/where/you/want/it` with appropriate v
 
 ## Building the project
 
-In order to run this code in PySpark, you will need to modify `environment.yml` to contain all the packages your code needs. You will need to build the environment on the target system, i.e. if you are running on a remote server like Silverdale, you need to run these commands there once you have rsynced the code up. The first time you build the conda environment, run:
+In order to run this code in PySpark, you will need to build the environment, using the `environment.yml` in this directory. You will need to build the environment on the target system, i.e. if you are running on a remote server/cloud, you need to run these commands there once you have rsynced the code up. This created environment is then shipped around to the cloud nodes as your Spark application runs. This eliminates the need to synch environments across the cloud. A single build on the staging server where you launch the Spark job is adequate. The first time you build the conda environment, run:
 
 `make build`
 
@@ -57,13 +60,13 @@ chmod +x submit.sh
 
 then run:
 
-`scripts/main.sh` (followed by any command line arguments)
+`scripts/velocities.sh` (followed by any command line arguments)
 
 The output can be found in the new `logs` directory.
 
 ## Running the project as you edit/refine
 
-As you edit the project and re-run things locally, you'll want to then push them up to the cloud. This command will sync your local files to the cloud, excluding all the git stuff (or anything contained in `rsync_exclude.txt`). It should be run one directory up from your main package directory on your local machine. Replace your username, remote host (usually Silverdale staging2 `172.21.10.111`), and path where you want the repo to go on the remote host, and `your_repo_name` with the name of your repository's folder:
+As you edit the project and re-run things locally, you'll want to then push them up to the cloud. This command will sync your local files to the cloud, excluding all the git stuff (or anything contained in `rsync_exclude.txt`). It should be run one directory up from your main package directory on your local machine. Replace your username, remote host, and path where you want the repo to go on the remote host:
 
 ```
 rsync -avz --no-perms --exclude-from ais-analytics/rsync_exclude.txt ais-analytics user@remotehost:path/to/where/you/want/it
@@ -72,13 +75,13 @@ rsync -avz --no-perms --exclude-from ais-analytics/rsync_exclude.txt ais-analyti
 On the cloud, from the main directory, run these commands:
 ```
 make update
-scripts/main.sh
+scripts/velocities.sh
 ```
 The output can then be found in the `logs` directory.
 
-To automatically update your package with the new code edits, run the script, and look at the log output, from the main directory, run these commands:
+To automatically update your package with the new code edits, run the script, and look at the log output, from the main directory, run this combined command:
 ```
-make update && scripts/main.sh && sleep 1 && ls -t logs | head -n 1 && tail -f logs/$( ls -t logs | head -n 1 )
+make update && scripts/velocities.sh && sleep 1 && ls -t logs | head -n 1 && tail -f logs/$( ls -t logs | head -n 1 )
 ```
 
 ## Development in ipython shell or Jupyter notebook
@@ -157,4 +160,4 @@ executor nodes. These versions should be the same in both columns.
 
 - Library code should be defined in `aisanalytics/__init__.py`
 - CLI code should be defined in `utilities.py`
-- Always create builds on your target environment (e.g. Silverdale)
+- Always create builds on your target environment

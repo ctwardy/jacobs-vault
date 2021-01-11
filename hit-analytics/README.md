@@ -1,22 +1,20 @@
 # hit-analytics
 
+The `hit-analytics` repo is the start of development of a scaled process to do satellite hit detection across all time, all AIS positions for each satellite. Currently, it is not fully implemented. In its current state, it ingests all TLE records from 2015-2017, and a table with each date from the AIS table represented a single time. It then, at scale, finds the closest TLE record for each satellite, for each day. This is then planned to be used as the input for secondary analytics where satellite positions are calculated for each AIS record based on the already discovered closest satellite TLE record from this table. This second step is implemented locally and demonstrated in notebook form, but is not implemented at scale as yet. 
+
+TLE input table required columns:
+- `satellite`: The NORAD satellite identification number.
+- `valid`: Whether the checksum of the record was valid for both lines.
+- `ts`: Unix epoch time based timestamp.
+AIS input table format:
+- `basedatetime`: AIS timestamp datetime, in format `"yyyy-MM-dd'T'HH:mm:ss"`
+The input tables are specified directly in `main.py` at the current development stage.
+
 # Getting started
-
-## Set up git tracking and push an initial commit
-
-If you wish to track the project on Gitlab, use the following steps. From inside the top level directory of your project, `hit-analytics`, run the following:
-```
-git init
-git checkout -b main
-git add -A
-git commit -m "Initial commit with template PySpark code"
-git push --set-upstream git@172.21.10.211:jacobs-vault/hit-analytics.git main
-```
-This structure assumes you have set up an ssh key in Gitlab and have the appropriate permissions to push to the `jacobs-vault` Gitlab namespace. Note that this sets up your repository to use `main` as the primary branch, not `master`.
 
 ## Push the project to the cloud
 
-Usually the project will be run on a cloud, such as Silverdale. If this is the case, from the directory containing hit-analytics (i.e. if you are inside the `hit-analytics` directory, first `cd ..`) run:
+Usually the project will be run on a cloud, where it is assumed Spark is installed across the cluster already and can be called in the usual manner with `spark-submit` (i.e. the Spark binaries are in the `$PATH`). If this is the case, from the directory containing hit-analytics (i.e. if you are inside the `hit-analytics` directory, first `cd ..`) run:
 
 ```
 rsync -avz --no-perms --exclude-from hit-analytics/rsync_exclude.txt hit-analytics user@remotehost:path/to/where/you/want/it
@@ -30,7 +28,7 @@ after replace `user`, `host`, and `path/to/where/you/want/it` with appropriate v
 
 ## Building the project
 
-In order to run this code in PySpark, you will need to modify `environment.yml` to contain all the packages your code needs. You will need to build the environment on the target system, i.e. if you are running on a remote server like Silverdale, you need to run these commands there once you have rsynced the code up. The first time you build the conda environment, run:
+In order to run this code in PySpark, you will need to build the environment, using the `environment.yml` in this directory. You will need to build the environment on the target system, i.e. if you are running on a remote server/cloud, you need to run these commands there once you have rsynced the code up. This created environment is then shipped around to the cloud nodes as your Spark application runs. This eliminates the need to synch environments across the cloud. A single build on the staging server where you launch the Spark job is adequate. The first time you build the conda environment, run:
 
 `make build`
 
@@ -63,7 +61,7 @@ The output can be found in the new `logs` directory.
 
 ## Running the project as you edit/refine
 
-As you edit the project and re-run things locally, you'll want to then push them up to the cloud. This command will sync your local files to the cloud, excluding all the git stuff (or anything contained in `rsync_exclude.txt`). It should be run one directory up from your main package directory on your local machine. Replace your username, remote host (usually Silverdale staging2 `172.21.10.111`), and path where you want the repo to go on the remote host, and `your_repo_name` with the name of your repository's folder:
+As you edit the project and re-run things locally, you'll want to then push them up to the cloud. This command will sync your local files to the cloud, excluding all the git stuff (or anything contained in `rsync_exclude.txt`). It should be run one directory up from your main package directory on your local machine. Replace your username, remote host, and path where you want the repo to go on the remote host:
 
 ```
 rsync -avz --no-perms --exclude-from hit-analytics/rsync_exclude.txt hit-analytics user@remotehost:path/to/where/you/want/it

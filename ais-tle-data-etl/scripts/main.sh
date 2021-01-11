@@ -1,5 +1,8 @@
 #!/bin/bash
 
+USECASE="AIS"
+# USECASE="TLE"
+
 INPUT_AIS_DIR="/home/cmorris/vault/data/raw/AIS/AIS_ASCII_by_UTM_Month"
 OUTPUT_AIS_TABLE="cmorris.af_vault_ais"
 
@@ -31,5 +34,6 @@ ${USECASE_PYSPARK_FILE} \
 --input-tle-dir $INPUT_TLE_DIR \
 --output-tle-table $OUTPUT_TLE_TABLE \
 --hdfs-dir $HDFS_DIR \
+--usecase $USECASE \
 &> ${LOGDIR}/${LOGFILE_NAME} &
 
