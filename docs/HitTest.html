@@ -25,20 +25,6 @@ nb_path: "nbs/05_HitTest.ipynb"
     
 <div class="cell border-box-sizing code_cell rendered">
 
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>51.6º, 179.2º, 38068.6km
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
 </div>
     {% endraw %}
 
@@ -121,37 +107,34 @@ nb_path: "nbs/05_HitTest.ipynb"
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
-<div class="input">
 
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">get_qvals</span><span class="p">(</span><span class="n">delta_days</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">alt</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">horizon</span><span class="p">:</span><span class="nb">float</span><span class="o">=</span><span class="mf">13.5</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Get quality vals for &quot;&quot;&quot;</span>
+</div>
+    {% endraw %}
 
-    <span class="k">if</span> <span class="n">delta_days</span> <span class="o">&lt;=</span> <span class="mf">2.0</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">alt</span><span class="o">.</span><span class="n">degrees</span> <span class="o">&gt;</span> <span class="mf">0.0</span><span class="p">:</span>
-            <span class="n">qvals</span> <span class="o">=</span> <span class="p">[</span><span class="n">QUALITY_EXCELLENT</span><span class="p">,</span> <span class="n">math</span><span class="o">.</span><span class="n">nan</span><span class="p">]</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">qvals</span> <span class="o">=</span> <span class="p">[</span><span class="n">math</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="n">QUALITY_EXCELLENT</span><span class="p">]</span>
-    <span class="k">elif</span> <span class="n">delta_days</span> <span class="o">&lt;=</span> <span class="mf">14.0</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">alt</span><span class="o">.</span><span class="n">degrees</span> <span class="o">&gt;</span> <span class="mf">0.0</span><span class="p">:</span>
-            <span class="n">qvals</span> <span class="o">=</span> <span class="p">[</span><span class="n">QUALITY_GOOD</span><span class="p">,</span> <span class="n">math</span><span class="o">.</span><span class="n">nan</span><span class="p">]</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">qvals</span> <span class="o">=</span> <span class="p">[</span><span class="n">math</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="n">QUALITY_GOOD</span><span class="p">]</span>
-    <span class="k">elif</span> <span class="n">delta_days</span> <span class="o">&lt;=</span> <span class="mf">56.0</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">alt</span><span class="o">.</span><span class="n">degrees</span> <span class="o">&gt;</span> <span class="mf">0.0</span><span class="p">:</span>
-            <span class="n">qvals</span> <span class="o">=</span> <span class="p">[</span><span class="n">QUALITY_POOR</span><span class="p">,</span> <span class="n">math</span><span class="o">.</span><span class="n">nan</span><span class="p">]</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">qvals</span> <span class="o">=</span> <span class="p">[</span><span class="n">math</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="n">QUALITY_POOR</span><span class="p">]</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">qvals</span> <span class="o">=</span> <span class="p">[</span><span class="n">math</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="n">QUALITY_STALE</span><span class="p">]</span>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
 
-    <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="n">alt</span><span class="o">.</span><span class="n">degrees</span><span class="p">,</span> <span class="n">az</span><span class="o">.</span><span class="n">degrees</span><span class="p">,</span> <span class="n">delta_days</span><span class="p">]</span> <span class="o">+</span> <span class="n">qvals</span><span class="p">)</span>
+<div class="output_wrapper">
+<div class="output">
 
-<span class="c1">#</span>
-</pre></div>
+<div class="output_area">
 
-    </div>
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="get_qvals" class="doc_header"><code>get_qvals</code><a href="https://github.com/cmorris-jacobs/jacobs-vault/tree/main/jacobs_vault/hit_test.py#L50" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_qvals</code>(<strong><code>Δt</code></strong>:<code>int</code>, <strong><code>alt</code></strong>:<code>float</code>, <strong><code>θ</code></strong>:<code>float</code>=<em><code>14.6</code></em>)</p>
+</blockquote>
+<p>Get quality vals for raw 𝚫t [days].</p>
+<p>Returns Series (alt, az, 𝚫t) in units (º,º, days)</p>
+<h2 id="Params">Params<a class="anchor-link" href="#Params"> </a></h2>
+<pre><code>𝚫t - age of TLE in days. Int or flot.
+alt - altitude above horizon
+𝜃 - minimum alt in degrees to count as a hit (Default HORIZON)</code></pre>
+
+</div>
+
+</div>
+
 </div>
 </div>
 
@@ -185,7 +168,7 @@ nb_path: "nbs/05_HitTest.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="HitTest" class="doc_header"><code>class</code> <code>HitTest</code><a href="https://github.com/cmorris-jacobs/jacobs-vault/tree/main/jacobs_vault/hit_test.py#L49" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>HitTest</code>(<strong><code>dt</code></strong>, <strong><code>day_file_base_path</code></strong>=<em><code>'../data/VAULT_Data/TLE_daily'</code></em>)</p>
+<h2 id="HitTest" class="doc_header"><code>class</code> <code>HitTest</code><a href="https://github.com/cmorris-jacobs/jacobs-vault/tree/main/jacobs_vault/hit_test.py#L87" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>HitTest</code>(<strong><code>dt</code></strong>:<code>datetime</code>, <strong><code>day_file_base_path</code></strong>:<code>str</code>=<em><code>'../data/VAULT_Data/TLE_daily'</code></em>, <strong><code>θ</code></strong>:<code>float</code>=<em><code>14.6</code></em>)</p>
 </blockquote>
 <p>Counts the satellites that are visible at a given point on the globe at a
 given time, and returns counts classified by data quality and
@@ -197,542 +180,6 @@ latitude, azimuth, hit_quality, radius for visible satellites</p>
 
 </div>
 </div>
-
-</div>
-    {% endraw %}
-
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Then test it on a single day.</p>
-
-</div>
-</div>
-</div>
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">ht</span> <span class="o">=</span> <span class="n">HitTest</span><span class="p">(</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2016</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">30</span><span class="p">))</span>
-<span class="n">ht</span><span class="o">.</span><span class="n">df_day_tle</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
-<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>2016-06-30 00:00:00	data/VAULT_Data/TLE_daily/2016/06/30.tab.gz
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-
-<div class="output_html rendered_html output_subarea output_execute_result">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>satellite</th>
-      <th>day_dt</th>
-      <th>day</th>
-      <th>tle_dt</th>
-      <th>tle_ts</th>
-      <th>line1</th>
-      <th>line2</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>1000</td>
-      <td>2016-06-30</td>
-      <td>6026</td>
-      <td>2016-06-27 11:15:21</td>
-      <td>1467040521</td>
-      <td>1 01000U 65008B   16179.46899882  .00000021  0...</td>
-      <td>2 01000  32.1467 333.7511 0009366 165.3909 194...</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>1000</td>
-      <td>2016-06-30</td>
-      <td>6026</td>
-      <td>2016-06-27 11:15:21</td>
-      <td>1467040521</td>
-      <td>1 01000U 65008B   16179.46899882  .00000021  0...</td>
-      <td>2 01000  32.1467 333.7511 0009366 165.3909 194...</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>1000</td>
-      <td>2016-06-30</td>
-      <td>6026</td>
-      <td>2016-06-27 11:15:21</td>
-      <td>1467040521</td>
-      <td>1 01000U 65008B   16179.46899882  .00000021  0...</td>
-      <td>2 01000  32.1467 333.7511 0009366 165.3909 194...</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>10000</td>
-      <td>2016-06-30</td>
-      <td>6026</td>
-      <td>2016-06-30 10:49:53</td>
-      <td>1467298193</td>
-      <td>1 10000U 77034A   16182.45131225 -.00000171  0...</td>
-      <td>2 10000  15.5820 331.7785 0019081 259.0540  28...</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>10002</td>
-      <td>2016-06-30</td>
-      <td>6026</td>
-      <td>2016-06-28 23:10:32</td>
-      <td>1467169832</td>
-      <td>1 10002U 77034C   16180.96565494 -.00000126  0...</td>
-      <td>2 10002  16.1681 333.0471 0296361   5.9346   0...</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">satellite</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>29201    106
-39694    101
-33472     94
-28584     87
-29203     81
-        ... 
-333        1
-18764      1
-29003      1
-34004      1
-16384      1
-Name: satellite, Length: 12152, dtype: int64</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Memory-check">Memory check<a class="anchor-link" href="#Memory-check"> </a></h3><p>Inspect the resulting dtypes and memory usage.</p>
-<p>The parsing was successful. As expected, <code>line1</code> and <code>line2</code> are large. Using <code>category</code> doesn't save much because so many rows are unique.  The <code>datetime</code> categories are surprisingly large.</p>
-
-</div>
-</div>
-</div>
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([</span><span class="n">df</span><span class="o">.</span><span class="n">dtypes</span><span class="p">,</span> <span class="n">df</span><span class="o">.</span><span class="n">memory_usage</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">deep</span><span class="o">=</span><span class="kc">True</span><span class="p">)],</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Dtype&#39;</span><span class="p">,</span> <span class="s1">&#39;Mem&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">T</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-<div class="output_html rendered_html output_subarea output_execute_result">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Dtype</th>
-      <th>Mem</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>satellite</th>
-      <td>uint16</td>
-      <td>24304</td>
-    </tr>
-    <tr>
-      <th>day_dt</th>
-      <td>datetime64[ns]</td>
-      <td>97216</td>
-    </tr>
-    <tr>
-      <th>day</th>
-      <td>uint16</td>
-      <td>24304</td>
-    </tr>
-    <tr>
-      <th>tle_dt</th>
-      <td>datetime64[ns]</td>
-      <td>97216</td>
-    </tr>
-    <tr>
-      <th>tle_ts</th>
-      <td>uint32</td>
-      <td>48608</td>
-    </tr>
-    <tr>
-      <th>line1</th>
-      <td>string</td>
-      <td>1531152</td>
-    </tr>
-    <tr>
-      <th>line2</th>
-      <td>string</td>
-      <td>1531152</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
-Int64Index: 12152 entries, 0 to 15178
-Data columns (total 7 columns):
- #   Column     Non-Null Count  Dtype         
----  ------     --------------  -----         
- 0   satellite  12152 non-null  uint16        
- 1   day_dt     12152 non-null  datetime64[ns]
- 2   day        12152 non-null  uint16        
- 3   tle_dt     12152 non-null  datetime64[ns]
- 4   tle_ts     12152 non-null  uint32        
- 5   line1      12152 non-null  string        
- 6   line2      12152 non-null  string        
-dtypes: datetime64[ns](2), string(2), uint16(2), uint32(1)
-memory usage: 569.6 KB
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">3</span><span class="p">][</span><span class="s2">&quot;line1&quot;</span><span class="p">])</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">3</span><span class="p">][</span><span class="s2">&quot;line2&quot;</span><span class="p">])</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>1 01001U 65008A   16178.87975142  .00000008  00000-0  00000+0 0  2425
-2 01001  32.1427 144.4001 0016649 349.5981  10.4171  9.90724672860590
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Skyfield">Skyfield<a class="anchor-link" href="#Skyfield"> </a></h3><p>First, test the basic operation works as expected.</p>
-
-</div>
-</div>
-</div>
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>51.6º, 179.2º, 38068.6km
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-<div class="output_markdown rendered_html output_subarea ">
-<h4 id="test_skyfield" class="doc_header"><code>test_skyfield</code><a href="https://github.com/cmorris-jacobs/jacobs-vault/tree/main/jacobs_vault/hit_test.py#L162" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>test_skyfield</code>()</p>
-</blockquote>
-
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span> 
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">assert</span> <span class="p">(</span><span class="n">datetime</span><span class="p">(</span><span class="mi">1971</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">-</span> <span class="n">datetime</span><span class="p">(</span><span class="mi">1970</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">days</span> <span class="o">==</span> <span class="mi">365</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([</span><span class="mf">51.5</span><span class="p">,</span> <span class="mi">189</span><span class="p">,</span> <span class="mf">2.3</span><span class="p">],</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;alt&#39;</span><span class="p">,</span><span class="s1">&#39;az&#39;</span><span class="p">,</span><span class="s1">&#39;days&#39;</span><span class="p">])</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-<div class="output_html rendered_html output_subarea output_execute_result">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>0</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>alt</th>
-      <td>51.5</td>
-    </tr>
-    <tr>
-      <th>az</th>
-      <td>189.0</td>
-    </tr>
-    <tr>
-      <th>days</th>
-      <td>2.3</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Can-they-see-me?">Can they see me?<a class="anchor-link" href="#Can-they-see-me?"> </a></h3><p>Given at Lat/Lon/Time, what satellites can see me?</p>
-<p>We pre-partition the TLE data by Year/Month/Day, so we can quickly load only <em>today's</em> TLE data, and check whether Lat/Lon can see it.</p>
-<h4 id="First-step:-get-Alt/Az/dt-for-each-row.">First step: get Alt/Az/dt for each row.<a class="anchor-link" href="#First-step:-get-Alt/Az/dt-for-each-row."> </a></h4><p>Here we <code>apply</code> the <code>Skyfield.EarthSatellite</code> function to all TLE rows in the dataframe for today.</p>
-<p><strong>Benchmark</strong>: this takes about 6s on a laptop. @TODO: speed this up by 10x.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p><strong> Minor glitch: cannot use faster <code>raw=True</code></strong></p>
-<p>In theory <code>apply(..., raw=True)</code> should be faster than default <code>apply</code>.  However, it's not working due to:</p>
-<blockquote><p>AssertionError:Number of manager items must equal union of block items&gt; # manager items:7, # tot_items:</p>
-<ul>
-<li>Possible solution: <code>https://www.nuomiphp.com/eplan/en/254300.html</code></li>
-<li>On the other hand, it's an open pandas ticket: <code>https://github.com/pandas-dev/pandas/issues/34822</code></li>
-</ul>
-</blockquote>
-<p>So I <code>try</code> the default way first. But the <code>except</code> won't work until we track down the block manager issue.</p>
-
-</div>
-</div>
-</div>
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
 
 </div>
     {% endraw %}
@@ -751,7 +198,9 @@ memory usage: 569.6 KB
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_alt_az_days</span> <span class="o">=</span> <span class="n">satellite_alt_az_days</span><span class="p">(</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2016</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">30</span><span class="p">),</span> <span class="mf">45.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">176.0</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">dt</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">(</span><span class="mi">2016</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span>
+<span class="n">ht</span> <span class="o">=</span> <span class="n">HitTest</span><span class="p">(</span><span class="n">dt</span><span class="p">)</span>
+<span class="n">hitmiss</span><span class="p">,</span> <span class="n">rows</span> <span class="o">=</span> <span class="n">ht</span><span class="o">.</span><span class="n">invoke</span><span class="p">(</span><span class="n">dt</span><span class="p">,</span> <span class="mf">45.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">176.0</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -764,7 +213,7 @@ memory usage: 569.6 KB
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>2016-06-30 00:00:00	data/VAULT_Data/TLE_daily/2016/06/30.tab.gz
+<pre>Trying to load ../data/VAULT_Data/TLE_daily/2016/06/30.tab.gz
 </pre>
 </div>
 </div>
@@ -782,272 +231,7 @@ memory usage: 569.6 KB
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_alt_az_days</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>altitude    12152
-azimuth     12152
-days        12152
-dtype: int64</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_alt_az_days</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-<div class="output_html rendered_html output_subarea output_execute_result">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>altitude</th>
-      <th>azimuth</th>
-      <th>days</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>-42.413819</td>
-      <td>297.656662</td>
-      <td>2 days 12:44:39</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>51.646300</td>
-      <td>179.205373</td>
-      <td>0 days 10:49:53</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>-32.583116</td>
-      <td>299.096010</td>
-      <td>1 days 00:49:28</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>-10.852721</td>
-      <td>159.700750</td>
-      <td>3 days 02:53:10</td>
-    </tr>
-    <tr>
-      <th>10</th>
-      <td>-28.903495</td>
-      <td>101.253621</td>
-      <td>0 days 04:49:32</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Second-step:-Calculate-the-hit-quality">Second step: Calculate the hit quality<a class="anchor-link" href="#Second-step:-Calculate-the-hit-quality"> </a></h4><p>First approximation:</p>
-<ul>
-<li>It's a <strong>hit</strong> if the alt &gt; 0 (above the horizon).</li>
-<li>Smaller TLE age -&gt; better quality (less stale)</li>
-</ul>
-
-</div>
-</div>
-</div>
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-<div class="output_markdown rendered_html output_subarea ">
-<h4 id="hit_quality" class="doc_header"><code>hit_quality</code><a href="https://github.com/cmorris-jacobs/jacobs-vault/tree/main/jacobs_vault/hit_test.py#L188" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>hit_quality</code>(<strong><code>df_alt_az_days</code></strong>, <strong><code>MISS</code></strong>=<em><code>0</code></em>, <strong><code>EXC</code></strong>=<em><code>2.0</code></em>, <strong><code>GOOD</code></strong>=<em><code>14.0</code></em>, <strong><code>POOR</code></strong>=<em><code>56.0</code></em>)</p>
-</blockquote>
-<p>Return hit/miss and quality as time proximity.</p>
-<h2 id="Parameters">Parameters<a class="anchor-link" href="#Parameters"> </a></h2><p><code>df_alt_az_days</code>: Dataframe returned by <a href="/jacobs-vault/Early_HitTest#satellite_alt_az_days"><code>satellite_alt_az_days</code></a>.
-<code>MISS</code>: Alt. &lt; MISS is a miss. (Default=0, the horizon)
-<code>EXC</code>: TLE age less than this is 'excellent' (Default 2)
-<code>GOOD</code>: TLE age less than this is 'good' (Default 14)
-<code>POOR</code>: TLE age less than this is 'poor' (Default 56)
-        Anything older is 'stale'.</p>
-<h2 id="Returns">Returns<a class="anchor-link" href="#Returns"> </a></h2><p>Dataframe with columns ["hit", "miss"]. Each row will have exactly one filled, with
-a string denoting how recent the pass was, e.g. "excellent", "good", "poor", "stale".</p>
-
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_hit_quality</span> <span class="o">=</span> <span class="n">hit_quality</span><span class="p">(</span><span class="n">df_alt_az_days</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_hit_quality</span><span class="p">[</span><span class="s2">&quot;hit&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>excellent    1490
-good           30
-poor            1
-Name: hit, dtype: int64</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_hit_quality</span><span class="p">[</span><span class="s2">&quot;miss&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>excellent    10439
-good           178
-poor             9
-stale            5
-Name: miss, dtype: int64</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">df_hit_quality</span><span class="p">[</span><span class="s2">&quot;hit&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">(),</span> <span class="n">df_hit_quality</span><span class="p">[</span><span class="s2">&quot;miss&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">sort</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">hitmiss</span>
 </pre></div>
 
     </div>
@@ -1085,22 +269,22 @@ Name: miss, dtype: int64</pre>
   </thead>
   <tbody>
     <tr>
-      <th>excellent</th>
-      <td>1490.0</td>
-      <td>10439</td>
+      <th>Excellent</th>
+      <td>799.0</td>
+      <td>11130</td>
     </tr>
     <tr>
-      <th>good</th>
-      <td>30.0</td>
-      <td>178</td>
-    </tr>
-    <tr>
-      <th>poor</th>
+      <th>Poor</th>
       <td>1.0</td>
       <td>9</td>
     </tr>
     <tr>
-      <th>stale</th>
+      <th>Good</th>
+      <td>30.0</td>
+      <td>178</td>
+    </tr>
+    <tr>
+      <th>Stale</th>
       <td>NaN</td>
       <td>5</td>
     </tr>
@@ -1124,60 +308,7 @@ Name: miss, dtype: int64</pre>
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_alt_az_days_visible</span> <span class="o">=</span> <span class="n">df_alt_az_days</span><span class="p">[</span><span class="n">df_alt_az_days</span><span class="p">[</span><span class="s2">&quot;altitude&quot;</span><span class="p">]</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_alt_az_days_visible</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>altitude    1521
-azimuth     1521
-days        1521
-dtype: int64</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_alt_az_days_visible</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">rows</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -1212,38 +343,50 @@ dtype: int64</pre>
       <th>altitude</th>
       <th>azimuth</th>
       <th>days</th>
+      <th>hit</th>
+      <th>miss</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <th>3</th>
-      <td>51.646300</td>
-      <td>179.205373</td>
-      <td>0 days 10:49:53</td>
+      <th>4792</th>
+      <td>39.103415</td>
+      <td>187.715195</td>
+      <td>0.0</td>
+      <td>Excellent</td>
+      <td>NaN</td>
     </tr>
     <tr>
-      <th>17</th>
-      <td>48.571486</td>
-      <td>219.021839</td>
-      <td>0 days 17:13:44</td>
+      <th>11229</th>
+      <td>40.888612</td>
+      <td>165.186133</td>
+      <td>0.0</td>
+      <td>Excellent</td>
+      <td>NaN</td>
     </tr>
     <tr>
-      <th>21</th>
-      <td>35.295619</td>
-      <td>324.390831</td>
-      <td>0 days 12:34:30</td>
+      <th>12587</th>
+      <td>86.544701</td>
+      <td>192.259231</td>
+      <td>0.0</td>
+      <td>Excellent</td>
+      <td>NaN</td>
     </tr>
     <tr>
-      <th>22</th>
-      <td>67.176418</td>
-      <td>358.140393</td>
-      <td>1 days 15:57:40</td>
+      <th>3920</th>
+      <td>45.862176</td>
+      <td>134.587456</td>
+      <td>0.0</td>
+      <td>Excellent</td>
+      <td>NaN</td>
     </tr>
     <tr>
-      <th>25</th>
-      <td>2.153692</td>
-      <td>266.529239</td>
-      <td>0 days 09:03:34</td>
+      <th>14511</th>
+      <td>51.141112</td>
+      <td>6.748791</td>
+      <td>0.0</td>
+      <td>Excellent</td>
+      <td>NaN</td>
     </tr>
   </tbody>
 </table>
@@ -1275,13 +418,16 @@ dtype: int64</pre>
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">starmap</span><span class="p">(</span><span class="n">rows</span><span class="p">)</span>
+</pre></div>
+
+    </div>
 </div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
+</div>
 
 <div class="output_wrapper">
 <div class="output">
@@ -1289,11 +435,32 @@ dtype: int64</pre>
 <div class="output_area">
 
 
-<div class="output_markdown rendered_html output_subarea ">
-<h4 id="colorize" class="doc_header"><code>colorize</code><a href="https://github.com/cmorris-jacobs/jacobs-vault/tree/main/jacobs_vault/hit_test.py#L250" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>colorize</code>(<strong><code>df</code></strong>)</p>
-</blockquote>
-<p>Replace quality strings with color numbers.</p>
+<div class="output_html rendered_html output_subarea ">
+<div>                            <div id="e0f665a3-f2bb-42b5-b1e2-6ec53075e078" class="plotly-graph-div" style="height:525px; width:100%;"></div>            <script type="text/javascript">                require(["plotly"], function(Plotly) {                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("e0f665a3-f2bb-42b5-b1e2-6ec53075e078")) {                    Plotly.newPlot(                        "e0f665a3-f2bb-42b5-b1e2-6ec53075e078",                        [{"hovertemplate": "R=%{r}<br>azimuth=%{theta}<br>size=%{marker.size}<br>color=%{marker.color}<extra></extra>", "legendgroup": "", "marker": {"color": [0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 2.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 4.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 2.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, 1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 3.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 3.0, 0.0, 0.0, 1.0, 0.0, 0.0, 2.0, 0.0, 0.0, 0.0, 0.0, 1.0, 2.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 1.0, 2.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 2.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 2.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 2.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 1.0, 0.0, 4.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 2.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 6.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 2.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 7.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 3.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 2.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 4.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 2.0, 0.0, 0.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0, 3.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 3.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 2.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, 2.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, 0.0, 0.0, 3.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 2.0, 0.0, 1.0, 2.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 2.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 7.0, 0.0, 1.0, 6.0, 0.0, 0.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0, 5.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 2.0, 0.0, 0.0, 0.0, 2.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 2.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 2.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 2.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], "coloraxis": "coloraxis", "size": [1.0, 1.0, 1.0, 3.0, 1.0, 1.0, 3.0, 3.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 3.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 5.0, 3.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 3.0, 1.0, 9.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 3.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 5.0, 1.0, 1.0, 1.0, 1.0, 1.0, 3.0, 1.0, 3.0, 3.0, 1.0, 3.0, 1.0, 1.0, 1.0, 1.0, 7.0, 1.0, 1.0, 3.0, 1.0, 1.0, 1.0, 1.0, 3.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 3.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 3.0, 3.0, 1.0, 1.0, 1.0, 1.0, 3.0, 1.0, 1.0, 1.0, 1.0, 3.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 3.0, 3.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 3.0, 1.0, 1.0, 1.0, 1.0, 1.0, 3.0, 3.0, 1.0, 1.0, 3.0, 1.0, 1.0, 1.0, 1.0, 3.0, 7.0, 1.0, 1.0, 3.0, 1.0, 1.0, 5.0, 1.0, 1.0, 1.0, 1.0, 3.0, 5.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 3.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 3.0, 1.0, 1.0, 1.0, 3.0, 1.0, 1.0, 1.0, 3.0, 1.0, 1.0, 3.0, 1.0, 3.0, 1.0, 1.0, 1.0, 1.0, 3.0, 3.0, 3.0, 5.0, 3.0, 1.0, 1.0, 1.0, 3.0, 1.0, 1.0, 1.0, 3.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 3.0, 3.0, 1.0, 1.0, 1.0, 1.0, 3.0, 1.0, 1.0, 1.0, 1.0, 5.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 3.0, 1.0, 1.0, 1.0, 3.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 3.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 3.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 5.0, 3.0, 1.0, 1.0, 1.0, 1.0, 3.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 3.0, 1.0, 5.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 3.0, 1.0, 1.0, 1.0, 3.0, 3.0, 1.0, 9.0, 3.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 3.0, 1.0, 3.0, 1.0, 1.0, 1.0, 1.0, 5.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 13.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 3.0, 1.0, 1.0, 1.0, 1.0, 1.0, 5.0, 1.0, 1.0, 1.0, 3.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 3.0, 1.0, 15.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 7.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 3.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 3.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 5.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 3.0, 1.0, 9.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 5.0, 1.0, 1.0, 3.0, 3.0, 1.0, 1.0, 1.0, 1.0, 7.0, 1.0, 1.0, 1.0, 1.0, 1.0, 3.0, 1.0, 1.0, 3.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 3.0, 1.0, 1.0, 1.0, 1.0, 7.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 3.0, 1.0, 1.0, 1.0, 1.0, 1.0, 3.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 3.0, 1.0, 5.0, 1.0, 1.0, 1.0, 3.0, 1.0, 1.0, 3.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 3.0, 1.0, 3.0, 5.0, 1.0, 1.0, 1.0, 1.0, 1.0, 3.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 3.0, 3.0, 1.0, 1.0, 1.0, 1.0, 1.0, 3.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 3.0, 1.0, 3.0, 1.0, 1.0, 7.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 3.0, 5.0, 1.0, 3.0, 5.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 5.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 3.0, 1.0, 15.0, 1.0, 3.0, 13.0, 1.0, 1.0, 3.0, 3.0, 1.0, 1.0, 1.0, 1.0, 11.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 5.0, 1.0, 1.0, 1.0, 5.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 3.0, 1.0, 1.0, 1.0, 3.0, 1.0, 1.0, 1.0, 1.0, 5.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 3.0, 1.0, 5.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 3.0, 1.0, 1.0, 5.0, 1.0, 1.0, 1.0, 1.0, 3.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0], "sizemode": "area", "sizeref": 0.15, "symbol": "circle"}, "mode": "markers", "name": "", "opacity": 1, "r": [38.35370044427335, 41.42851426905417, 54.704380778949854, 22.823581503907107, 73.64228775008573, 73.40143315557405, 74.59256247111902, 62.726394076819034, 70.71891143468713, 21.594673509745533, 71.06763723459595, 64.16123471971159, 68.19187266901781, 51.70952970803247, 57.41751103449306, 69.92167184019183, 64.56484839181543, 72.58726665222585, 20.463919345548945, 69.7719726077138, 36.24051777390284, 74.35199181472458, 65.37402205581063, 74.03166840388529, 37.96734566640063, 53.646228400535136, 63.3058554278758, 71.02651608351103, 71.42958866410518, 67.86559995264805, 73.27935524221412, 58.48923609299109, 54.46653754357421, 44.72042646909922, 60.53375967496119, 39.27439809593629, 53.610149626519565, 74.7970753943543, 25.438740474662225, 43.55269745713484, 42.54123621430595, 58.085119889483344, 65.78453081876488, 67.23490420809662, 56.74101494610131, 44.51989639394761, 29.48201944474085, 75.35807300220367, 69.23372952804726, 62.99805784236881, 42.411697324250134, 63.92722118903812, 69.92890299972044, 72.43481749581402, 29.801647698181213, 44.5637201066993, 68.40085508030127, 72.40224399294918, 39.26788098674247, 39.488145227942475, 35.12101162977831, 37.23280847317438, 57.07777562890132, 70.8626050053241, 70.4823563962234, 44.1978981520244, 72.30777701197187, 68.49145007504558, 57.10627951551125, 71.20445335534731, 61.512145211679766, 72.31501161399498, 39.52390033655344, 58.42867652139796, 19.472622842319097, 73.44402176913758, 45.45059042830872, 68.04500612229204, 40.2518449163021, 40.87877923897341, 46.7368077709238, 41.41735297208349, 57.17444628799578, 40.979382000837376, 39.02049894348846, 20.38900055309108, 64.71593149310033, 36.09802836957761, 30.97979009846535, 69.17285936080214, 59.10463671862814, 51.73678269531946, 61.294038467731994, 50.089017298061684, 68.41672038276717, 63.84113651056781, 40.99581763825625, 67.47604694557242, 68.26095273647559, 55.607625859293236, 66.63673435454609, 60.60522220208772, 42.388160534994114, 53.234579980402565, 36.74604030743701, 34.78396387084342, 37.90513106158292, 69.80058733442729, 15.079848332332432, 66.97369291262258, 63.4436255460697, 41.78706399827828, 55.13763994103818, 21.619246147315565, 74.48233872751054, 35.559158006496986, 67.75410388811261, 53.64862611452498, 64.6152226696606, 36.83956980327113, 72.51618491105208, 27.502302948430668, 68.71007854967263, 46.7888113067665, 47.55155492032028, 53.12013254902655, 70.8454028315746, 67.6571622681171, 69.97355680120963, 32.219316314358714, 42.65255988277556, 63.47268670592597, 41.50226559394374, 38.372009308913015, 65.2442634376196, 70.46120675306214, 53.25507081472879, 13.26439738679754, 45.11411184719646, 48.251043008391655, 71.09085015570761, 42.47160755779043, 60.33576501416923, 73.09614225145675, 71.51133660533067, 9.161275034289858, 73.36191476436271, 67.25940957474153, 66.1723663991036, 43.6787835597013, 63.66949981485814, 71.84899691736476, 44.25023013054633, 72.18022667048373, 54.34005143009495, 43.33736682592333, 57.74617531337562, 60.958655779256226, 69.73272160404468, 74.1687256664116, 39.99036760416474, 53.192964537350484, 55.95993974485793, 34.49526400740013, 64.52534161900317, 42.74502716069538, 72.76664268901844, 61.84888562330837, 71.76912279665115, 67.71224770552915, 34.5408084696537, 72.3233110804949, 35.933030379025375, 41.96491032097722, 39.06693796222466, 35.62175822615772, 68.33517024757836, 43.24139163585484, 63.51796691567141, 73.45495768178567, 67.11525032433516, 37.70759820985582, 57.26225845106312, 56.71989444424927, 50.09930018232045, 38.343042612993656, 69.45914400320751, 37.73343819443936, 35.381389972944625, 57.43533563702274, 57.63213019610276, 48.977790630894894, 31.844165553496637, 72.53842413186456, 37.310741920501975, 47.41352699293569, 38.194544408419986, 73.90287262316025, 55.112589819277076, 56.56516362034083, 60.586384077780565, 68.00163629277266, 70.30215045806366, 37.6834796223466, 45.85827975943275, 71.45864806231073, 40.09638021164488, 54.999879999800584, 73.82408836759313, 68.2888296065838, 63.02188976444822, 19.15149602579939, 51.548090641535, 46.06573020675228, 36.94671005798947, 35.65125679475629, 36.5804668319349, 56.41825820570355, 49.0401230921069, 56.398317338555245, 59.71134101683821, 41.09055549298589, 66.31359664607999, 56.05274667978523, 45.75673326876354, 57.63957354862807, 62.47017500074995, 35.8452233378703, 48.170544234457914, 38.73858318770737, 53.34968357304486, 57.844746794101745, 15.102392081596946, 72.51143809355281, 45.4510626061557, 67.1487252922312, 71.60461232726887, 62.50290680618142, 64.74684075498647, 49.292517263870444, 75.38119735815759, 50.11509793525793, 40.510310697611246, 46.20226226382219, 54.70476735174325, 51.70030701413075, 49.78135556901129, 51.903643007036685, 66.49532149494624, 62.330216564398924, 48.84238524465667, 58.94077157110348, 74.22306118409227, 55.97397207043253, 52.8825708998389, 57.55745290950141, 22.531949673421664, 40.739047568202444, 58.90081532123333, 73.43854749509292, 41.426545398271074, 44.13782359950688, 36.9584945469365, 46.554625405376285, 53.95677695171742, 57.251279659003536, 56.653480368162704, 51.948825557923186, 69.36295028341242, 55.008794465332265, 64.67183202951956, 46.422257662701774, 37.39512361869893, 73.121226345562, 49.924058750454236, 49.72686420510995, 59.35857537828843, 39.90415814097874, 65.3617835260861, 46.37086213450753, 28.95195377014958, 73.39653834726796, 67.73784352483983, 60.35625609944819, 49.78849091257524, 58.75358325934178, 75.13797580646411, 68.68388717102764, 58.70496417746044, 47.82313398081145, 65.12467679378213, 70.19888548058773, 63.63772409731266, 59.149831118569395, 47.07317426446458, 61.67993825358707, 46.3101550022928, 49.884480484812634, 69.50464942433031, 70.45197167287657, 57.49322280011894, 23.808483215194187, 66.54137164285662, 68.551833503057, 50.34133970784451, 61.33261492716319, 50.93344653352962, 59.7358762038304, 38.89116069161001, 72.67235173611701, 34.61732138783505, 52.94353018943336, 63.03095240988734, 46.88577494454113, 48.52993371178973, 37.63996898454834, 49.6554698745818, 37.760360534776936, 58.18453229716431, 47.64190992226023, 74.53791647291153, 43.468816808542456, 12.548074605004658, 74.88301917564502, 51.495653642125376, 49.218807265724166, 68.32411477029244, 56.12382415032705, 61.1658793680956, 47.15575347244477, 46.921501067521675, 50.41418094870242, 61.346536893665046, 64.1281004319911, 69.85543429745384, 45.19044091036833, 35.76978996131577, 54.02638095915874, 38.337637210581754, 55.90050956093868, 53.885275016977054, 75.20108763939868, 53.93465060497372, 68.091102489227, 57.64005069677578, 67.16793968399554, 70.95284357113448, 1.9746146231231592, 61.842473552700355, 53.680629835649555, 28.022018156835088, 66.32444402010243, 50.89658530288684, 57.398791135404394, 63.86261388560136, 31.657761195819035, 54.21196701200489, 9.07163447023359, 59.05651469928108, 23.502544876232975, 56.203852280850114, 62.34886498383762, 52.497981701493735, 61.08987810934242, 61.30028126571855, 59.319067502872464, 39.23983998352951, 59.7672388274653, 51.577921927699855, 69.19782760965316, 62.383760471132234, 60.26600781329848, 65.6072617116007, 50.472709357142826, 72.36619402387609, 54.03914487902408, 15.399037821069967, 69.13220151310135, 56.1991550715576, 70.94145831401016, 63.36649276808119, 31.620073940726968, 54.6348109036792, 53.67985494064612, 70.64379773892591, 69.21901801820661, 60.51259683618704, 65.09250649799374, 28.930943315171426, 71.87912344149984, 57.96120043191802, 48.31756046213498, 71.72014723868047, 62.59396148765923, 50.42658171194411, 69.09676851178753, 63.72682592235802, 46.03481810519014, 58.09531326353637, 51.57235645323884, 74.84362001640706, 70.49739876716066, 49.159441762062556, 53.5757339158265, 59.702685477085666, 52.44378771771242, 58.601865590844874, 63.893129896264746, 70.60594452007574, 53.8118462797121, 74.74838292457308, 69.80224733267906, 48.38559706771748, 34.54978376361789, 8.948155974286792, 68.62754246113786, 74.38155757636011, 68.74719423029731, 69.2562214956389, 59.28870585971396, 53.876505592894986, 72.19806347927326, 67.8606109849002, 58.78142138747856, 74.41421580596248, 70.53600919160857, 51.88839736888747, 64.9596098576026, 70.5273778656658, 71.21464415933411, 73.07025669315863, 68.50931334594813, 65.65230698926841, 68.04754364182743, 72.86569486900433, 10.988662221123278, 68.64030086348487, 75.23892464809576, 73.02823458805396, 68.33365637886672, 41.94570218770011, 60.07890453787295, 68.81739183040916, 67.1054504002845, 63.4362121779587, 63.30744855052377, 71.19994189875186, 50.901945640073244, 55.19864487438312, 46.689136787227945, 73.7887836865858, 71.83228612477305, 63.161802351148, 65.72624639224802, 66.84775467470152, 65.55122305290719, 59.33685956421361, 67.91932928435375, 68.4786126533311, 49.2985200404522, 53.08187670802655, 64.4982788874664, 55.43595148125245, 52.49227288852396, 68.51679767232622, 58.65130811239661, 72.43260616757877, 51.45156331879528, 63.824176005201565, 75.07273492603966, 34.318868239996554, 56.99097855583701, 73.263698436813, 67.81789259713534, 67.4290031472213, 63.8925488254589, 47.764386449976655, 63.716837855814674, 51.73384293036319, 45.11112756584054, 61.26432544643624, 68.43216773017062, 30.004519053634255, 35.63754255377619, 55.899806161890744, 32.18196795985706, 69.93921466637522, 51.25782114651031, 51.34977664626379, 59.705730404957706, 37.058443066102356, 44.841729239974946, 65.88954206372593, 45.98518091636854, 74.22763942672901, 40.02240865129035, 68.52189742752645, 52.88697320600814, 60.55301387536568, 70.88294909355182, 70.15638906373046, 71.24389209886773, 69.89805411118468, 49.42320493735487, 53.28881880165256, 39.320995400544206, 66.8343330165995, 34.62848329405341, 73.10180512760968, 48.57847649914325, 58.771692708742094, 64.52895755997278, 60.6688782902122, 56.77356507038082, 24.107606154250973, 52.53056483748318, 8.611785295235762, 71.9902593989928, 7.855052997521597, 56.0215049358576, 74.36500858206807, 65.68643975585641, 36.001985863006404, 73.80209844942267, 55.13314396819915, 70.4556758959269, 75.0427604348104, 73.16122695153481, 71.56680137224518, 15.42286488182161, 50.31937891695097, 62.71420137866667, 73.1527882316762, 66.46349551285829, 65.08433625180221, 71.8880248800854, 11.09456050588311, 13.376197442046063, 12.63060611322122, 64.03003139079004, 70.48735510904018, 73.22542566924174, 47.92301025160903, 51.76570716112926, 66.93876279284842, 74.37887679116253, 45.5660044186006, 68.22350771336968, 72.01802194772246, 55.2954294417335, 68.78138683827366, 65.96310377892208, 73.61004602203239, 65.82218878637299, 44.8247928104059, 58.47833941095081, 69.8906809284366, 25.096531795417135, 13.998382099920363, 49.46917106822187, 46.328466765737204, 20.55291358274235, 34.61858333338876, 61.895460296558326, 55.254064742168225, 73.16254105958984, 75.13823527469694, 58.712706308025126, 56.89760828381374, 52.46381418112257, 66.9735100129887, 74.87421824093744, 70.92648395338458, 66.70440154101885, 71.23410707190835, 66.24816774117252, 65.55268296884722, 50.320871889145074, 64.92986298356644, 60.54862831742347, 65.201373711832, 70.58271919877448, 31.068356529965868, 54.94483306657205, 74.97436262545412, 61.46179784797026, 50.35304011748485, 58.388127076200846, 67.4689378432969, 66.22612016902013, 17.42817762083608, 14.961481258919946, 55.88059189657079, 56.58572013282561, 52.18486343621761, 73.7197318684416, 47.553122353119846, 51.90468368216362, 47.637054922902664, 67.31084393479611, 56.52921131883231, 64.15615025418691, 69.46171552515335, 53.92840551726951, 60.44901004267656, 63.84360725517111, 59.522142392851165, 51.36738317476922, 56.35655874263948, 52.298062453210406, 73.87634543754294, 72.87809353038817, 49.11138783657506, 51.924205924996116, 67.18310197842055, 75.08300851389066, 55.86931193994724, 27.666807228178826, 65.42803997983178, 53.70435590320812, 46.46959480716252, 32.603765057203645, 72.55504199151042, 54.75301822259177, 71.81349357356504, 60.199280804099445, 67.99466715572832, 27.304831591074347, 34.7898846226653, 64.54001749020874, 30.622860482897615, 63.046335392937266, 68.27588438991205, 24.425064834243017, 51.0061551804231, 56.737942853247034, 67.63257375719942, 51.01432219560983, 69.97238244783875, 75.20064609405482, 68.11434292281233, 51.794639941472, 51.69616192063537, 61.166491407169175, 47.71705729691376, 57.38473808112393, 53.58599355410914, 42.500532636679274, 36.702273353887605, 71.26712633783063, 55.09390570950806, 55.0079687785872, 44.9705045790733, 57.79928080097423, 63.684648141735636, 62.507362511722036, 60.73948980880428, 67.42369049614616, 56.050745169002454, 67.52109580625897, 72.97907463195048, 50.554435574922714, 67.75891561678287, 26.955589575323934, 66.89086848387161, 50.7846839337486, 3.455298949870155, 67.30555313072061, 50.363791558011584, 71.19219228657082, 62.68798209224563, 55.478733689476655, 60.85261198702621, 64.50165255113285, 70.92320304635952, 72.69316807510862, 67.01457797146531, 53.736861076860706, 65.66013506267615, 66.51910170250704, 69.27294359226364, 74.42086134901592, 60.03477339193768, 70.24667491069448, 43.52810112503371, 72.89425567690736, 69.2930557334385, 59.810685406250535, 53.78203141043778, 71.89787796724652, 27.02064874250221, 72.62591604343051, 69.79748246443708, 65.54478006274742, 66.99996867755982, 47.44565104068329, 74.8916094031509, 69.13979723822358, 73.09356021066185, 70.0877913401105, 64.57029036939787, 75.28279429666881, 51.93389420865979, 44.94886428327907, 73.79028597518013, 59.20325690334374, 56.49405404836646, 69.40924435200048, 67.2649014732926, 58.15461026216134, 66.20495379033201, 74.82690397879394, 69.08513439633612, 74.80913448138014, 66.58734482339304, 70.49460178683391, 73.27305227871622, 72.57766297168476, 69.68668110249132, 73.05435532391544, 48.70335982281395, 61.6392327240665, 70.39115017469527, 59.630589544948165, 74.22066309621229, 71.67356860664277, 26.76476374792044, 71.24903655170772, 59.7129421228241, 53.11532609421244, 75.02924985036543, 71.27714932731706, 60.15089272367746, 6.956401142560409, 67.53858111578336, 63.2644504362112, 61.382929306582845, 69.80900064369516, 71.50258058153523, 56.89592625256472, 69.82821397780472, 70.30021977112419, 74.70819208578881, 59.63251918146315, 62.2176967724866, 64.33726647118917, 55.13058227389519, 61.44686607779646, 67.81919052027268, 34.32591427785569, 55.948234576186515, 60.438910139348025, 74.06598345366217, 47.593974076626395, 49.82669985105892, 72.04964817040607, 39.69426036978724, 70.94380726253814, 67.41914687066856, 74.72119719901735, 52.00391614811508, 70.65101531985466, 53.80512993814573, 68.78696872652884, 45.73720461500251, 70.2421924299241, 71.41563775551232, 53.35495395332047, 70.8633741588205, 71.47966716587467, 14.935799420776902, 69.90822822641775, 67.9501717731492, 38.858887797697136, 58.24651574737379, 44.47103952044554, 74.08808357372153, 48.88900258812608, 66.81639290627585, 68.19839610345238, 52.742722669050565, 67.24761246983124, 62.32092158838341, 30.48605156317692, 41.27185350987368, 69.50804259144635, 35.74199741061573, 56.2424514846599, 59.34159401065405, 60.596918474581756, 63.312170459777704, 66.12501888420353, 60.31796856656803, 70.3833837446082, 58.33769284529784, 72.7312598965552, 49.80290208321923, 62.275689224532506, 1.1070229249405372, 70.6652726714716, 44.34869346140402, 61.2711173438275, 71.85652213428493, 61.12844159580085, 48.486872147659206, 57.94860999605772, 54.155401082838864, 69.1082584759337, 53.41814575406308, 61.040623853289276, 70.25298014449689, 31.62092045046731, 72.29881138397974], "showlegend": false, "subplot": "polar", "theta": [179.20537344926635, 219.02183878061294, 324.39083130749674, 358.1403925175163, 23.133710057196378, 185.9227149141486, 304.1291050417621, 254.21586637037123, 314.124116530102, 344.0916276210819, 278.2180789985712, 109.19233447020365, 4.521713130639393, 32.37234198591367, 20.513283541436596, 157.20145831043214, 309.304606275837, 321.7137997713239, 4.2612756978630735, 120.95058988061288, 187.5850725047003, 335.2051529247809, 34.84210785640141, 64.84953525469909, 170.18970275160672, 54.075053301833826, 201.70533520201238, 161.2987721781688, 40.529567053797315, 340.2094628272825, 354.909430138279, 246.87379942360656, 235.03648030574632, 175.15989324282222, 73.28348433083023, 184.1254453731465, 243.44179331326873, 358.12488584542234, 17.009341391521914, 43.53509842527369, 53.22794729628029, 39.051830092817184, 54.695555004020704, 13.87423130196529, 147.0504318738852, 239.42280304709988, 83.515718687546, 153.54244939321586, 107.63325576433537, 81.32660112788297, 275.1462704294825, 253.19856750892436, 55.16934623605355, 55.86106078718389, 171.91208030286163, 181.6730447445978, 137.50661496520982, 238.08282911719363, 153.18887952049639, 133.70003256435132, 192.14213214104052, 205.80907524385108, 191.22101345804543, 260.13812467865074, 350.5131309026614, 146.20877276242027, 327.09960500637294, 298.767916472996, 191.9126329119464, 256.5447305853959, 118.64006155353447, 121.34783645610418, 214.47380228730742, 322.11369126554536, 288.8978482448032, 263.3663078396868, 189.9245435983968, 115.65197689856029, 178.06425391844672, 136.06905442768323, 230.1685919029133, 185.68714691977036, 245.74512909311613, 214.93866472298907, 179.70094515497436, 144.51925056351217, 333.4713086176029, 185.4341739537998, 228.6590401359751, 239.762982023572, 257.4622245215798, 133.89678082802442, 249.72409633286816, 237.39394888831214, 32.47634577253883, 251.36233846130068, 168.121597888159, 118.70990501981687, 253.49871920108632, 141.52743704719475, 195.2308378704655, 204.41435418641177, 227.31249901800246, 245.14005085376513, 38.028762468834486, 185.63207044733693, 203.51446012045304, 58.147524604555564, 352.30593595174156, 314.8421585252519, 249.34245035488306, 141.25684244867202, 220.15324497600687, 4.614118352789391, 127.21979745215612, 167.65203621292764, 355.20917502146347, 176.53812901402833, 312.83432612897974, 181.07892177961475, 86.31598263203726, 193.85074896944934, 323.5899288382178, 232.27796211355073, 224.73580849237146, 128.29727628430655, 78.84813656400236, 113.22372423373565, 272.5439097720983, 215.36845145860033, 228.61749833911892, 39.625770482900776, 181.0501445487675, 184.0394911411005, 329.9690819044177, 86.67154035965467, 143.6952114433718, 260.39977538370346, 140.9175714469924, 215.8156620527132, 256.49883883891584, 144.03427593754512, 265.73711673429244, 137.97007719159723, 326.93109551082426, 341.63722330441203, 102.1481807904367, 247.7405501705933, 279.5847982074243, 147.86683929724612, 84.41558233637872, 340.7771575952864, 134.4688287227726, 26.06716840180803, 251.05987167914122, 223.55914964849765, 244.2474135395004, 160.44436428659768, 198.9696957559885, 257.6480863288428, 149.28896045211908, 220.02518701736884, 36.122830806883435, 167.78466163635898, 95.70700955699539, 138.4716855178844, 108.38873378581962, 242.96296558307523, 255.5109011819635, 111.47795864372793, 169.94277020051177, 143.49704592347382, 326.73603708821037, 220.95342100283023, 200.34097099233838, 170.37757852796872, 110.87611107445207, 148.98904317565274, 76.54325402928016, 12.145035347476272, 330.13040118125605, 205.78155010981442, 129.2668339799574, 107.25169079719717, 184.14650414770114, 157.2761329475808, 237.48585035228965, 216.2375138628528, 188.1365974728973, 226.6649477979178, 229.14151471187398, 282.15030950951973, 134.8431069128579, 303.1226288524455, 203.64939358450067, 230.08412484353042, 210.09788836849128, 117.82514568810822, 350.1379969744727, 357.6204314813276, 33.502840942513004, 319.876605203328, 178.55037994354248, 36.39773811616491, 205.67956810986269, 48.061743146693765, 97.88065871338027, 101.44988513573901, 23.342951345117292, 115.07685704880895, 312.0834257981626, 227.64089269912515, 124.76172900655689, 226.10749832797973, 163.92200775180544, 204.04385459424813, 36.57647649803423, 79.62664611132122, 209.98557086510127, 229.34323918061173, 232.01913873588268, 186.30585695761718, 122.78543350384594, 239.98608475123913, 148.4318861420514, 110.02635585699105, 341.49156695759297, 165.7942249080813, 130.74545036403592, 167.27935142879028, 222.99978183255195, 237.12755260462453, 27.919794159531286, 63.61242021058225, 148.16725773703052, 122.6349918149897, 104.04609638119685, 131.24257207355515, 111.72133556027002, 126.14089644576352, 103.70610441975116, 228.96633920375044, 207.74753502350748, 29.92710593194727, 30.201320931341968, 166.38681972132665, 68.85127864293658, 128.54019388272405, 263.2515299023755, 134.0432686219225, 289.647479143776, 52.075522494199, 173.48683429169552, 212.20409972721822, 123.65161465038403, 227.75520927580564, 84.57107703494887, 144.68716094280342, 115.73414416453012, 200.72255430950395, 319.5807174450694, 134.58745635998417, 170.44139532993003, 220.70445638181715, 128.66510974201884, 225.1445005668149, 202.6821454045308, 208.78890246330644, 125.97518152904784, 200.99790773863106, 139.89053763153873, 164.8890843512707, 161.03257460866246, 118.09623882444248, 28.915089591975427, 55.94549572769586, 350.37213304045287, 120.77939706872965, 108.12258003717928, 326.0470477892544, 37.201543626968686, 105.2945792949689, 243.41192154047476, 166.38604562378137, 157.00467560735837, 224.36927081957097, 131.81184097171308, 90.36873194095249, 221.24019528343075, 222.8535429816907, 43.91208775800111, 357.15531154474775, 228.0360160532321, 216.21481813605607, 163.32280015970878, 112.58293108734549, 131.4168458678237, 170.4772417646937, 109.11636180755399, 340.7933939514796, 88.94900323175034, 325.5325286392931, 115.44004435356436, 122.98260750503991, 184.95551255281325, 227.03059533563697, 188.5154427103021, 224.84877762253916, 145.1046821107031, 275.7047148157395, 81.19986045493607, 34.206190214875974, 227.17768285917043, 1.6135067537226317, 153.76358286677663, 186.83622746370435, 160.41887399686942, 164.38806282372676, 215.9014941715881, 184.70582583593455, 311.34216366468354, 63.50211357101246, 208.99460161241353, 164.03316879806795, 30.75557979480543, 225.20953266039953, 147.78815202231158, 312.13580531948975, 224.13163816294437, 210.66354184452453, 209.38512402880627, 174.27300499172904, 268.67171916093315, 9.105554946276296, 236.0418986657148, 210.03068858424524, 90.8223352718853, 240.32778514207106, 161.81650149857495, 208.48155324444832, 200.80304804554166, 335.1236581425433, 200.9217324942682, 156.00332567533735, 139.47812542266172, 107.9441599672867, 289.84457322957735, 207.11716066254726, 223.04471623253147, 207.5823933932904, 327.11735416134485, 339.64737835031394, 187.7151948858939, 213.38858656431142, 66.85410585904373, 20.0051014255138, 89.31679451186804, 96.77449484877833, 256.94349580896437, 120.39868145283478, 209.76042052592433, 237.68102008460508, 236.5668005132089, 246.77822497869553, 234.49300193929835, 223.13102858350598, 160.61937015269922, 119.08451122798718, 38.09358017744447, 27.938791735816007, 126.21884962953246, 221.35547805080637, 129.06908831325643, 178.21521742717903, 246.93660349246343, 205.15354775964724, 211.41064586933882, 241.6076863160952, 207.2182130319941, 238.1339670995758, 133.12062651729644, 347.3994087138058, 144.95441622759324, 155.29907840512615, 122.92464674394066, 236.0325523341187, 220.57135643117348, 138.7375141178193, 174.20759006666626, 214.91268258203738, 224.84908537680704, 192.6433540279533, 56.65905433209841, 42.70254514930028, 174.992785305612, 240.45898653761563, 165.7162368036854, 159.34820388151243, 152.28655563730655, 217.2246690766432, 217.4883263424706, 328.47603214440227, 165.22224427091749, 207.597180581442, 219.2664826822331, 153.60940203576695, 212.4825902652579, 228.91769458391883, 236.95393559371337, 140.87112445071992, 256.9416249655288, 84.84420832548606, 177.61185272716128, 37.63339130104576, 45.81224546112414, 234.60925057205964, 112.88313741735831, 177.27108920955763, 123.3495502520622, 242.21804292614402, 130.3389191303945, 163.24279024849906, 135.53348119815948, 216.97136318765675, 116.26445942224355, 185.3147457886302, 191.10288576125544, 222.61383131466607, 121.54165200784493, 246.81325857949707, 103.70834286471938, 234.39529218997455, 129.0488722968823, 125.22391274127737, 175.61727972824025, 264.3327245718713, 235.6895594638563, 201.70995780854474, 243.51145520400758, 45.72702542859838, 148.71116993352152, 166.13899328775676, 207.1007346200164, 231.89261672076137, 130.78873812637687, 231.99652563549452, 239.36816125292296, 198.53090921385152, 156.17393541975053, 292.42855121903074, 123.42558429900448, 119.72108917391084, 139.85634450102515, 215.66933751863726, 127.12067967124203, 232.78339419921264, 162.8808010436175, 176.4441657176942, 318.9060784376846, 194.7310101269201, 196.79421354108538, 228.91707953542203, 197.34012924292242, 216.9701988490777, 229.93517284894722, 138.74857158625508, 241.11848686222703, 38.774305324155314, 322.12783343465605, 244.55310978805036, 293.73129483108437, 212.2675117162298, 228.60204476037404, 129.4599552960389, 95.05330077003545, 228.41040885513243, 86.63205849616197, 35.084312477290396, 134.11000653096158, 240.64677378689285, 53.8542822917457, 50.4013350411531, 135.28765831581075, 43.58953973493676, 19.18083766113626, 8.983402840291978, 348.58708640182516, 177.79040000386217, 205.3745348652372, 195.6573421524545, 263.19176975918356, 356.38060630118235, 20.32669199915032, 115.68640206990771, 132.5735991345594, 305.48351389646234, 3.4922541154091613, 204.2796596481217, 143.3648051294337, 149.74143533266283, 323.13226352145443, 240.04409251931682, 171.95437165344688, 304.72689502347725, 154.60392808782953, 231.4279878483946, 20.15036420573288, 33.83297220767837, 86.4394203014176, 349.0284757435262, 305.20717974458745, 41.25611591806639, 221.52498052241, 180.658376019272, 9.331755526882068, 35.969929767456215, 44.48145531343269, 111.5418318613423, 354.7227195652604, 136.19828009472158, 346.060147239896, 230.8904418457186, 12.722290882904993, 96.2432733886154, 64.9500365356653, 239.19044540285245, 115.7225834019649, 117.94129933197641, 15.584452741499465, 44.471199165147496, 188.65252457458342, 232.22071942651186, 118.78355000328847, 218.26482259567356, 229.98167936513113, 119.6337616598441, 207.9287847008125, 209.91025159014836, 211.26237141680474, 164.15522677922857, 144.52514273953537, 121.7967970122597, 193.98898644492147, 181.34262273501204, 17.539468693480675, 226.75295260352462, 21.351873029393502, 102.1707655024335, 111.26017744354695, 294.54620830645894, 300.40758036728187, 260.9326499652445, 94.74414762580051, 230.21747642460272, 89.5281695338856, 136.58762416916286, 355.7753896024442, 69.4581643743208, 21.007764197260045, 357.2998419497545, 203.2264608519603, 328.31536798656373, 237.70667946661064, 90.01698769170186, 41.29748239798977, 344.2034029968482, 244.60433622899475, 216.9756060044486, 152.5850397430103, 194.71323173807872, 91.28979160973023, 185.8961390199561, 179.62038672051466, 4.983711155118963, 123.69284439416269, 234.68002860824456, 199.20724708258248, 155.50801623174542, 118.0135941427482, 214.35839524699108, 129.52232911189043, 114.73698063507096, 83.01252008465164, 77.03899087005863, 244.38257003766887, 140.1082256939619, 202.73806742637046, 144.70465266305058, 299.04996944562265, 321.35553419731184, 211.0833718001585, 15.48981312474453, 89.53920856125113, 212.54195445321204, 43.00113552001034, 242.7547724377737, 54.04232847303759, 306.4934706528612, 36.34630585589566, 317.37488469690214, 174.67823846032985, 141.1868159756574, 260.872463563304, 225.38520644792567, 246.48899712393413, 225.5610523851766, 150.4188013369616, 48.151724196868855, 248.84335007279532, 279.69994338854144, 242.96322487671472, 218.93145362851558, 165.1861331584383, 185.63111663498742, 243.24961615849196, 162.0430662408221, 202.7048325622808, 169.11864686880133, 120.68882805607109, 124.57194045761958, 290.96630826381966, 54.052401318005174, 241.28358868295925, 204.68412004775922, 186.1775448852003, 60.23118539253686, 209.17627400825918, 26.97534662406552, 340.10694760861304, 241.87008276488578, 286.9617398884613, 64.4542744156548, 60.38728242045675, 263.48161991931653, 156.81350312801354, 224.81192844988522, 127.21258550791923, 216.4948811048984, 127.28803328206563, 187.60721367195958, 171.5883987409496, 181.50768499052765, 264.5222028924281, 225.37221347511442, 172.51446902242856, 177.852169831964, 4.357332920572182, 233.50428012072805, 187.04427199179102, 71.98498366763936, 296.3920141491722, 197.81931727769688, 223.1325754362407, 147.42307642569884, 163.8401810913072, 158.91575045179653, 214.0034621209926, 233.78416555535972, 252.43304470756038, 233.97643626396288, 241.30364831911928, 38.53444594598856, 122.2986485449872, 218.92594103241635, 46.13267073582997, 270.15327735300605, 192.25923133267153, 9.819822533342293, 7.247708246757976, 341.37628647137564, 136.65091384814266, 207.28077456658212, 187.05809021960135, 171.39451751177202, 209.79559776126982, 112.9223937691941, 233.15367432292285, 192.0132252669621, 149.85086164782513, 326.96322290764726, 291.411722939486, 29.339209892970093, 232.1945605662977, 190.62019368497425, 166.0251645413878, 239.1934501602216, 180.25061501894083, 136.74135734301743, 162.5293076456058, 185.43646090883163, 201.7042711492385, 290.2006145386175, 45.335319424203824, 281.3872762930566, 131.5797062476136, 229.75372369853397, 219.43519139365057, 227.3135075040947, 207.98108122652778, 190.30755318231695, 181.6279471564458, 184.2249450504662, 186.2026423777977, 274.0480949659414, 130.84314699375673, 218.03500150987358, 147.87643594642353, 315.4511194231632, 233.61792474690617, 149.5008086355943, 231.90031822805227, 244.17119849181148, 291.73434919172803, 274.03011895888864, 192.77471324078206, 275.85578311887065, 278.6212065381867, 111.51802879763952, 334.04608850412166, 334.841430168285, 207.7783954885407, 174.3485375615694, 260.63390413923855, 250.55777318690534, 321.9541531780517, 331.5389533639673, 239.0314925573189, 245.8458295623423, 219.28611522157533, 148.26622312284505, 330.29680217497025, 313.3021389829329, 140.7755214588773, 3.483674395185309, 126.24568039229528, 230.46555906748836, 222.95518255683626, 224.7918861527183, 101.41173555105351, 217.43414361067238, 227.51447457612863, 73.09994060814076, 230.87782275952682, 274.27050756064443, 320.76164799754804, 346.95829282409045, 240.5979924529819, 220.3737646575722, 284.147536100838, 102.03477077821613, 300.90324516306646, 57.9516289722755, 345.44577359423425, 163.4491931357602, 220.3502818425674, 28.087790333358, 168.11337483902128, 260.3398693244258, 253.11996803900368, 143.18212655556258, 229.2765795195219, 48.230499788899984, 140.6935978226062, 278.0218313966309, 76.31245386305558, 117.903907218774, 78.89336642085516, 145.70492550703796, 355.97696661938295, 155.28778092238355, 194.39518209231662, 78.04601368194744, 178.02986199488493, 6.748791455406755, 309.2402958718409, 50.23965677595172, 239.58448276252452, 353.3659636170313, 114.41470231743611, 36.999809725778086, 154.99168892788842, 293.62026521906114, 38.061294327984, 65.75136385361209, 349.49984988665017, 121.9195451964177, 38.669573059750604, 242.5190228411588, 323.58142051964586, 92.74668201716875, 201.16739087216064, 269.7224024909303, 204.66391659737835, 57.8237996554993, 4.794223324344193, 270.7851141044006, 236.28483217888655, 327.9713645018447, 278.41595987457873, 333.47958683629764, 22.747941152470776, 244.8588762625664, 151.31262850271148, 107.38752387638179, 120.51519783751132, 201.49190397301186, 301.0763046375526, 234.88653231698672, 64.35381688944068, 314.2303234172852, 51.08091541441837, 310.88396269700945, 28.753673361134766], "type": "scatterpolar"}],                        {"coloraxis": {"colorbar": {"title": {"text": "color"}}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]]}, "legend": {"itemsizing": "constant", "tracegroupgap": 0}, "margin": {"t": 60}, "polar": {"angularaxis": {"direction": "clockwise", "rotation": 90}, "domain": {"x": [0.0, 1.0], "y": [0.0, 1.0]}}, "template": {"data": {"bar": [{"error_x": {"color": "#2a3f5f"}, "error_y": {"color": "#2a3f5f"}, "marker": {"line": {"color": "#E5ECF6", "width": 0.5}}, "type": "bar"}], "barpolar": [{"marker": {"line": {"color": "#E5ECF6", "width": 0.5}}, "type": "barpolar"}], "carpet": [{"aaxis": {"endlinecolor": "#2a3f5f", "gridcolor": "white", "linecolor": "white", "minorgridcolor": "white", "startlinecolor": "#2a3f5f"}, "baxis": {"endlinecolor": "#2a3f5f", "gridcolor": "white", "linecolor": "white", "minorgridcolor": "white", "startlinecolor": "#2a3f5f"}, "type": "carpet"}], "choropleth": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "type": "choropleth"}], "contour": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "contour"}], "contourcarpet": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "type": "contourcarpet"}], "heatmap": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "heatmap"}], "heatmapgl": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "heatmapgl"}], "histogram": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "histogram"}], "histogram2d": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "histogram2d"}], "histogram2dcontour": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "histogram2dcontour"}], "mesh3d": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "type": "mesh3d"}], "parcoords": [{"line": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "parcoords"}], "pie": [{"automargin": true, "type": "pie"}], "scatter": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scatter"}], "scatter3d": [{"line": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scatter3d"}], "scattercarpet": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scattercarpet"}], "scattergeo": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scattergeo"}], "scattergl": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scattergl"}], "scattermapbox": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scattermapbox"}], "scatterpolar": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scatterpolar"}], "scatterpolargl": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scatterpolargl"}], "scatterternary": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scatterternary"}], "surface": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "surface"}], "table": [{"cells": {"fill": {"color": "#EBF0F8"}, "line": {"color": "white"}}, "header": {"fill": {"color": "#C8D4E3"}, "line": {"color": "white"}}, "type": "table"}]}, "layout": {"annotationdefaults": {"arrowcolor": "#2a3f5f", "arrowhead": 0, "arrowwidth": 1}, "autotypenumbers": "strict", "coloraxis": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "colorscale": {"diverging": [[0, "#8e0152"], [0.1, "#c51b7d"], [0.2, "#de77ae"], [0.3, "#f1b6da"], [0.4, "#fde0ef"], [0.5, "#f7f7f7"], [0.6, "#e6f5d0"], [0.7, "#b8e186"], [0.8, "#7fbc41"], [0.9, "#4d9221"], [1, "#276419"]], "sequential": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "sequentialminus": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]]}, "colorway": ["#636efa", "#EF553B", "#00cc96", "#ab63fa", "#FFA15A", "#19d3f3", "#FF6692", "#B6E880", "#FF97FF", "#FECB52"], "font": {"color": "#2a3f5f"}, "geo": {"bgcolor": "white", "lakecolor": "white", "landcolor": "#E5ECF6", "showlakes": true, "showland": true, "subunitcolor": "white"}, "hoverlabel": {"align": "left"}, "hovermode": "closest", "mapbox": {"style": "light"}, "paper_bgcolor": "white", "plot_bgcolor": "#E5ECF6", "polar": {"angularaxis": {"gridcolor": "white", "linecolor": "white", "ticks": ""}, "bgcolor": "#E5ECF6", "radialaxis": {"gridcolor": "white", "linecolor": "white", "ticks": ""}}, "scene": {"xaxis": {"backgroundcolor": "#E5ECF6", "gridcolor": "white", "gridwidth": 2, "linecolor": "white", "showbackground": true, "ticks": "", "zerolinecolor": "white"}, "yaxis": {"backgroundcolor": "#E5ECF6", "gridcolor": "white", "gridwidth": 2, "linecolor": "white", "showbackground": true, "ticks": "", "zerolinecolor": "white"}, "zaxis": {"backgroundcolor": "#E5ECF6", "gridcolor": "white", "gridwidth": 2, "linecolor": "white", "showbackground": true, "ticks": "", "zerolinecolor": "white"}}, "shapedefaults": {"line": {"color": "#2a3f5f"}}, "ternary": {"aaxis": {"gridcolor": "white", "linecolor": "white", "ticks": ""}, "baxis": {"gridcolor": "white", "linecolor": "white", "ticks": ""}, "bgcolor": "#E5ECF6", "caxis": {"gridcolor": "white", "linecolor": "white", "ticks": ""}}, "title": {"x": 0.05}, "xaxis": {"automargin": true, "gridcolor": "white", "linecolor": "white", "ticks": "", "title": {"standoff": 15}, "zerolinecolor": "white", "zerolinewidth": 2}, "yaxis": {"automargin": true, "gridcolor": "white", "linecolor": "white", "ticks": "", "title": {"standoff": 15}, "zerolinecolor": "white", "zerolinewidth": 2}}}},                        {"responsive": true}                    ).then(function(){
+                            
+var gd = document.getElementById('e0f665a3-f2bb-42b5-b1e2-6ec53075e078');
+var x = new MutationObserver(function (mutations, observer) {{
+        var display = window.getComputedStyle(gd).display;
+        if (!display || display === 'none') {{
+            console.log([gd, 'removed!']);
+            Plotly.purge(gd);
+            observer.disconnect();
+        }}
+}});
 
+// Listen for the removal of the full notebook cells
+var notebookContainer = gd.closest('#notebook-container');
+if (notebookContainer) {{
+    x.observe(notebookContainer, {childList: true});
+}}
+
+// Listen for the clearing of the current output cell
+var outputEl = gd.closest('.output');
+if (outputEl) {{
+    x.observe(outputEl, {childList: true});
+}}
+
+                        })                };                });            </script>        </div>
 </div>
 
 </div>
@@ -1311,121 +478,16 @@ dtype: int64</pre>
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">QUALITY_COLORS</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">v</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">fig</span><span class="o">.</span><span class="n">write_image</span><span class="p">(</span><span class="s1">&#39;images/starmap_new.pdf&#39;</span><span class="p">)</span>
 </pre></div>
 
     </div>
 </div>
 </div>
 
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>excellent 0
-good 1
-poor 2
-stale 3
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
 </div>
     {% endraw %}
 
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-<div class="output_markdown rendered_html output_subarea ">
-<h4 id="viz" class="doc_header"><code>viz</code><a href="https://github.com/cmorris-jacobs/jacobs-vault/tree/main/jacobs_vault/hit_test.py#L257" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>viz</code>(<strong><code>df</code></strong>, <strong><code>show</code></strong>=<em><code>True</code></em>, <strong><code>size0</code></strong>=<em><code>1</code></em>)</p>
-</blockquote>
-<p>Polar plots a <code>df_alt_az_days_visible</code> dataframe.
-Dataframe must have: <code>color</code>, <code>days</code>, <code>altitude</code>, <code>azimuth</code>.
-Returns a Plotly Express polar plot figure.
-If show=True, also displays it here.
-size0 is the smallest marker size (used for best hits)</p>
-
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">viz</span><span class="p">(</span><span class="n">df_alt_az_days_visible</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-<div class="output_subarea output_text output_error">
-<pre>
-<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
-<span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
-<span class="ansi-green-fg">&lt;ipython-input-7-fad8479d6ad4&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
-<span class="ansi-green-fg">----&gt; 1</span><span class="ansi-red-fg"> </span>fig <span class="ansi-blue-fg">=</span> viz<span class="ansi-blue-fg">(</span>df_alt_az_days_visible<span class="ansi-blue-fg">)</span>
-
-<span class="ansi-red-fg">NameError</span>: name &#39;viz&#39; is not defined</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="David-says-try-these-from-2017:">David says try these from 2017:<a class="anchor-link" href="#David-says-try-these-from-2017:"> </a></h3><ul>
-<li>4-jan-2017, 8pm</li>
-<li>6 jan 3am</li>
-<li>8 jan 6pm</li>
-<li>12 jan 5am</li>
-<li>19 jan 9am</li>
-<li>26 jan 6pm</li>
-<li>29 jan 6pm</li>
-</ul>
-
-</div>
-</div>
-</div>
 </div>
  
 

@@ -13,7 +13,7 @@ entries:
       title: Template notebook
       url: /core
     - output: web,pdf
-      title: ht1 - old hittest
+      title: starmap
       url: /Early_HitTest
     - output: web,pdf
       title: HitTest
