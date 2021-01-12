@@ -1,5 +1,6 @@
 # Project specific
-ais-analytics/data/
+ais-analytics/data
+!ais-analytics/data/ais_2015-01-01.csv.zip
 NoGit/
 screenlog.*
 
