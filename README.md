@@ -4,7 +4,7 @@
 
 VAULT converts AIS ship records into clickable tracks that show satellite coverage for the location clicked. The demo shows both Jupyter maps (via iPyLeaflet) and Google-Earth style maps (using OpenSphere).  
 
-<img src="images/vault-demo-3.gif">
+<img src="nbs/images/vault-demo-3.gif">
 
 For demo purposes, we treat all entries in the TLE file as viable satellites. In reality most of these are space junk, but within 10 years there could be over 10,000 cubesats. 
 
@@ -13,9 +13,11 @@ The project also contains scripts & notebooks to ingest, characterize, and clean
 <table>
     <tr style="background-color:#FFFFFF">
         <td style="background-color:#FFFFFF">
-            <img src="images/Jacobs_logo_rgb_black.svg" width="200"/>
+<img src="nbs/images/Jacobs_logo_rgb_black.svg" width="200" style="max-width: 200px">
         </td>
-        <td><img alt="Satellites Visible" src="images/polar_plot2.png" width="300"></td>
+        <td>
+<img alt="Satellites Visible" src="nbs/images/starmap_new.png" width="300" style="max-width: 300px">
+        </td>
     </tr>
 </table>
 

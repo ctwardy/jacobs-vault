@@ -11,19 +11,19 @@ entries:
       url: /
     - output: web,pdf
       title: Template notebook
-      url: /core
+      url: core.html
     - output: web,pdf
       title: starmap
-      url: /Early_HitTest
+      url: Early_HitTest.html
     - output: web,pdf
       title: HitTest
-      url: /HitTest
+      url: HitTest.html
     - output: web,pdf
       title: Demo_Chris
-      url: /demo_chris
+      url: demo_chris.html
     - output: web,pdf
       title: Notes
-      url: /notes
+      url: notes.html
     output: web
     title: jacobs_vault
   output: web

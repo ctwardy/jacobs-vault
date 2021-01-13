@@ -1,10 +1,10 @@
 {
   "jacobs_vault": {
     "Overview": "/",
-    "Template notebook": "/core",
-    "starmap": "/Early_HitTest",
-    "HitTest": "/HitTest",
-    "Demo_Chris": "/demo_chris",
-    "Notes": "/notes"
+    "Template notebook": "core.html",
+    "starmap": "Early_HitTest.html",
+    "HitTest": "HitTest.html",
+    "Demo_Chris": "demo_chris.html",
+    "Notes": "notes.html"
   }
 }
